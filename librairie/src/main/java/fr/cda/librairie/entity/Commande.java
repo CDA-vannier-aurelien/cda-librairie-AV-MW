@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import fr.cda.librairie.entity.Livre;
+
 
 @Data
 @AllArgsConstructor
@@ -18,7 +18,12 @@ public class Commande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "numero_commande")
     private int numeroCommande;
+
+    @Column(name = "date_commande")
     private Date dateCommande;
+
+    @ManyToMany(cascade = CascadeType.ALL)
    private List<Livre> listLivre = new ArrayList<>();
 }
