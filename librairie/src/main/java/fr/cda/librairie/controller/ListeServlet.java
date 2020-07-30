@@ -1,4 +1,4 @@
-package fr.cda.librairie.controleurs;
+package fr.cda.librairie.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
