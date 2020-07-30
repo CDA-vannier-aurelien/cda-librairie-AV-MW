@@ -17,6 +17,10 @@
 
 	<context:annotation-config />
 	
+	<context:property-placeholder
+   location="classpath:db.properties"
+   ignore-unresolvable="true" />
+	
 	<jpa:repositories base-package="fr.cda.librairie.dao"/>
 
 	<context:component-scan
@@ -25,20 +29,22 @@
 			expression="(service|dao|init)\..*" />
 	</context:component-scan>
 	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-        <property name="url" value="jdbc:mariadb://localhost:3306/cda_librairie"/>
-        <property name="username" value="librairie_user"/>
-        <property name="password" value="pwd"/>
-    </bean>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="${db.driver}"
+		p:url="${db.url}" p:username="${db.user}"
+		p:password="${db.password}">
+	</bean>
     
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-          p:packagesToScan="fr.cda.web.jpa.entity"
+          p:packagesToScan="fr.cda.librairie.entity"
           p:dataSource-ref="dataSource">
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="true"/>
                 <property name="showSql" value="true"/>
+                <property name="databasePlatform"
+					value="org.hibernate.dialect.MariaDB103Dialect" />
             </bean>
         </property>
     </bean>
