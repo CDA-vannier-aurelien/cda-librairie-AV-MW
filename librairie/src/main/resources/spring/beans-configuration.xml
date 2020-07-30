@@ -29,6 +29,10 @@
 			expression="(service|dao|init)\..*" />
 	</context:component-scan>
 	
+	<context:property-placeholder
+		location="classpath:db.properties"
+		ignore-unresolvable="true" />
+		
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="${db.driver}"
@@ -45,6 +49,7 @@
                 <property name="showSql" value="true"/>
                 <property name="databasePlatform"
 					value="org.hibernate.dialect.MariaDB103Dialect" />
+                
             </bean>
         </property>
     </bean>
