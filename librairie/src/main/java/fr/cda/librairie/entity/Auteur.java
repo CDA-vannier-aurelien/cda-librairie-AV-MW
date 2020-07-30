@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Auteur {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_auteur")
 	private int id;
 	private String nom;

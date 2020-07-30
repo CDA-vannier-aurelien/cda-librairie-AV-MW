@@ -13,8 +13,8 @@ import fr.cda.librairie.controller.config.AbstractController;
 /**
  * Servlet implementation class listUtilisateur
  */
-@WebServlet("/listUtilisateur")
-public class listUtilisateur extends AbstractController {
+@WebServlet("/listlivre.do")
+public class listLivre extends AbstractController {
 	private static final long serialVersionUID = 1L;
 
 	/**

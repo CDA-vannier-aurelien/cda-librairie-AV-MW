@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Editeur {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_editeur")
 	private int id;
 	private String nom;
