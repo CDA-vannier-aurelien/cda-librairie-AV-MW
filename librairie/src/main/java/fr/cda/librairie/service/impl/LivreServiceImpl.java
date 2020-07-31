@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import fr.cda.librairie.dao.IAuteurDao;
+import fr.cda.librairie.dao.IEditeurDao;
 import fr.cda.librairie.dao.ILivreDao;
 import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.entity.Auteur;
+import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.entity.Livre;
-import fr.cda.librairie.service.IAuteurService;
-import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
 import org.springframework.stereotype.Service;
 
@@ -20,38 +23,40 @@ public class LivreServiceImpl implements ILivreService {
 	@Autowired
 	ILivreDao livreDao;
 
-	/*@Autowired
-	IAuteurService auteurService;
+	@Autowired
+	IAuteurDao auteurDao;
 
 	@Autowired
-	IEditeurService editeurService;
-*/
+	IEditeurDao editeurDao;
+
 	@Override
-	public void addLivre(LivreDto livre) {
-		/*Livre livre2 = new Livre();
+	public LivreDto addLivre(LivreDto livre) {
+		Livre livre2 = new Livre();
 		livre2.setNbPage(livre.getNbPage());
 		livre2.setPrix(livre.getPrix());
 		livre2.setQuantitee(livre.getQuantitee());
 		livre2.setTitre(livre.getTitre());
 		livre2.setReference(livre.getReference());
-		livre2.setAuteur(auteurService.getAuteurByNom(livre.getAuteur()));
-		livre2.setEditeur(editeurService.getEditeurByNom(livre.getEditeur()));
-		livreDao.save(livre2);*/
 
+		Optional<Auteur> opsRes = auteurDao.findByNomUsage(livre.getAuteur());
+		if (opsRes.isPresent()) {
+			livre2.setAuteur(opsRes.get());
+		}
+		Optional<Editeur> opsRes2 = editeurDao.findByNom(livre.getEditeur());
+		if (opsRes.isPresent()) {
+			livre2.setEditeur(opsRes2.get());
+		}
+		livre2 = livreDao.save(livre2);
+
+		livre = this.getLivre(livre2.getReference());
+
+		return livre;
 	}
 
 	@Override
 	public void deleteLivre(int id) {
-		/*LivreDto l = this.getLivre(id);
-		Livre livre = new Livre();
-		livre.setNbPage(l.getNbPage());
-		livre.setPrix(l.getPrix());
-		livre.setQuantitee(l.getQuantitee());
-		livre.setTitre(l.getTitre());
-		livre.setReference(l.getReference());
-		livre.setAuteur(auteurService.getAuteurByNom(l.getAuteur()));
-		livre.setEditeur(editeurService.getEditeurByNom(l.getEditeur()));
-		livreDao.delete(livre);*/
+
+		livreDao.deleteById(id);
 
 	}
 
@@ -88,4 +93,11 @@ public class LivreServiceImpl implements ILivreService {
 		}
 		return listLivreDto;
 	}
+
+	@Override
+	public int getMaxId() {
+		// TODO Auto-generated method stub
+		return livreDao.getMaxId().intValue();
+	}
+
 }

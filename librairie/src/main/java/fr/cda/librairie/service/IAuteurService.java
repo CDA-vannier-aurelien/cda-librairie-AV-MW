@@ -2,15 +2,21 @@ package fr.cda.librairie.service;
 
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.entity.Auteur;
+import fr.cda.librairie.dto.AuteurDto;
+import fr.cda.librairie.utils.Exception.AuteurPresentException;
 
 @Service
 public interface IAuteurService {
-	public void addAuteur(Auteur auteur);
+	public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException;
 
 	public void deleteAuteur(int id);
 
-	public Auteur getAuteur(int id);
+	public AuteurDto getAuteur(int id);
 
-	public Auteur getAuteurByNom(String nom);
+	public AuteurDto getAuteurByNom(String nom);
+
+	public int getMaxId();
+
+	public boolean existByName(String nom);
+
 }
