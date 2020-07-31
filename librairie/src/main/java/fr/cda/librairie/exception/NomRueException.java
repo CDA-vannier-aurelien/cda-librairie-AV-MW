@@ -1,4 +1,4 @@
-package fr.cda.librairie.exeption;
+package fr.cda.librairie.exception;
 
-public class NomRueExecption extends Exception {
+public class NomRueException extends Exception {
 }

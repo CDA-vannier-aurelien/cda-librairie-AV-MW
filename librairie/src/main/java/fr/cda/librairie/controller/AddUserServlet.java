@@ -7,18 +7,16 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.exeption.NomPaysException;
-import fr.cda.librairie.exeption.NomRueExecption;
-import fr.cda.librairie.exeption.NomVilleIncorrect;
-import fr.cda.librairie.exeption.RoleExecption;
+import fr.cda.librairie.exception.NomPaysException;
+import fr.cda.librairie.exception.NomRueException;
+import fr.cda.librairie.exception.NomVilleIncorrect;
+import fr.cda.librairie.exception.RoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import fr.cda.librairie.service.IUserService;
-import fr.cda.librairie.utils.BCrypt;
 
 /**
  * Servlet implementation class AddUserServlet
@@ -48,12 +46,12 @@ IUserService iUserService;
 			iUserService.create(user);
 		} catch (NomVilleIncorrect nomVilleIncorrect) {
 			nomVilleIncorrect.printStackTrace();
-		} catch (NomRueExecption nomRueExecption) {
-			nomRueExecption.printStackTrace();
+		} catch (NomRueException nomRueException) {
+			nomRueException.printStackTrace();
 		} catch (NomPaysException e) {
 			e.printStackTrace();
-		} catch (RoleExecption roleExecption) {
-			roleExecption.printStackTrace();
+		} catch (RoleException roleException) {
+			roleException.printStackTrace();
 		}
 
 	}

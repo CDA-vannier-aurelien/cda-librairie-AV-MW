@@ -1,4 +1,4 @@
-package fr.cda.librairie.exeption;
+package fr.cda.librairie.exception;
 
-public class RoleExecption extends Exception {
+public class RoleException extends Exception {
 }

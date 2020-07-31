@@ -3,16 +3,15 @@ package fr.cda.librairie.service.impl;
 import fr.cda.librairie.dao.*;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.entity.*;
-import fr.cda.librairie.exeption.NomPaysException;
-import fr.cda.librairie.exeption.NomRueExecption;
-import fr.cda.librairie.exeption.NomVilleIncorrect;
-import fr.cda.librairie.exeption.RoleExecption;
+import fr.cda.librairie.exception.NomPaysException;
+import fr.cda.librairie.exception.NomRueException;
+import fr.cda.librairie.exception.NomVilleIncorrect;
+import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -36,7 +35,7 @@ public class UserServiceImpl implements IUserService {
     IAdresseDao iAdresseDao;
 
     @Override
-    public UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueExecption, RoleExecption {
+    public UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException {
         User user = new User();
         String nomPays = pUser.getNomPays();
         Optional<Pays> optionalPays = iPaysDao.findByNomPays(nomPays);
@@ -51,7 +50,7 @@ public class UserServiceImpl implements IUserService {
         String nomRue = pUser.getNomRue();
         Optional<Rue> optionalRue = iRueDao.findByNom(nomRue);
         if (!optionalRue.isPresent()) {
-            throw new NomRueExecption();
+            throw new NomRueException();
         }
         Adresse adresse = new Adresse();
         adresse.setVille(optionalVille.get());
@@ -66,7 +65,7 @@ public class UserServiceImpl implements IUserService {
         }
         Optional<Role> optionalRole = iRoleDao.findByRole("Client");
         if (!optionalRole.isPresent()) {
-            throw new RoleExecption();
+            throw new RoleException();
         }
         user.setRole(optionalRole.get());
         user.setNom(pUser.getNom());

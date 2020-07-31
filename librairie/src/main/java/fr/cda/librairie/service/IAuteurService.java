@@ -3,7 +3,7 @@ package fr.cda.librairie.service;
 import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dto.AuteurDto;
-import fr.cda.librairie.utils.Exception.AuteurPresentException;
+import fr.cda.librairie.exception.AuteurPresentException;
 
 @Service
 public interface IAuteurService {
