@@ -1,14 +1,10 @@
 package fr.cda.librairie.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import fr.cda.librairie.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -49,7 +45,7 @@ public class User {
 	 * @see ChienDaoImpl#getListChienByClient(String)
 	 */
 	@Id
-	private int Id;
+	private int id;
 
 	private String nom;
 
@@ -61,6 +57,9 @@ public class User {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	@JoinColumn(name = "login", referencedColumnName = "login", nullable = false)
 	private CompteUser adresse;
+
+	@OneToMany
+	List<Commande> commandes = new ArrayList<>();
 
 	public User(String pNom, String pPrenom) {
 		this.nom = pNom;
