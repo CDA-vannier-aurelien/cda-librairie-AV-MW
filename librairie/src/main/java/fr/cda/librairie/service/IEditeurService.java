@@ -2,16 +2,20 @@ package fr.cda.librairie.service;
 
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.entity.Editeur;
+import fr.cda.librairie.dto.EditeurDto;
 
 @Service
 public interface IEditeurService {
 
-	public void addEditeur(Editeur editeur);
+	public EditeurDto addEditeur(EditeurDto editeur);
 
 	public void deleteEditeur(int id);
 
-	public Editeur getEditeur(int id);
+	public EditeurDto getEditeur(int id);
 
-	public Editeur getEditeurByNom(String nom);
+	public EditeurDto getEditeurByNom(String nom);
+
+	public int getMaxId();
+
+	public boolean existByName(String nom);
 }
