@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import fr.cda.librairie.dao.IEditeurDao;
 import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.service.IEditeurService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EditeurServiceImpl implements IEditeurService {
 
 	@Autowired

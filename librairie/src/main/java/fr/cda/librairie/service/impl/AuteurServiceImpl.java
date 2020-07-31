@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import fr.cda.librairie.dao.IAuteurDao;
 import fr.cda.librairie.entity.Auteur;
 import fr.cda.librairie.service.IAuteurService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuteurServiceImpl implements IAuteurService {
 
 	@Autowired
