@@ -17,6 +17,10 @@
 
 	<context:annotation-config />
 	
+	<context:property-placeholder
+   location="classpath:db.properties"
+   ignore-unresolvable="true" />
+	
 	<jpa:repositories base-package="fr.cda.librairie.dao"/>
 
 	<context:component-scan
