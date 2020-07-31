@@ -1,16 +1,13 @@
 package fr.cda.librairie.service;
 
-import fr.cda.librairie.dto.UserDto;
-import fr.cda.librairie.entity.User;
+import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.exeption.NomPaysException;
+import fr.cda.librairie.exeption.NomRueExecption;
+import fr.cda.librairie.exeption.NomVilleIncorrect;
+import fr.cda.librairie.exeption.RoleExecption;
 
 public interface IUserService {
 
-	void save(UserDto u);
-
-	UserDto findByLogin(String login);
-
-	boolean exists(String login, String password);
-
-
+    UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueExecption, RoleExecption;
 
 }

@@ -12,21 +12,23 @@ import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.IAuteurService;
 import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LivreServiceImpl implements ILivreService {
 
 	@Autowired
 	ILivreDao livreDao;
 
-	@Autowired
+	/*@Autowired
 	IAuteurService auteurService;
 
 	@Autowired
 	IEditeurService editeurService;
-
+*/
 	@Override
 	public void addLivre(LivreDto livre) {
-		Livre livre2 = new Livre();
+		/*Livre livre2 = new Livre();
 		livre2.setNbPage(livre.getNbPage());
 		livre2.setPrix(livre.getPrix());
 		livre2.setQuantitee(livre.getQuantitee());
@@ -34,13 +36,13 @@ public class LivreServiceImpl implements ILivreService {
 		livre2.setReference(livre.getReference());
 		livre2.setAuteur(auteurService.getAuteurByNom(livre.getAuteur()));
 		livre2.setEditeur(editeurService.getEditeurByNom(livre.getEditeur()));
-		livreDao.save(livre2);
+		livreDao.save(livre2);*/
 
 	}
 
 	@Override
 	public void deleteLivre(int id) {
-		LivreDto l = this.getLivre(id);
+		/*LivreDto l = this.getLivre(id);
 		Livre livre = new Livre();
 		livre.setNbPage(l.getNbPage());
 		livre.setPrix(l.getPrix());
@@ -49,7 +51,7 @@ public class LivreServiceImpl implements ILivreService {
 		livre.setReference(l.getReference());
 		livre.setAuteur(auteurService.getAuteurByNom(l.getAuteur()));
 		livre.setEditeur(editeurService.getEditeurByNom(l.getEditeur()));
-		livreDao.delete(livre);
+		livreDao.delete(livre);*/
 
 	}
 
@@ -86,5 +88,4 @@ public class LivreServiceImpl implements ILivreService {
 		}
 		return listLivreDto;
 	}
-
 }
