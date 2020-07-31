@@ -39,6 +39,8 @@ public class UserServiceImpl implements IUserService {
 		return res;
 	}
 
+
+
 	@Override
 	public UserDto findByLogin(String login) {
 		return iCteDao.findByLogin(login);
