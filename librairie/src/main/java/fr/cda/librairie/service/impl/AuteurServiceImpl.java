@@ -9,7 +9,7 @@ import fr.cda.librairie.dao.IAuteurDao;
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.entity.Auteur;
 import fr.cda.librairie.service.IAuteurService;
-import fr.cda.librairie.utils.Exception.AuteurPresentException;
+import fr.cda.librairie.exception.AuteurPresentException;
 
 @Service
 public class AuteurServiceImpl implements IAuteurService {

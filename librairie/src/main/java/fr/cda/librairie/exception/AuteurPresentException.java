@@ -1,4 +1,4 @@
-package fr.cda.librairie.utils.Exception;
+package fr.cda.librairie.exception;
 
 public class AuteurPresentException extends Exception {
 
