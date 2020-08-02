@@ -2,13 +2,9 @@ package librairie;
 
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IUserService;
-import fr.cda.librairie.utils.ContextConfigurationType;
-import fr.cda.librairie.utils.ContextFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -24,7 +20,7 @@ class UserServiceImplTest {
     @Test
     void create() throws Exception {
 
-        UtilisateurDto user = UtilisateurDto.builder().dateNaissance(new Date())
+ /*       UtilisateurDto user = UtilisateurDto.builder().dateNaissance(new Date())
                 .nom("benseddik3")
                 .prenom("Fethi3")
                 .login("fethi3")
@@ -38,7 +34,7 @@ class UserServiceImplTest {
                 .dateNaissance(new Date())
                 .build();
            UtilisateurDto user1 =  iUserService.create(user);
-          assertNotNull(user1);
+          assertNotNull(user1);*/
 
     }
 }

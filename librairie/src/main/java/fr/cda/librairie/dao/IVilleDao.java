@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface IVilleDao extends CrudRepository<Ville, Integer> {
     Optional<Ville>findByNom(String nomVille);
+
 }

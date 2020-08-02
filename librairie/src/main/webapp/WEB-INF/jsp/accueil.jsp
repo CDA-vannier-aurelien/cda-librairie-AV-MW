@@ -60,6 +60,26 @@
 										placeholder="Nom" required>
 								</div>
 								<div class="form-group">
+									<input id="datenais" type="datetime-local" name="datenais" class="form-control"
+										   placeholder="Date de Naissance" required>
+								</div>
+								<div class="form-group">
+									<input id="numPorte" type="number" name="numPorte" class="form-control"
+										   placeholder="Numero" required>
+								</div>
+								<div class="form-group">
+									<input id="rue" type="text" name="rue" class="form-control"
+										   placeholder="Rue" required>
+								</div>
+								<div class="form-group">
+									<input id="ville" type="text" name="ville" class="form-control"
+										   placeholder="Ville" required>
+								</div>
+								<div class="form-group">
+									<input id="codepostal" type="number" name="codepostal" class="form-control"
+										   placeholder="Code Postal" required>
+								</div>
+								<div class="form-group">
 									<input id="login" type="text" name="login" class="form-control"
 										placeholder="Login" required>
 								</div>

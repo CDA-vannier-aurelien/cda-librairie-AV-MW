@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,7 @@ public class User {
 	private Date dateConnection;
 
     @Column(name = "date_naissance")
-    private Date dateNaissance;
+    private LocalDateTime dateNaissance;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     Adresse adresse;

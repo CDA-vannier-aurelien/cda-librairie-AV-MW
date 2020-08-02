@@ -2,6 +2,7 @@ package fr.cda.librairie.service.impl;
 
 import fr.cda.librairie.dao.*;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.dto.VilleDto;
 import fr.cda.librairie.entity.*;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
@@ -75,6 +76,7 @@ public class UserServiceImpl implements IUserService {
         user.setLogin(pUser.getLogin());
         user.setPassword(BCrypt.hashpw(pUser.getPassword(),BCrypt.gensalt(12)));
         iUserDao.save(user);
+
         return pUser;
     }
 }

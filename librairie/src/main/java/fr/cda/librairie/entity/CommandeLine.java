@@ -1,6 +1,8 @@
 package fr.cda.librairie.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
+@Builder
 @Table(uniqueConstraints={
         @UniqueConstraint(columnNames = {"numero_commande", "reference"}
         )})

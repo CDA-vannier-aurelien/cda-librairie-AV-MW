@@ -1,6 +1,7 @@
 package fr.cda.librairie.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.cda.librairie.controller.config.AbstractServletController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
@@ -29,15 +31,28 @@ public class AddUserServlet extends AbstractServletController {
 IUserService iUserService;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		UtilisateurDto user = UtilisateurDto.builder().dateNaissance(new Date())
-				.nom("benseddik")
-				.prenom("Fethi")
-				.login("fethi")
-				.password("fethi")
-				.nomRue("rue du nord prolongee")
-				.numeroPorte(63)
-				.nomVille("Anzin")
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		String nom = req.getParameter("nom");
+		String prenom = req.getParameter("prenom");
+		int numeroPorte = Integer.parseInt(req.getParameter("numPorte"));
+		String rue = req.getParameter("rue");
+		String ville = req.getParameter("ville");
+		int codePostal = Integer.parseInt(req.getParameter("codepostal"));
+		String login = req.getParameter("login");
+		String password = req.getParameter("password");
+		LocalDateTime datenais = LocalDateTime.parse(req.getParameter("datenais"));
+		System.out.println(nom + password + login +password+rue+ville+numeroPorte);
+		UtilisateurDto user = UtilisateurDto.builder()
+				.dateNaissance(datenais)
+				.nom(nom)
+				.prenom(prenom)
+				.login(login)
+				.password(password)
+				.nomRue(rue)
+				.numeroPorte(numeroPorte)
+				.nomVille(ville)
+				.codePostal(codePostal)
 				.nomPays("France")
 				.isActivated(true)
 				.dateConnection(new Date())
@@ -57,7 +72,7 @@ IUserService iUserService;
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	}
 }

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }))
 public class Editeur {
 

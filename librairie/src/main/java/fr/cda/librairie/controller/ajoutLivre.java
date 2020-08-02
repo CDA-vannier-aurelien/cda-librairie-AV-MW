@@ -1,5 +1,7 @@
 package fr.cda.librairie.controller;
 
+import fr.cda.librairie.controller.config.AbstractServletController;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ajoutLivre
  */
 @WebServlet("/addLivre.do")
-public class ajoutLivre extends HttpServlet {
+public class ajoutLivre extends AbstractServletController {
 	private static final long serialVersionUID = 1L;
 
 	/**

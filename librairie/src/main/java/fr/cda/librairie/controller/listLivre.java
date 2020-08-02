@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.cda.librairie.controller.config.AbstractController;
+import fr.cda.librairie.controller.config.AbstractServletController;
 
 /**
  * Servlet implementation class listUtilisateur
  */
 @WebServlet("/listlivre.do")
-public class listLivre extends AbstractController {
+public class listLivre extends AbstractServletController {
 	private static final long serialVersionUID = 1L;
 
 	/**
