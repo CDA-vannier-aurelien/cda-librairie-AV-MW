@@ -1,5 +1,8 @@
 package fr.cda.librairie.dao;
 
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,6 +10,11 @@ import fr.cda.librairie.entity.Editeur;
 
 @Repository
 public interface IEditeurDao extends CrudRepository<Editeur, Integer> {
-	public Editeur findByNom(String nom);
+	public Optional<Editeur> findByNom(String nom);
+
+	@Query("SELECT coalesce(max(ch.id), 0) FROM Editeur ch")
+	public Long getMaxId();
+
+	public boolean existsByNom(String nomUsage);
 
 }
