@@ -6,11 +6,12 @@ import fr.cda.librairie.entity.Commande;
 import fr.cda.librairie.entity.User;
 import fr.cda.librairie.service.ICommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class CommandeServiceImpl implements ICommandeService {
 
     @Autowired

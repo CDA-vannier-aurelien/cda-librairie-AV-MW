@@ -22,7 +22,7 @@ public class Commande {
     private int numeroCommande;
 
     @Column(name = "date_commande")
-    private Date date;
+    private Date date = new Date();
 
     @OneToMany(cascade = CascadeType.ALL)
    private List<CommandeLine> listLivre = new ArrayList<>();
