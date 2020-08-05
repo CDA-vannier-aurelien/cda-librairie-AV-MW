@@ -4,10 +4,7 @@ import fr.cda.librairie.dao.*;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.dto.VilleDto;
 import fr.cda.librairie.entity.*;
-import fr.cda.librairie.exception.NomPaysException;
-import fr.cda.librairie.exception.NomRueException;
-import fr.cda.librairie.exception.NomVilleIncorrect;
-import fr.cda.librairie.exception.RoleException;
+import fr.cda.librairie.exception.*;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +75,17 @@ public class UserServiceImpl implements IUserService {
         iUserDao.save(user);
 
         return pUser;
+    }
+
+    @Override
+    public UtilisateurDto checkLogin(UtilisateurDto pUser){
+        Optional<User> user = iUserDao.getUserByLogin(pUser.getLogin());
+        if(user.isPresent()){
+            return pUser;
+        }else{
+            return null;
+        }
+
     }
 }
 

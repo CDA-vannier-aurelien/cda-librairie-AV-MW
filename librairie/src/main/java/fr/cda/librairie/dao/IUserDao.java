@@ -8,9 +8,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface IUserDao extends CrudRepository<User, String> {
     @Query(value = "select u.commandes from User u where u.id = :id" )
     List<Commande> getCommandesByUserIdOrderByDateDesc(@Param("id")int id);
+    Optional<User>getUserByLogin(String login);
 
 }
