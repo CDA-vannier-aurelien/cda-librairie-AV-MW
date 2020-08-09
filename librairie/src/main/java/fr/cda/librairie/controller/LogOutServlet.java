@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.cda.librairie.controller.config.AbstractController;
+
 /**
  * 
- * Permet la dÃ©connection de la session du client.
+ * Permet la déconnection de la session du client.
  * 
  * @author Aurélien
  * @version 1.0
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *          Servlet implementation class LogoutServlet
  */
 @WebServlet("/deconnexion")
-public class LogOutServlet extends AbstractServletController {
+public class LogOutServlet extends AbstractController {
 	private static final long serialVersionUID = 1L;
 
 	public LogOutServlet() {

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
@@ -20,10 +21,12 @@ import fr.cda.librairie.service.IUserService;
 
 /**
  * Servlet implementation class AddUserServlet
+ * Fait suite aux informations recueillies dans la jsp d'accueil et le fait de créer un nouveau compte utilisateur.
+ * 
  */
 @Controller
 @WebServlet("/addUser.do")
-public class AddUserServlet extends AbstractServletController {
+public class AddUserServlet extends AbstractController {
 	private static final long serialVersionUID = 1L;
 @Autowired
 IUserService iUserService;
