@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="fr.cda.librairie.dto.UserDto"%>
+<%@ page import="fr.cda.librairie.dto.UtilisateurDto"%>
 <%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
