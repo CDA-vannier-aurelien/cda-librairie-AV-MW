@@ -12,6 +12,7 @@ import fr.cda.librairie.controller.config.AbstractController;
 
 /**
  * Servlet implementation class listUtilisateur
+ * Permet de renvoyer les informations nécessaires à l'affichage des différents livres disponibles dans la librairie.
  */
 @WebServlet("/listlivre.do")
 public class listLivre extends AbstractController {

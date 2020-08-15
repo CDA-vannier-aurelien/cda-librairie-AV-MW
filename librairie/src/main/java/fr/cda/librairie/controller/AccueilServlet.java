@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 
@@ -23,7 +24,7 @@ import fr.cda.librairie.utils.BCrypt;
  */
 @Controller
 @WebServlet(urlPatterns = { "/accueil" })
-public class AccueilServlet extends AbstractServletController {
+public class AccueilServlet extends AbstractController {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -39,7 +40,7 @@ public class AccueilServlet extends AbstractServletController {
 	}
 
 	/**
-	 * cette méthode récupère les informations de la jsp accueil et permet soit de
+	 * cette méthode  récupère les informations de la jsp accueil et permet soit de
 	 * se connecter soit de s'inscrire et donc créer un nouveau client.
 	 */
 	@Override
