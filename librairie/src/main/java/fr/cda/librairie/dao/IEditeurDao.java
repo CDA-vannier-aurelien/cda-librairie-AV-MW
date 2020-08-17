@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import fr.cda.librairie.entity.Editeur;
 
 @Repository
+
+/**
+ * Interface permettant l'enrgestriement des informations concernant les editeurs en base de donnée.
+ * @author PC
+ *
+ */
 public interface IEditeurDao extends CrudRepository<Editeur, Integer> {
 	public Optional<Editeur> findByNom(String nom);
 

@@ -6,6 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
+/**
+ * Interface permettant l'enregistrement des différentes villes d'habitation des utilisateurs.
+ * @author PC
+ *
+ */
 public interface IVilleDao extends CrudRepository<Ville, Integer> {
     Optional<Ville>findByNom(String nomVille);
 }

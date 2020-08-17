@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import fr.cda.librairie.entity.Livre;
 
+
+/**
+ *  Interface permettant d'enregistrer les informations des livres en base de donnée. 
+ * @author PC
+ *
+ */
 @Repository
 public interface ILivreDao extends CrudRepository<Livre, Integer> {
 
