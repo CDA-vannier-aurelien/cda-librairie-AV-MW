@@ -11,19 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ajoutLivre
+ * Cette servlet permettant au libraire d'ajouter de nouveaux livres avec les informations associées dans la librairie.
  */
 @WebServlet("/addLivre.do")
 public class ajoutLivre extends AbstractServletController {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ajoutLivre() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

@@ -13,7 +13,7 @@ import fr.cda.librairie.controller.config.AbstractServletController;
 import org.springframework.stereotype.Controller;
 
 /**
- * Servlet implementation class MenuServlet
+ * Servlet permettant d'appeler les différentes choix offerts à 'lutilisateur une fois connecté à son compte.
  */
 @WebServlet("/menu.do")
 @Controller
