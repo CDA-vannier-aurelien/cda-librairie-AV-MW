@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import fr.cda.librairie.entity.Auteur;
 
+/**
+ * 
+ * Interface permettant d'interagir avec la base de donnée  concernant les éléments propre à chaque auteur de livres.
+ * @author Matthieu
+ *
+ */
 @Repository
 public interface IAuteurDao extends CrudRepository<Auteur, Integer> {
 

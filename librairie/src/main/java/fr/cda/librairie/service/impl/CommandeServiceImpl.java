@@ -32,9 +32,9 @@ public class CommandeServiceImpl implements ICommandeService {
 
     /**
      * @param id
-     * Methode de recherche de commande par Id Client
+     * Methode de recherche de commandes par Id Client
      * @return
-     * Retourne Arraylist de Commande
+     * Retourne Arraylist de Commandes
      */
     @Override
     public Commande findById(int id) {
@@ -49,7 +49,7 @@ public class CommandeServiceImpl implements ICommandeService {
     /**
      * @return
      * Methode qui retourne une ArrayList
-     * de toute les Commande
+     * de toutes les Commandes
      */
     @Override
     public List<Commande> findAll() {
@@ -60,7 +60,7 @@ public class CommandeServiceImpl implements ICommandeService {
      * @param pId
      * Methode de recherche de commande par User
      * @return
-     * Retourne une ArrayList de Commande
+     * Retourne une ArrayList de Commandes
      *
      */
     @Override
