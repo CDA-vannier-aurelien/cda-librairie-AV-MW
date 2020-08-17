@@ -5,6 +5,12 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+/**
+ * 
+ * Classe permettant de recueillir les différentes informations provenant des servlet concernant les livres.
+ * @author PC
+ *
+ */
 public class LivreDto {
 	private int reference;
 	private int prix;
