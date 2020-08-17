@@ -10,4 +10,5 @@ public interface IUserService {
 
     UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException;
 
+    UtilisateurDto conection(UtilisateurDto pUser);
 }

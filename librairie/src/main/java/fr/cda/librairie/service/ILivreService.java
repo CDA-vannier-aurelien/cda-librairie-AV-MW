@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dto.LivreDto;
 
-@Service
+
 public interface ILivreService {
 	public LivreDto addLivre(LivreDto livre);
 

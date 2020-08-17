@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +33,21 @@ public class User {
 
     private String login;
 
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Pays pays;
+    
+    private String nomRue;
+    
+    private int numeroPorte;
+    
+    
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Ville ville;
+    
+    private String complementAdresse;
+    
     private String password;
+    
     @Column(name = "is_activated")
     private boolean isActivated;
 
@@ -40,15 +56,14 @@ public class User {
 
     @Column(name = "date_naissance")
     private Date dateNaissance;
-
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    Adresse adresse;
-
+    
     @OneToMany(cascade = CascadeType.PERSIST)
     List<Commande> commandes = new ArrayList<>();
 
     @ManyToOne
 	Role role;
+    
+    
 
     public User(String pNom, String pPrenom) {
         this.nom = pNom;
