@@ -24,7 +24,7 @@ import fr.cda.librairie.utils.Constantes;
 public class TestAuteurService {
 
 	@Autowired
-	private static IAuteurService auteurService;
+	private  IAuteurService auteurService;
 
 	@Test
 	@Order(1)
