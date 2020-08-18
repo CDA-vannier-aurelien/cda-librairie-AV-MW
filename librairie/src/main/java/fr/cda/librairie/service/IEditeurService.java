@@ -1,10 +1,7 @@
 package fr.cda.librairie.service;
 
-import org.springframework.stereotype.Service;
-
 import fr.cda.librairie.dto.EditeurDto;
 
-@Service
 public interface IEditeurService {
 
 	public EditeurDto addEditeur(EditeurDto editeur);
