@@ -36,6 +36,9 @@ public class AccueilServlet extends AbstractController {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+	
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
 	}
 
@@ -47,5 +50,7 @@ public class AccueilServlet extends AbstractController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
+		
 			}
 }
