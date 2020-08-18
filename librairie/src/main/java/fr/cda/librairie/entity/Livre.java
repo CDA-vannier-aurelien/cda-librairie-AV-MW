@@ -1,11 +1,14 @@
 package fr.cda.librairie.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -14,18 +17,18 @@ import javax.persistence.*;
 @Builder
 public class Livre {
 
-    @Id
-    private int reference;
-    private int prix;
-    private int quantitee;
-    private String titre;
-    @Column(name = "nombre_page")
-    private String nbPage;
+	@Id
+	private int reference;
+	private double prix;
+	private int quantitee;
+	private String titre;
+	@Column(name = "nombre_page")
+	private int nbPage;
 
-    @ManyToOne
-    Auteur auteur;
+	@ManyToOne
+	Auteur auteur;
 
-    @ManyToOne
-    Editeur editeur;
+	@ManyToOne
+	Editeur editeur;
 
 }

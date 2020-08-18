@@ -25,5 +25,12 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/beans-configuration.xml</param-value>
 	</context-param>
+	
+	<jsp-config>
+    <jsp-property-group>
+      <url-pattern> *.jsp </url-pattern>
+      <include-prelude>/WEB-INF/jsp/jstlLib.jsp</include-prelude>
+    </jsp-property-group>
+  </jsp-config>
 
 </web-app>

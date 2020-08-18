@@ -1,10 +1,7 @@
 package fr.cda.librairie.service;
 
-import org.springframework.stereotype.Service;
-
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.exception.AuteurPresentException;
-
 
 public interface IAuteurService {
 	public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException;

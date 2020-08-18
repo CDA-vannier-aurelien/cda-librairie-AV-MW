@@ -107,7 +107,7 @@ public class AddUser extends AbstractController {
 			roleException.printStackTrace();
 		}
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/menu.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 	}
 
 <<<<<<< HEAD:librairie/src/main/java/fr/cda/librairie/controller/AddUser.java

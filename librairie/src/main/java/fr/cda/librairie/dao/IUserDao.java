@@ -25,6 +25,6 @@ public interface IUserDao extends CrudRepository<User, String> {
     Optional<User>getUserByLogin(String login);
 
     
-    Optional<User> findByLogin(String pUser);
+    Optional<User> getUserByMail(String pUser);
     
 }

@@ -11,6 +11,8 @@ public interface IUserService {
     UtilisateurDto checkLogin(UtilisateurDto pUser);
 =======
     UtilisateurDto conection(UtilisateurDto pUser);
+
+	UtilisateurDto checkMail(UtilisateurDto user);
     
    
 >>>>>>> Dev

@@ -5,7 +5,6 @@ import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.Constantes;
 
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @WebServlet("/connection")
 
 public class ConnectionServlet extends AbstractController implements Servlet {
@@ -26,48 +24,37 @@ public class ConnectionServlet extends AbstractController implements Servlet {
 
 	@Autowired
 	IUserService iUser;
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-HttpSession vSession = request.getSession();
-		
-		if(vSession.getAttribute(Constantes.USER_EN_COURS) != null) {
-			this.getServletContext().getRequestDispatcher("/menu.do").forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession vSession = request.getSession();
+
+		if (vSession.getAttribute(Constantes.USER_EN_COURS) != null) {
+			this.getServletContext().getRequestDispatcher("/accueil").forward(request, response);
 		} else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		}
 	}
 
-
 //Méthode faite par Loreen la bosse
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		HttpSession vSession = request.getSession();
-		
+
 		UtilisateurDto vUser = UtilisateurDto.builder().mail(login).password(password).build();
-		vUser= iUser.conection(vUser);
-		if(vUser==null) {
+		vUser = iUser.conection(vUser);
+		if (vUser == null) {
+			HttpSession vSession = null;
 			request.setAttribute("error", "Login/password incorrect");
-			request.getRequestDispatcher("WEB-INF/jsp/accueil.jsp").forward(request, response);
-		}else {
-				
-
-			if(vSession.getAttribute(Constantes.USER_EN_COURS) != null) {
-				this.getServletContext().getRequestDispatcher("/accueil").forward(request, response);
-				
-
-			} else  {
-				request.setAttribute("infos", "connexion réussie");
-				
-				vSession.setAttribute(Constantes.USER_EN_COURS, UtilisateurDto.builder().mail(login).dateConnection(new Date()).build());
-				
-				this.getServletContext().getRequestDispatcher("/accueil").forward(request, response);
-			} 
+			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+		} else {
+			HttpSession vSession = request.getSession();
+			System.out.println("connect�");
+			vSession.setAttribute("user", vUser);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		}
-		
-	
 	}
-
 }
