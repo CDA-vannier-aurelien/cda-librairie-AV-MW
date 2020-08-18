@@ -32,7 +32,9 @@ import java.util.List;
 @Entity
 @Builder
 @AllArgsConstructor
-@Table(name = "Utilisateur", uniqueConstraints = { @UniqueConstraint(columnNames = "login") })
+@Table(name = "Utilisateur",
+		uniqueConstraints = {
+		@UniqueConstraint(columnNames = "mail")} )
 
 public class User {
 
@@ -44,7 +46,7 @@ public class User {
 
 	private String prenom;
 
-	private String login;
+    private String mail;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Pays pays;

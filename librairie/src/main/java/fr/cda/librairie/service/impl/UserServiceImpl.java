@@ -66,7 +66,7 @@ public class UserServiceImpl implements IUserService {
 		user.setComplementAdresse(pUser.getComplementAdresse());
 		user.setVille(optionalVille.get());
 		user.setPays(optionalPays.get());
-		user.setLogin(pUser.getMail());
+		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
 		user.setPassword(BCrypt.hashpw(pUser.getPassword(), BCrypt.gensalt(12)));
 		iUserDao.save(user);
@@ -81,7 +81,7 @@ public class UserServiceImpl implements IUserService {
 	// C'est gagnéééééééééééééééééééééééééééééééééééééééééééééééé
 		// C'est bon j'suis chaud
 		
-		Optional<User> optionalUser=iUserDao.findByLogin(pUser.getMail());
+		Optional<User> optionalUser=iUserDao.getUserByMail(pUser.getMail());
 		if(!optionalUser.isPresent()) {
 			System.out.println("erreur login");
 			pUser=null;
@@ -95,13 +95,25 @@ public class UserServiceImpl implements IUserService {
 			System.out.println("Erreur Compte inactif");
 			
 		}else {
-			pUser.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom());
-			System.out.println("Connecté !");
+			pUser= UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom()).build();
+			return pUser;
+		
 		}
 		}
 		
 		return pUser;
 	}
+
+	@Override
+	public UtilisateurDto checkMail(UtilisateurDto pUser) {
+		 Optional<User> user = iUserDao.getUserByMail(pUser.getMail());
+	        if(user.isPresent()){
+	            return pUser;
+	        }else{
+	            return null;
+	        }
+	}
+
 
 	
 
