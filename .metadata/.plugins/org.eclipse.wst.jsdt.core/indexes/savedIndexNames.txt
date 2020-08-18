@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\git-repos\cda-librairie-AV-MW\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+887458895.index
+3365579618.index
+3877150160.index
+3373919309.index
+1400646117.index

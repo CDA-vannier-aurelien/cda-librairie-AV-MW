@@ -5,30 +5,27 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.springframework.context.ApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.utils.Constantes;
-import fr.cda.librairie.utils.ContextConfigurationType;
-import fr.cda.librairie.utils.ContextFactory;
 
 @TestMethodOrder(OrderAnnotation.class)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("classpath:spring/beans-configuration.xml")
 public class TestEditeurService {
 
-	private static ApplicationContext context;
-	private static IEditeurService editeurService;
+@Autowired
+private  IEditeurService editeurService;
 
-	@BeforeAll
-	public static void initAll() {
-		context = ContextFactory.getContext(ContextConfigurationType.CLASSPATH);
-		editeurService = context.getBean(IEditeurService.class);
-	}
 
 	@Test
 	@Order(1)

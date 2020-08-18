@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+<<<<<<< HEAD
 
+=======
+>>>>>>> Dev
 @Repository
 /**
  * Interface permettant l'enregistrement des différents utilisateurs en base de donnée.
@@ -21,4 +24,7 @@ public interface IUserDao extends CrudRepository<User, String> {
     List<Commande> getCommandesByUserIdOrderByDateDesc(@Param("id")int id);
     Optional<User>getUserByLogin(String login);
 
+    
+    Optional<User> findByLogin(String pUser);
+    
 }

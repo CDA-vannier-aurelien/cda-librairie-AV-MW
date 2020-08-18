@@ -18,4 +18,8 @@ public class Pays {
     private int Id;
     @Column(name = "nom_pays")
     private String nomPays;
+    
+    public Pays (String pNomPays) {
+    	this.nomPays = pNomPays;
+    }
 }

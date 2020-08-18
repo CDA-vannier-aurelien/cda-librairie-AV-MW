@@ -17,6 +17,7 @@ class UserServiceImplTest {
     @Autowired
     private IUserService iUserService;
 
+<<<<<<< HEAD
     @Test
     void create() throws Exception {
 
@@ -36,4 +37,26 @@ class UserServiceImplTest {
           assertNotNull(user1);
 
     }
+=======
+//    @Test
+//    void create() throws Exception {
+//
+//        UtilisateurDto user = UtilisateurDto.builder().dateNaissance(new Date())
+//                .nom("benseddik3")
+//                .prenom("Fethi3")
+//                .login("fethi3")
+//                .password("fethi")
+//                .nomRue("Truax")
+//                .numeroPorte(63)
+//                .nomVille("OZAN")
+//                .nomPays("Ghana")
+//                .isActivated(true)
+//                .dateConnection(new Date())
+//                .dateNaissance(new Date())
+//                .build();
+//           UtilisateurDto user1 =  iUserService.create(user);
+//          assertNotNull(user1);
+//
+//    }
+>>>>>>> Dev
 }
