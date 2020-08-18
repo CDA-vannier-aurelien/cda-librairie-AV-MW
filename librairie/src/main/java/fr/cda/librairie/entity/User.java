@@ -1,5 +1,20 @@
 package fr.cda.librairie.entity;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +38,13 @@ import java.util.List;
 
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    private String nom;
+	private String nom;
 
-    private String prenom;
+	private String prenom;
 
     private String mail;
 
@@ -51,7 +66,7 @@ public class User {
     @Column(name = "is_activated")
     private boolean isActivated;
 
-    @Column(name = "date_last_connection")
+	@Column(name = "date_last_connection")
 	private Date dateConnection;
 
     @Column(name = "date_naissance")
@@ -65,9 +80,9 @@ public class User {
     
     
 
-    public User(String pNom, String pPrenom) {
-        this.nom = pNom;
-        this.prenom = pPrenom;
-    }
+	public User(String pNom, String pPrenom) {
+		this.nom = pNom;
+		this.prenom = pPrenom;
+	}
 
 }

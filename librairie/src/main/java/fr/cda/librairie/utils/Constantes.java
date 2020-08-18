@@ -5,4 +5,7 @@ public class Constantes {
 
 	public static final String STRING_TEST = "TEST";
 
+	public static final int INTEGER_TEST = 1;
+	public static final double DOUBLE_TEST = 1;
+
 }

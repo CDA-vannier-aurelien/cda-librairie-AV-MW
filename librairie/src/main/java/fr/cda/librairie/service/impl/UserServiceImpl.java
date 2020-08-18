@@ -1,18 +1,19 @@
 package fr.cda.librairie.service.impl;
 
-import fr.cda.librairie.dao.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import fr.cda.librairie.dao.IPaysDao;
+import fr.cda.librairie.dao.IRoleDao;
+import fr.cda.librairie.dao.IRueDao;
+import fr.cda.librairie.dao.IUserDao;
+import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.entity.*;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
-import fr.cda.librairie.utils.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
