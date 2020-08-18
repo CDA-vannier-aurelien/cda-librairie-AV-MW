@@ -22,49 +22,24 @@
 			style="font-family: Lora, serif; color: rgb(33, 37, 41);">La
 			Librairie</span>
 	</h1>
-	<nav
-		class="navbar navbar-light navbar-expand-md sticky-top bg-dark py-lg-4"
-		id="mainNav">
-		<div class="container-fluid">
-			<a class="navbar-brand text-uppercase d-lg-none text-expanded"
-				href="#" style="color: rgba(255, 255, 255, 0.7);">La Librarie</a>
-			<button data-toggle="collapse" data-target="#navbarResponsive"
-				class="navbar-toggler" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="nav navbar-nav mx-auto">
-					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="index.jsp" data-toggle="tooltip" data-placement="top"
-						title="Accueil">Home</a></li>
-					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="../about.html" data-toggle="tooltip" data-placement="top"
-						title="A propos">A propos</a></li>
-					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="../products.html" data-toggle="tooltip" data-placement="top"
-						title="Produits">Produits</a></li>
-					<li class="nav-item" role="presentation" data-toggle="tooltip"
-						data-bs-tooltip="" data-placement="left"><a class="nav-link"
-						href="../store.html">Store</a></li>
-					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="../dashboard.html">dashboard</a></li>
-
-				<c:if test="${empty sessionScope.user }">
-						<li class="nav-item" role="presentation"><a class="nav-link"
-							data-toggle="modal" data-target="#modalLRForm">Login</a></li>
-				</c:if>
-					<c:if test="${!empty sessionScope.user }">
-					<button type="submit">Logout</button>
-					</c:if>
-		
-			
-
-
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<nav class=“navbar navbar-light navbar-expand-md sticky-top bg-dark py-lg-4” id=“mainNav”>
+        <div class=“container-fluid”><a class=“navbar-brand text-uppercase d-lg-none text-expanded” href=“#” style=“color: rgba(255,255,255,0.7);“>La Librarie</a><button data-toggle=“collapse” data-target=“#navbarResponsive” class=“navbar-toggler” aria-controls=“navbarResponsive”
+                aria-expanded=“false” aria-label=“Toggle navigation”><span class=“navbar-toggler-icon”></span></button>
+            <div class=“collapse navbar-collapse” id=“navbarResponsive”>
+                <ul class=“nav navbar-nav mx-auto”>
+                    <li class=“nav-item” role=“presentation”><a class=“nav-link” href=“index.html”>Home</a></li>
+                    <li class=“nav-item” role=“presentation”><a class=“nav-link” href=“about.html”>About us</a></li>
+                    <li class=“nav-item” role=“presentation”><a class=“nav-link” href=“products.html”>Produits</a></li>
+                    <li class=“nav-item” role=“presentation” data-toggle=“tooltip” data-bs-tooltip=“” data-placement=“left”><a class=“nav-link” href=“store.html”>Store</a></li>
+                    <li class=“nav-item” role=“presentation”><a class=“nav-link” href=“dashboard.html”>dashboard</a></li>
+                    <li class=“nav-item” role=“presentation”><a class=“nav-link” href=“store.html”>Login</a></li>
+                    <li class=“nav-item dropdown”><a class=“dropdown-toggle nav-link” data-toggle=“dropdown” aria-expanded=“false” href=“#”>Dropdown </a>
+                        <div class=“dropdown-menu” role=“menu”><a class=“dropdown-item” role=“presentation” href=“#”>Mon compte</a><a class=“dropdown-item” role=“presentation” href=“#”>LogOut</a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 	<section class="text-dark page-section clearfix">
 		<div class="container">
 			<div class="intro">
@@ -300,7 +275,7 @@
 						<div class="tab-pane fade" id="panel8" role="tabpanel">
 
 							<!--Body-->
-							<form method="post" action="inscription" class="was-validated">
+							<form method="post" action="addUser.do" class="was-validated">
 								<div class="modal-body">
 									<div class="container-fluid">
 										<div class="row">
@@ -344,8 +319,19 @@
 												<input type="number" id="codePostal"
 													class="form-control form-control-sm validate"
 													placeholder="Code Postal" name="codePostal" required>
-
 											</div>
+											<div class="col md-form form-sm mb-2 mt-4">
+												<input type="text" id="pays"
+													class="form-control form-control-sm validate"
+													placeholder="Pays" name="pays" required>
+											</div>
+										</div>
+										<div class="md-form form-sm mb-2">
+											<i class="fa fa-lock prefix"></i> <input type="text"
+												id="complement"
+												class="form-control form-control-sm validate"
+												placeholder="Complément d'adresse" name="complementAdresse"
+												required>
 										</div>
 										<div class="md-form form-sm mb-2">
 											<i class="fa fa-calendar-minus-o prefix"></i> <input

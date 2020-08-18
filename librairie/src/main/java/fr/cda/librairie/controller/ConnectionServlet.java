@@ -33,7 +33,7 @@ public class ConnectionServlet extends AbstractController implements Servlet {
 		if (vSession.getAttribute(Constantes.USER_EN_COURS) != null) {
 			this.getServletContext().getRequestDispatcher("/accueil").forward(request, response);
 		} else {
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		}
 	}
 
@@ -49,11 +49,12 @@ public class ConnectionServlet extends AbstractController implements Servlet {
 		if (vUser == null) {
 			HttpSession vSession = null;
 			request.setAttribute("error", "Login/password incorrect");
-			request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
 			HttpSession vSession = request.getSession();
+			System.out.println("connecté");
 			vSession.setAttribute("user", vUser);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		}
 	}
 }
