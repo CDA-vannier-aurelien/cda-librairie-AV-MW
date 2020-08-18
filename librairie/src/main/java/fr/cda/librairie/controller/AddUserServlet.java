@@ -70,7 +70,7 @@ public class AddUserServlet extends AbstractController {
 			roleException.printStackTrace();
 		}
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/menu.jsp").forward(req, resp);
 	}
 
 }
