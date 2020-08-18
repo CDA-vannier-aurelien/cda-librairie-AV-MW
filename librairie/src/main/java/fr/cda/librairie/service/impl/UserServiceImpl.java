@@ -102,7 +102,7 @@ public class UserServiceImpl implements IUserService {
 			System.out.println("Erreur Compte inactif");
 			
 		}else {
-			pUser= UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom()).build();
+			pUser= UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole()).build();
 			return pUser;
 		
 		}
