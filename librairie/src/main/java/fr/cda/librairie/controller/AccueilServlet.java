@@ -7,11 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.cda.librairie.controller.config.AbstractServletController;
+import fr.cda.librairie.controller.config.AbstractController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.service.IUserService;
 
 /**

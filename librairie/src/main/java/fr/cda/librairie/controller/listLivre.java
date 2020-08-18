@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.cda.librairie.controller.config.AbstractServletController;
+import fr.cda.librairie.controller.config.AbstractController;
 
 /**
  * Servlet implementation class listUtilisateur
  * Permet de renvoyer les informations nécessaires à l'affichage des différents livres disponibles dans la librairie.
  */
 @WebServlet("/listlivre.do")
-public class listLivre extends AbstractServletController {
+public class listLivre extends AbstractController {
 	private static final long serialVersionUID = 1L;
 
 	/**

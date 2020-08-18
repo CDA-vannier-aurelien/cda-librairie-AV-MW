@@ -1,6 +1,6 @@
 package fr.cda.librairie.controller;
 
-import fr.cda.librairie.controller.config.AbstractServletController;
+import fr.cda.librairie.controller.config.AbstractController;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Cette servlet permettant au libraire d'ajouter de nouveaux livres avec les informations associées dans la librairie.
  */
 @WebServlet("/addLivre.do")
-public class ajoutLivre extends AbstractServletController {
+public class ajoutLivre extends AbstractController {
 	private static final long serialVersionUID = 1L;
 
 

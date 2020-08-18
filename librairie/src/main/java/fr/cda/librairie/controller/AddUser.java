@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.cda.librairie.controller.config.AbstractServletController;
+import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
@@ -25,7 +25,7 @@ import fr.cda.librairie.service.IUserService;
  */
 @Controller
 @WebServlet("/addUser.do")
-public class AddUserServlet extends AbstractServletController {
+public class AddUser extends AbstractController {
 	private static final long serialVersionUID = 1L;
 @Autowired
 IUserService iUserService;

@@ -20,7 +20,7 @@ class UserServiceImplTest {
     @Test
     void create() throws Exception {
 
- /*       UtilisateurDto user = UtilisateurDto.builder().dateNaissance(new Date())
+       UtilisateurDto user = UtilisateurDto.builder()
                 .nom("benseddik3")
                 .prenom("Fethi3")
                 .login("fethi3")
@@ -31,10 +31,9 @@ class UserServiceImplTest {
                 .nomPays("Ghana")
                 .isActivated(true)
                 .dateConnection(new Date())
-                .dateNaissance(new Date())
                 .build();
            UtilisateurDto user1 =  iUserService.create(user);
-          assertNotNull(user1);*/
+          assertNotNull(user1);
 
     }
 }

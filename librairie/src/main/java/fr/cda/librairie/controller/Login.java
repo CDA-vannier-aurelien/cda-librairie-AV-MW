@@ -1,6 +1,6 @@
 package fr.cda.librairie.controller;
 
-import fr.cda.librairie.controller.config.AbstractServletController;
+import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "testServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends AbstractServletController {
+public class Login extends AbstractController {
     @Autowired
     IUserService iUserService;
 
