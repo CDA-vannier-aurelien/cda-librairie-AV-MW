@@ -15,7 +15,6 @@ import fr.cda.librairie.entity.Auteur;
 import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.ILivreService;
-import org.springframework.stereotype.Service;
 
 @Service
 public class LivreServiceImpl implements ILivreService {
@@ -54,22 +53,28 @@ public class LivreServiceImpl implements ILivreService {
 	}
 
 	@Override
-	public void deleteLivre(int id) {
+	public void deleteLivre(int vRef) {
 
-		livreDao.deleteById(id);
-
-	}
-
-	@Override
-	public void updateLivre() {
-		// TODO Auto-generated method stub
+		livreDao.deleteById(vRef);
 
 	}
 
 	@Override
-	public LivreDto getLivre(int id) {
+	public void updateQuantiteeLivre(int vQuantitee, int vRef) {
 
-		Optional<Livre> opsRes = livreDao.findById(id);
+		Optional<Livre> optionelRes = livreDao.findById(vRef);
+		Livre l = null;
+		if (optionelRes.isPresent()) {
+			l = optionelRes.get();
+		}
+		l.setQuantitee(vQuantitee);
+		livreDao.save(l);
+	}
+
+	@Override
+	public LivreDto getLivre(int vRef) {
+
+		Optional<Livre> opsRes = livreDao.findById(vRef);
 		LivreDto livre = null;
 		if (opsRes.isPresent()) {
 			Livre l = opsRes.get();
@@ -96,7 +101,6 @@ public class LivreServiceImpl implements ILivreService {
 
 	@Override
 	public int getMaxId() {
-		// TODO Auto-generated method stub
 		return livreDao.getMaxId().intValue();
 	}
 
