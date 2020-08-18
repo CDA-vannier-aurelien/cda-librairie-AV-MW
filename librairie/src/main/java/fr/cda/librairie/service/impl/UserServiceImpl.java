@@ -1,5 +1,7 @@
 package fr.cda.librairie.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,11 +11,16 @@ import fr.cda.librairie.dao.IRueDao;
 import fr.cda.librairie.dao.IUserDao;
 import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.entity.Pays;
+import fr.cda.librairie.entity.Role;
+import fr.cda.librairie.entity.User;
+import fr.cda.librairie.entity.Ville;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
+import fr.cda.librairie.utils.BCrypt;
 
 @Service
 public class UserServiceImpl implements IUserService {
