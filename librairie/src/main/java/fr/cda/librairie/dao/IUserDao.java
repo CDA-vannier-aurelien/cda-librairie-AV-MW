@@ -20,6 +20,6 @@ public interface IUserDao extends CrudRepository<User, String> {
     List<Commande> getCommandesByUserIdOrderByDateDesc(@Param("id")int id);
 
     
-    Optional<User> findByLogin(String pUser);
+    Optional<User> getUserByMail(String pUser);
     
 }

@@ -39,7 +39,7 @@ public class AccueilServlet extends AbstractController {
 		
 	
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}
 
 	/**

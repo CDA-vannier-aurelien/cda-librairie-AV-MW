@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "Utilisateur",
 		uniqueConstraints = {
-		@UniqueConstraint(columnNames = "login")} )
+		@UniqueConstraint(columnNames = "mail")} )
 
 public class User {
 
@@ -31,7 +31,7 @@ public class User {
 
     private String prenom;
 
-    private String login;
+    private String mail;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     private Pays pays;
