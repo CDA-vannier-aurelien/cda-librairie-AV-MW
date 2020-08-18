@@ -109,12 +109,4 @@ public class TestLivreService {
 
 	}
 
-	@Test
-	@Order(5)
-	public void testGetMaxId() {
-
-		int idMax = livreService.getMaxId();
-
-	}
-
 }
