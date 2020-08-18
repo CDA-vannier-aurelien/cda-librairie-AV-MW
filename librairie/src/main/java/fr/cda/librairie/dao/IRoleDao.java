@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 @Repository
+/**
+ * 
+ * Interface permettant l'enregistrement des différents rôles possibles pour les utilisateurs en base de donnée. 
+ * @author PC
+ *
+ */
 public interface IRoleDao extends CrudRepository<Role, Integer> {
     Optional<Role> findByRole(String pRole);
 }

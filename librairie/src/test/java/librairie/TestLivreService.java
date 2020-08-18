@@ -71,7 +71,7 @@ public class TestLivreService {
 		LivreDto livre = livreService.getLivre(Constantes.INTEGER_TEST);
 		assertNull(livre);
 
-	};
+	}
 
 	@Test
 	@Order(3)

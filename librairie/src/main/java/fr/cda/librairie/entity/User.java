@@ -20,6 +20,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -39,21 +46,37 @@ public class User {
 
 	private String login;
 
-	private String password;
-	@Column(name = "is_activated")
-	private boolean isActivated;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Pays pays;
+    
+    private String nomRue;
+    
+    private int numeroPorte;
+    
+    
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    private Ville ville;
+    
+    private String complementAdresse;
+    
+    private String password;
+    
+    @Column(name = "is_activated")
+    private boolean isActivated;
 
 	@Column(name = "date_last_connection")
 	private Date dateConnection;
 
-	@Column(name = "date_naissance")
-	private Date dateNaissance;
+    @Column(name = "date_naissance")
+    private Date dateNaissance;
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    List<Commande> commandes = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.PERSIST)
-	List<Commande> commandes = new ArrayList<>();
-
-	@ManyToOne
+    @ManyToOne
 	Role role;
+    
+    
 
 	public User(String pNom, String pPrenom) {
 		this.nom = pNom;

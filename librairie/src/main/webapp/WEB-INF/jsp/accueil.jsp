@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="jstlLib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,10 @@
 	<div class="jumbotron">
 		<div class="container">
 			<h1>Connexion</h1>
-			<h2 class="text-danger">${error}</h2>
-			<form action="accueil" method="post">
+			<h2 class="text-danger"><c:out value="${error}"></c:out></h2>
+			<form action="connection" method="post">
 
+             
 				<div class="form-group">
 					<input id="login" type="text" name="login" class="form-control"
 						placeholder="Login" required>
@@ -23,6 +25,7 @@
 					<input id="password" type="password" name="password"
 						class="form-control" placeholder="Password" required>
 				</div>
+
 
 				<button class="btn btn-primary" type="submit">Go</button>
 
@@ -60,12 +63,40 @@
 										placeholder="Nom" required>
 								</div>
 								<div class="form-group">
-									<input id="login" type="text" name="login" class="form-control"
-										placeholder="Login" required>
+									<input id="mail" type="text" name="mail" class="form-control"
+										placeholder="Mail" required>
 								</div>
 								<div class="form-group">
 									<input id="password" type="password" name="password"
 										class="form-control" placeholder="Password" required>
+								</div>
+								<div class="form-group">
+									<input id="nomRue" type="text" name="nomRue"
+										class="form-control" placeholder="Rue" required>
+								</div>
+								<div class="form-group">
+									<input id="numeroRue" type="number" name="numeroPorte"
+										class="form-control" placeholder="Numéro de rue" required>
+								</div>
+								<div class="form-group">
+									<input id="complementAdresse" type="text" name="complementAdresse"
+										class="form-control" placeholder="Complément d'adresse" required>
+								</div>
+								<div class="form-group">
+									<input id="pays" type="text" name="pays"
+										class="form-control" placeholder="Pays" required>
+								</div>
+								<div class="form-group">
+									<input id="codePostal" type="text" name="codePostal"
+										class="form-control" placeholder="Code Postal" required>
+								</div>
+								<div class="form-group">
+									<input id="ville" type="text" name="ville"
+										class="form-control" placeholder="Ville" required>
+								</div>
+								<div class="form-group">
+									<input id="dateNaissance" type="date" name="dateNaissance"
+										class="form-control" placeholder="Date de Naissance" required>
 								</div>
 
 							</div>
