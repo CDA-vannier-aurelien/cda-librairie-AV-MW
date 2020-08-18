@@ -24,20 +24,17 @@ import fr.cda.librairie.utils.Constantes;
 public class TestAuteurService {
 
 	@Autowired
-	private  IAuteurService auteurService;
+	private IAuteurService auteurService;
 
 	@Test
 	@Order(1)
-	public void testAddAuteur() {
+	public void testAddAuteur() throws Exception {
 
 		AuteurDto auteur = new AuteurDto();
 		auteur.setNom(Constantes.STRING_TEST);
 		auteur.setPrenom(Constantes.STRING_TEST);
 		auteur.setNomUsuel(Constantes.STRING_TEST);
-		try {
-			auteur = auteurService.addAuteur(auteur);
-		} catch (Exception e) {
-		}
+		auteur = auteurService.addAuteur(auteur);
 		assertNotNull(auteur);
 		assertEquals(Constantes.STRING_TEST, auteur.getNom());
 		assertEquals(Constantes.STRING_TEST, auteur.getPrenom());

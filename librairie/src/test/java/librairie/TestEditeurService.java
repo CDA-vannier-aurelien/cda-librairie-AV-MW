@@ -23,9 +23,8 @@ import fr.cda.librairie.utils.Constantes;
 @ContextConfiguration("classpath:spring/beans-configuration.xml")
 public class TestEditeurService {
 
-@Autowired
-private  IEditeurService editeurService;
-
+	@Autowired
+	private IEditeurService editeurService;
 
 	@Test
 	@Order(1)

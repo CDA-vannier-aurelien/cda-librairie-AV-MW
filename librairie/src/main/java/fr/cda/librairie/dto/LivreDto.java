@@ -30,7 +30,7 @@ public class LivreDto {
 	 */
 	private int quantitee;
 	private String titre;
-	private String nbPage;
+	private int nbPage;
 	private String auteur;
 	private String editeur;
 }
