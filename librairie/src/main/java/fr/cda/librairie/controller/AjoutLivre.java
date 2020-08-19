@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Cette servlet permettant au libraire d'ajouter de nouveaux livres avec les informations associées dans la librairie.
  */
 @WebServlet("/addLivre.do")
-public class ajoutLivre extends HttpServlet {
+public class AjoutLivre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 

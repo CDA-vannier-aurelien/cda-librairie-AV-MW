@@ -9,4 +9,6 @@ public class Constantes {
 	public static final int INTEGER_TEST = 1;
 	public static final double DOUBLE_TEST = 1;
 
+	public static final int ELEMENTS_PAGE = 4;
+
 }

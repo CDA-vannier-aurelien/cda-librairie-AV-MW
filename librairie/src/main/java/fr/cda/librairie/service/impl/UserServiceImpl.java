@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.controller.AddUserServlet;
 import fr.cda.librairie.dao.IPaysDao;
 import fr.cda.librairie.dao.IRoleDao;
 import fr.cda.librairie.dao.IRueDao;
@@ -29,6 +28,7 @@ import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Service
 public class UserServiceImpl implements IUserService {
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IRoleDao iRoleDao;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
 		String nomPays = pUser.getPays();
 		Optional<Pays> optionalPays = iPaysDao.findByNomPays(nomPays);
 		if (!optionalPays.isPresent()) {
-		
+
 		}
 		String nomVille = pUser.getVille();
 		Optional<Ville> optionalVille = iVilleDao.findByNom(nomVille);
@@ -93,60 +93,58 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UtilisateurDto conection(UtilisateurDto pUser) {
-		
-		
-		
-	// C'est gagnéééééééééééééééééééééééééééééééééééééééééééééééé
+
+		// C'est
+		// gagnéééééééééééééééééééééééééééééééééééééééééééééééé
 		// C'est bon j'suis chaud
-		
-		Optional<User> optionalUser=iUserDao.getUserByMail(pUser.getMail());
-		if(!optionalUser.isPresent()) {
+
+		Optional<User> optionalUser = iUserDao.getUserByMail(pUser.getMail());
+		if (!optionalUser.isPresent()) {
 			log.warn("erreur login");
-			pUser=null;
-		}else {
-			if( !BCrypt.checkpw(pUser.getPassword(), optionalUser.get().getPassword())) {
-				pUser=null;
+			pUser = null;
+		} else {
+			if (!BCrypt.checkpw(pUser.getPassword(), optionalUser.get().getPassword())) {
+				pUser = null;
 				log.warn("Erreur password");
-			
-		}else if( !optionalUser.get().isEstActive()) {
-			pUser=null;
-			log.warn("Erreur Compte inactif");
-			
-		}else {
-			pUser= UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole()).build();
-			log.info("ajout avec succ�s");
-			return pUser;
-		
+
+			} else if (!optionalUser.get().isEstActive()) {
+				pUser = null;
+				log.warn("Erreur Compte inactif");
+
+			} else {
+				pUser = UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
+						.labelRole(optionalUser.get().getRole().getRole()).build();
+				log.info("ajout avec succ�s");
+				return pUser;
+
+			}
 		}
-		}
-		
+
 		return pUser;
 	}
 
 	@Override
 	public UtilisateurDto checkMail(UtilisateurDto pUser) {
-		 Optional<User> user = iUserDao.getUserByMail(pUser.getMail());
-	        if(user.isPresent()){
-	            return pUser;
-	        }else{
-	            return null;
-	        }
+		Optional<User> user = iUserDao.getUserByMail(pUser.getMail());
+		if (user.isPresent()) {
+			return pUser;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	public List<UtilisateurDto> getAll(int pageEnCours) {
-	
-		
+
 		List<UtilisateurDto> liste = new ArrayList<>();
-		PageRequest page = PageRequest.of(pageEnCours-1, Constantes.ELEMENTS_PAR_PAGE);
+		PageRequest page = PageRequest.of(pageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
 		Page<User> u = this.iUserDao.findAll(page);
-	
+
 		for (User user : u) {
-			UtilisateurDto uDto= this.modelMapper.map(user,UtilisateurDto.class);
+			UtilisateurDto uDto = this.modelMapper.map(user, UtilisateurDto.class);
 			uDto.setLabelRole(user.getRole().getRole());
 			liste.add(uDto);
-			
-	
+
 		}
 		return liste;
 	}
@@ -155,8 +153,5 @@ public class UserServiceImpl implements IUserService {
 	public long count() {
 		return this.iUserDao.count();
 	}
-
-
-	
 
 }
