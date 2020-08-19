@@ -35,5 +35,6 @@ public class LivreDto {
 	private String titre;
 	private int nbPage;
 	private String auteur;
+	private String description;
 	private String editeur;
 }

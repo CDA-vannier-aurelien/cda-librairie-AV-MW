@@ -52,6 +52,8 @@ log.debug("list d'utilisateur");
 				
 				System.err.println("attention : " + e.getMessage());
 			}
+			
+			
 		}
 		
 		List<UtilisateurDto> vUser= this.userService.getAll(pageEnCours);

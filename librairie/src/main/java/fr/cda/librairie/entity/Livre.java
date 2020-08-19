@@ -20,6 +20,7 @@ public class Livre {
 	private double prix;
 	private int quantitee;
 	private String titre;
+	private String description;
 	@Column(name = "nombre_page")
 	private int nbPage;
 

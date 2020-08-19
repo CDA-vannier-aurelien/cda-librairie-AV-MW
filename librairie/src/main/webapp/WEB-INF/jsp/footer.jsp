@@ -1,11 +1,10 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer>
     <div class="row">
         <div class="col-sm-6 col-md-4 footer-navigation">
             <h3><a href="#">Company<span>Ma Librairie</span></a></h3>
-            <p class="links"><a href="#">Home</a><strong> Â· </strong><a href="#">Blog</a><strong> Â· </strong><a href="#">Pricing</a><strong> Â· </strong><a href="#">About</a><strong> Â· </strong><a href="#">Faq</a><strong> Â· </strong><a href="#">Contact</a></p>
-            <p class="company-name">Company Ma Librairie Â© 2020 </p>
+            <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong> · </strong><a href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong> · </strong><a href="#">Faq</a><strong> · </strong><a href="#">Contact</a></p>
+            <p class="company-name">Company Ma Librairie © 2020 </p>
         </div>
         <div class="col-sm-6 col-md-4 footer-contacts">
             <div><span class="fa fa-map-marker footer-contacts-icon"> </span>

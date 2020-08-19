@@ -3,19 +3,20 @@ package fr.cda.librairie.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import fr.cda.librairie.entity.Livre;
 
-
 /**
- *  Interface permettant d'enregistrer les informations des livres en base de donnée. 
+ * Interface permettant d'enregistrer les informations des livres en base de
+ * donnée.
+ * 
  * @author PC
  *
  */
 @Repository
-public interface ILivreDao extends CrudRepository<Livre, Integer> {
+public interface ILivreDao extends PagingAndSortingRepository<Livre, Integer> {
 
 	public List<Livre> findAll();
 
