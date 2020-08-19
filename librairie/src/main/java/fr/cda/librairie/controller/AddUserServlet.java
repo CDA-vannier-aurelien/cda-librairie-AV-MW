@@ -21,6 +21,8 @@ import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
 
+
+
 /**
  * Servlet implementation class AddUserServlet Fait suite aux informations
  * recueillies dans la jsp d'accueil et le fait de créer un nouveau compte
@@ -70,7 +72,7 @@ public class AddUserServlet extends AbstractController {
 			roleException.printStackTrace();
 		}
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/menu.jsp").forward(req, resp);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(req, resp);
 	}
 
 }
