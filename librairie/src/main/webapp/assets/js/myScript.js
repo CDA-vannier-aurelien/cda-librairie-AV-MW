@@ -15,3 +15,10 @@ function testEmail(){
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+
+
+function afficherModaleSuppression(mail){
+	$('#idToDeleteText').text(mail);
+	$('#idToDelete').val(mail);
+	$('#modaleSuppression').modal('show');
+}

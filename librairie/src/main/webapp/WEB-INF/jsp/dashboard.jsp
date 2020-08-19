@@ -111,8 +111,10 @@
 						<td>${u.mail}</td>
 						<td>${u.labelRole}</td>
 						<td>${u.estActive}</td>
-						<td><button class="btn btn-danger btn-circle btn-lg"><span class="fa fa-eraser-cart">Supprimer</span></button></td>
-					</tr>
+						<td><a href="#"> <i class="fas fa-eraser"
+							onclick="afficherModaleSuppression(${u.mail})"></i>
+					</a></td>
+						
 				</c:forEach>
 			<tbody>
 		</table>
@@ -141,7 +143,33 @@
 
 	</div>
 
-
+<div class="modal fade" id="modaleSuppression" tabindex="-1"
+		aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modaleSuppressionLabel">Modal
+						title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Etes vous sûr de vouloir supprimer cet utilissateur? <span
+						id="idToDeleteText"></span> ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">non</button>
+					<form action="dashboard" method="post">
+						<input type="hidden" name="idToDelete" id="idToDelete">
+						<button type="submit" class="btn btn-primary">oui</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<footer class="footer text-faded text-center py-5"
 		style="background-color: rgb(238, 244, 247); position: relative;">
 		<div class="container">
