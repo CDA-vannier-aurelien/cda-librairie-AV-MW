@@ -1,3 +1,4 @@
+<%@page import="lombok.EqualsAndHashCode.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -44,7 +45,7 @@
 					<li class="nav-item" role="presentation"><a class="nav-link"
 						href="accueil">Home</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="products.html">Produits</a></li>
+						href="listeLivre">Produits</a></li>
 					<c:if test="${sessionScope.user.labelRole == 'Libraire'}">
 						<li class="nav-item" role="presentation"><a class="nav-link"
 							href="dashboard">Dashboard</a></li>
@@ -99,7 +100,7 @@
 					<th>Prenom</th>
 					<th>Adresse mail</th>
 					<th>Role</th>
-					<th>Activé</th>
+					<th>Activï¿½</th>
 				</tr>
 			</thead>
 
@@ -156,7 +157,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					Etes vous sûr de vouloir supprimer cet utilissateur? <span
+					Etes vous sï¿½r de vouloir supprimer cet utilissateur? <span
 						id="idToDeleteText"></span> ?
 				</div>
 				<div class="modal-footer">
@@ -173,7 +174,7 @@
 	<footer class="footer text-faded text-center py-5"
 		style="background-color: rgb(238, 244, 247); position: relative;">
 		<div class="container">
-			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;©&nbsp;Brand
+			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;ï¿½&nbsp;Brand
 				2020</p>
 		</div>
 	</footer>

@@ -13,7 +13,9 @@ public interface ILivreService {
 
 	public LivreDto getLivre(int pRef);
 
-	public List<LivreDto> getAllLivre();
+	public List<LivreDto> getAllLivre(int pPageEnCours);
 
 	public int getMaxId();
+
+	public long count();
 }

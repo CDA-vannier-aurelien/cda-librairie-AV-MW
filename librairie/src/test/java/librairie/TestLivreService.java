@@ -47,7 +47,8 @@ public class TestLivreService {
 		auteur = auteurService.addAuteur(auteur);
 
 		LivreDto livre = new LivreDto(Constantes.INTEGER_TEST, Constantes.DOUBLE_TEST, Constantes.INTEGER_TEST,
-				Constantes.STRING_TEST, Constantes.INTEGER_TEST, Constantes.STRING_TEST, Constantes.STRING_TEST);
+				Constantes.STRING_TEST, Constantes.INTEGER_TEST, Constantes.STRING_TEST, Constantes.STRING_TEST,
+				Constantes.STRING_TEST);
 
 		livre = livreService.addLivre(livre);
 
@@ -104,7 +105,7 @@ public class TestLivreService {
 	@Order(4)
 	public void testGetAllLivre() {
 
-		List<LivreDto> listeLivre = livreService.getAllLivre();
+		List<LivreDto> listeLivre = livreService.getAllLivre(Constantes.INTEGER_TEST);
 		assertNotNull(listeLivre);
 
 	}
