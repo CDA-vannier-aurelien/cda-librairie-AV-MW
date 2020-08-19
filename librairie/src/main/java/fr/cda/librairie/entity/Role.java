@@ -1,10 +1,6 @@
 package fr.cda.librairie.entity;
 
 import lombok.AllArgsConstructor;
-<<<<<<< HEAD
-import lombok.Builder;
-=======
->>>>>>> Dev
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,10 +13,6 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-<<<<<<< HEAD
-@Builder
-=======
->>>>>>> Dev
 public class Role {
 
     @Id
