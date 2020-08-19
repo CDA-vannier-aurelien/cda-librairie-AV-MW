@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
  * Servlet implementation class AddUserServlet Fait suite aux informations
  * recueillies dans la jsp d'accueil et le fait de créer un nouveau compte
  * utilisateur.
- *
+ * 
  */
 @Controller
 @WebServlet("/addUser.do")
