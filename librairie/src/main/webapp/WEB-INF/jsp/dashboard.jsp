@@ -21,104 +21,8 @@
 </head>
 
 <body style="background: white;">
-	<div>
-		<div id="bs4_sldr_cmrce"
-			class="modal fade bs4_modal bs4_blue bs4_bg_white bs4_bd_black bs4_bd_semi_trnsp bs4_none_radius bs4_shadow_none bs4_center bs4_animate bs4FadeInDown bs4_duration_md bs4_easeOutQuint bs4_size_sldr_cmrce"
-			role="dialog" data-modal-backdrop="true" data-show-on="click"
-			data-modal-delay="false" data-modal-duration="false">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<a class="bs4_btn_x_out_shtr bs4_sldr_cmrce_close" href="#"
-						data-dismiss="modal">close</a>
-					<div class="row">
-						<div class="col-12 col-md-5">
-							<div id="bs4_sldr_commerce"
-								class="carousel slide bs4-carousel bs4_sldr_cmrce_indicators thumb-scroll-x swipe-x bs4s_easeOutInCubic"
-								data-ride="carousel" data-pause="hover" data-interval="false"
-								data-duration="2000">
-								<div class="carousel-inner" role="listbox">
-									<div class="carousel-item active">
-										<img src="bs4_slider_commerce_01.png"
-											alt="bs4_slider_commerce_01">
-									</div>
-									<div class="carousel-item">
-										<img src="bs4_slider_commerce_02.png"
-											alt="bs4_slider_commerce_02">
-									</div>
-									<div class="carousel-item">
-										<img src="bs4_slider_commerce_03.png"
-											alt="bs4_slider_commerce_03">
-									</div>
-									<div class="carousel-item">
-										<img src="bs4_slider_commerce_04.png"
-											alt="bs4_slider_commerce_04">
-									</div>
-								</div>
-								<ol class="carousel-indicators">
-									<li class="active" data-target="#bs4_sldr_commerce"
-										data-slide-to="0"><img src="bs4_slider_commerce_01.png"
-										alt="bs4_slider_commerce_01"></li>
-									<li data-target="#bs4_sldr_commerce" data-slide-to="1"><img
-										src="bs4_slider_commerce_02.png" alt="bs4_slider_commerce_02"></li>
-									<li data-target="#bs4_sldr_commerce" data-slide-to="2"><img
-										src="bs4_slider_commerce_03.png" alt="bs4_slider_commerce_03"></li>
-									<li data-target="#bs4_sldr_commerce" data-slide-to="3"><img
-										src="bs4_slider_commerce_04.png" alt="bs4_slider_commerce_04"></li>
-								</ol>
-							</div>
-						</div>
-						<div class="col-12 col-md-7">
-							<div class="bs4_sldr_cmrce_txt">
-								<h1>name of product, company plus modal number</h1>
-								<ul>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star"></i></li>
-									<li><i class="fa fa-star-o"></i></li>
-								</ul>
-								<h2 class="bs4_sldr_cmrce_txt">$130.00</h2>
-								<p style="font-size: 15px; font-weight: 200;">Lorem ipsum
-									dolor sit amet, consectetuer adipiscing elit. Nam nibh. Nunc
-									varius facilisis eros. Sed erat. In in velit quis arcu ornare
-									laoreet. Curabitur adipiscing luctus massa. Integer ut purus ac
-									augue commodo commodo. Nunc nec mi eu justo tempor
-									consectetuer. Etiam vitae nisl. In dignissim lacus ut ante.
-									Cras elit lectus, bibendum a, adipiscing vitae, commodo et,
-									dui.</p>
-								<form action="#">
-									<div class="bs4_form_num">
-										<label>quantity</label><input class="form-control"
-											type="number" name="quantity" min="1" max="20">
-									</div>
-									<div class="bs4_form_color">
-										<label>colours</label><select
-											class="form-control form-control-sm"><optgroup
-												label="Pick a color">
-												<option value="12">RED</option>
-												<option value="13">BLUE</option>
-												<option value="14">GREEN</option>
-											</optgroup></select>
-									</div>
-									<div class="bs4_form_size">
-										<label>size</label><select class="form-control"><optgroup
-												label="select a size">
-												<option value="12">18</option>
-												<option value="13">25</option>
-												<option value="14">36</option>
-											</optgroup></select>
-									</div>
-									<div class="bs4_form_cmrce_btn">
-										<button class="btn btn-primary bs4_btn_x_out_shtr"
-											type="submit">add to cart</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
+	
 	<h1 class="text-center text-white d-none d-lg-block site-heading">
 		<span class="site-heading-lower"
 			style="font-family: Lora, serif; color: rgb(68, 79, 81);">La
@@ -157,34 +61,34 @@
 							<div class="dropdown-menu" role="menu">
 								<a class="dropdown-item" role="presentation" href="#">Mon
 									compte</a>
-							</div>
-							<div class="dropdown-menu" role="menu">
+
 								<a class="dropdown-item" role="presentation" href="panier">Mon
 									panier</a><a class="dropdown-item" role="presentation"
 									href="deconnexion">LogOut</a>
-							</div></li>
+							</div>
+							</li>
 					</c:if>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
-		<div class="header_wrap">
-			<div class="num_rows">
+<!-- 		<div class="header_wrap"> -->
+<!-- 			<div class="num_rows"> -->
 
-				<div class="form-group">
-					<!--		Show Numbers Of Rows 		-->
-					<select class="form-control" name="state" id="maxRows">
+<!-- 				<div class="form-group"> -->
+<!-- 							Show Numbers Of Rows 		 -->
+<!-- 					<select class="form-control" name="state" id="maxRows"> -->
 
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="15">15</option>
+<!-- 						<option value="5">5</option> -->
+<!-- 						<option value="10">10</option> -->
+<!-- 						<option value="15">15</option> -->
 
-					</select>
+<!-- 					</select> -->
 
-				</div>
-			</div>
-		</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 
 		<table class="table table-striped table-class" id="table-id">
 

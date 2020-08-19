@@ -5,7 +5,7 @@ public class Constantes {
 
 	public static final String STRING_TEST = "TEST";
 	
-	public static int ELEMENTS_PAR_PAGE = 2;
+	public static final int ELEMENTS_PAR_PAGE = 3;
 	public static final int INTEGER_TEST = 1;
 	public static final double DOUBLE_TEST = 1;
 

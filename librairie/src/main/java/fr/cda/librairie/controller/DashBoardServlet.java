@@ -37,6 +37,8 @@ log.debug("list d'utilisateur");
 		String pageParam = request.getParameter("page");
 		int pageEnCours = 1;
 		
+	
+		
 		if(pageParam != null) {
 			try {
 				pageEnCours = Integer.parseInt(pageParam);
