@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dao.IAuteurDao;
@@ -15,6 +18,7 @@ import fr.cda.librairie.entity.Auteur;
 import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.ILivreService;
+import fr.cda.librairie.utils.Constantes;
 
 @Service
 public class LivreServiceImpl implements ILivreService {
@@ -28,6 +32,9 @@ public class LivreServiceImpl implements ILivreService {
 	@Autowired
 	IEditeurDao editeurDao;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
 	public LivreDto addLivre(LivreDto livre) {
 		Livre livre2 = new Livre();
@@ -36,6 +43,7 @@ public class LivreServiceImpl implements ILivreService {
 		livre2.setQuantitee(livre.getQuantitee());
 		livre2.setTitre(livre.getTitre());
 		livre2.setReference(livre.getReference());
+		livre2.setDescription(livre.getDescription());
 
 		Optional<Auteur> opsRes = auteurDao.findByNomUsage(livre.getAuteur());
 		if (opsRes.isPresent()) {
@@ -79,29 +87,36 @@ public class LivreServiceImpl implements ILivreService {
 		if (opsRes.isPresent()) {
 			Livre l = opsRes.get();
 			livre = new LivreDto(l.getReference(), l.getPrix(), l.getQuantitee(), l.getTitre(), l.getNbPage(),
-					l.getAuteur().getNomUsage(), l.getEditeur().getNom());
+					l.getAuteur().getNomUsage(), l.getDescription(), l.getEditeur().getNom());
 		}
 
 		return livre;
 	}
 
 	@Override
-	public List<LivreDto> getAllLivre() {
-		List<Livre> listLivre = livreDao.findAll();
-
-		List<LivreDto> listLivreDto = new ArrayList<>();
-
-		for (Livre livre : listLivre) {
+	public List<LivreDto> getAllLivre(int pPageEnCours) {
+		List<LivreDto> listLivre = new ArrayList<LivreDto>();
+		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAGE);
+		Page<Livre> livres = this.livreDao.findAll(page);
+		for (Livre livre : livres) {
 			LivreDto livre2 = new LivreDto(livre.getReference(), livre.getPrix(), livre.getQuantitee(),
-					livre.getTitre(), livre.getNbPage(), livre.getAuteur().getNomUsage(), livre.getEditeur().getNom());
-			listLivreDto.add(livre2);
+					livre.getTitre(), livre.getNbPage(), livre.getAuteur().getNomUsage(), livre.getDescription(),
+					livre.getEditeur().getNom());
+			listLivre.add(livre2);
 		}
-		return listLivreDto;
+
+		return listLivre;
 	}
 
 	@Override
 	public int getMaxId() {
 		return livreDao.getMaxId().intValue();
+	}
+
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return livreDao.count();
 	}
 
 }
