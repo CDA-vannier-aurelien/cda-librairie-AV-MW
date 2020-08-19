@@ -111,6 +111,7 @@
 						<td>${u.mail}</td>
 						<td>${u.labelRole}</td>
 						<td>${u.estActive}</td>
+						<td><button class="btn btn-danger btn-circle btn-lg"><span class="fa fa-eraser-cart">Supprimer</span></button></td>
 					</tr>
 				</c:forEach>
 			<tbody>
