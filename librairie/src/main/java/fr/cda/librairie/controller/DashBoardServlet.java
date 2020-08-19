@@ -46,8 +46,12 @@ log.debug("list d'utilisateur");
 					pageEnCours = 1;
 				}
 			} catch (NumberFormatException e) {
+				
+				
 				System.err.println("attention : " + e.getMessage());
 			}
+			
+			
 		}
 		
 		List<UtilisateurDto> vUser= this.userService.getAll(pageEnCours);
@@ -64,7 +68,7 @@ log.debug("list d'utilisateur");
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/dashboard.jsp").forward(request, response);
 	}
 
 }

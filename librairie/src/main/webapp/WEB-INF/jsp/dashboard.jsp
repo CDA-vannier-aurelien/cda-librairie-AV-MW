@@ -112,7 +112,10 @@
 						<td>${u.mail}</td>
 						<td>${u.labelRole}</td>
 						<td>${u.estActive}</td>
-					</tr>
+						<td><a href="#"> <i class="fas fa-eraser"
+							onclick="afficherModaleSuppression(${u.mail})"></i>
+					</a></td>
+						
 				</c:forEach>
 			<tbody>
 		</table>
@@ -141,8 +144,40 @@
 
 	</div>
 
-
-<%@include file="footer.jsp" %>
+<div class="modal fade" id="modaleSuppression" tabindex="-1"
+		aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modaleSuppressionLabel">Modal
+						title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Etes vous s�r de vouloir supprimer cet utilissateur? <span
+						id="idToDeleteText"></span> ?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">non</button>
+					<form action="dashboard" method="post">
+						<input type="hidden" name="idToDelete" id="idToDelete">
+						<button type="submit" class="btn btn-primary">oui</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer text-faded text-center py-5"
+		style="background-color: rgb(238, 244, 247); position: relative;">
+		<div class="container">
+			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;�&nbsp;Brand
+				2020</p>
+		</div>
+	</footer>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/script.min.js"></script>
