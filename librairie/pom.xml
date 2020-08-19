@@ -13,14 +13,32 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<!--javax servlet-->
+
+		<javax.servlet.version>4.0.0</javax.servlet.version>
+		<!--Spring-->
+		<org.springframework-version>5.2.2.RELEASE</org.springframework-version>
+
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework-version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.0</version>
+			<version>${javax.servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -116,11 +134,6 @@
 			<version>1.2.3</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.8</version>
-		</dependency>
 
 	</dependencies>
 

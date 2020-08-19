@@ -47,12 +47,9 @@ log.debug("list d'utilisateur");
 				}
 			} catch (NumberFormatException e) {
 				
-				
-<<<<<<< HEAD
-				
-				
-=======
->>>>>>> devDebug
+
+
+
 				System.err.println("attention : " + e.getMessage());
 			}
 			
