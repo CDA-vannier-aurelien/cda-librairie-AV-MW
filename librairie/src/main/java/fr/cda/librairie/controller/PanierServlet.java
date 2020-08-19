@@ -21,7 +21,7 @@ public class PanierServlet extends AbstractController {
 	
 		
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/panier.jsp").forward(request, response);
 	}
 
 

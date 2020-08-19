@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    <title>Lies des livres</title>
     <link rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css"/>">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
@@ -24,32 +24,47 @@
 <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="site-heading-lower"
                                                                         style="font-family: Lora, serif;color: rgb(33,37,41);">La Librairie</span>
 </h1>
+<nav
+		class="navbar navbar-light navbar-expand-md sticky-top bg-dark py-lg-4"
+		id="mainNav">
+		<div class="container-fluid">
+			<a class="navbar-brand text-uppercase d-lg-none text-expanded"
+				href="#" style="color: rgba(255, 255, 255, 0.7);">La Librarie</a>
+			<button data-toggle="collapse" data-target="#navbarResponsive"
+				class="navbar-toggler" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="nav navbar-nav mx-auto">
+					<li class="nav-item" role="presentation"><a class="nav-link"
+						href="accueil">Home</a></li>
+					<li class="nav-item" role="presentation"><a class="nav-link"
+						href="products.html">Produits</a></li>
+					<c:if test="${sessionScope.user.labelRole == 'Libraire'}">
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							href="dashboard">Dashboard</a></li>
+					</c:if>
+					<c:if test="${empty sessionScope.user }">
+						<li class="nav-item" role="presentation"><a class="nav-link"
+							data-toggle="modal" data-target="#modalLRForm">Login</a></li>
+					</c:if>
+					<c:if test="${!empty sessionScope.user }">
 
-<nav class="navbar navbar-light navbar-expand-md sticky-top bg-dark py-lg-4" id="mainNav">
-    <div class="container-fluid"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#"
-                                    style="color: rgba(255,255,255,0.7);">La Librarie</a>
-        <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler"
-                aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="nav navbar-nav mx-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="index.jsp" data-toggle="tooltip"
-                                                            data-placement="top" title="Accueil">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../about.html" data-toggle="tooltip"
-                                                            data-placement="top" title="A propos">A propos</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../products.html"
-                                                            data-toggle="tooltip" data-placement="top" title="Produits">Produits</a>
-                </li>
-                <li class="nav-item" role="presentation" data-toggle="tooltip" data-bs-tooltip="" data-placement="left">
-                    <a class="nav-link" href="../store.html">Store</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="../dashboard.html">dashboard</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" data-toggle="modal"
-                                                            data-target="#modalLRForm">Login</a></li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
+						<li class="nav-item dropdown"><a
+							class="dropdown-toggle nav-link" data-toggle="dropdown"
+							aria-expanded="false" href="#">${sessionScope.user.nom} </a>
+							<div class="dropdown-menu" role="menu">
+								<a class="dropdown-item" role="presentation" href="#">Mon
+									compte</a><a class="dropdown-item" role="presentation"
+									href="panier">Mon panier</a><a class="dropdown-item"
+									role="presentation" href="deconnexion">LogOut</a>
+							</div></li>
+					</c:if>
+				</ul>
+			</div>
+		</div>
+	</nav>
 <div class="shopping-cart">
     <div class="px-4 px-lg-0">
 
@@ -64,16 +79,16 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light">
-                                        <div class="p-2 px-3 text-uppercase">Product</div>
+                                        <div class="p-2 px-3 text-uppercase">Livres</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Price</div>
+                                        <div class="py-2 text-uppercase">Prix</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Quantity</div>
+                                        <div class="py-2 text-uppercase">Quantité</div>
                                     </th>
                                     <th scope="col" class="border-0 bg-light">
-                                        <div class="py-2 text-uppercase">Remove</div>
+                                        <div class="py-2 text-uppercase">Supprimer</div>
                                     </th>
                                 </tr>
                                 </thead>
@@ -127,17 +142,17 @@
 
                 <div class="row py-5 p-4 bg-white rounded shadow-sm">
                     <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupons de réduction</div>
                         <div class="p-4">
-                            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
+                            <p class="font-italic mb-4">Si vous possédez un coupon de réduction, insérez le code ici</p>
                             <div class="input-group mb-4 border rounded-pill p-2">
                                 <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
                                 <div class="input-group-append border-0">
-                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Enregistrer le coupon</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
+                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Contactez le service après-vente</div>
                         <div class="p-4">
                             <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
                             <textarea name="" cols="30" rows="2" class="form-control"></textarea>
