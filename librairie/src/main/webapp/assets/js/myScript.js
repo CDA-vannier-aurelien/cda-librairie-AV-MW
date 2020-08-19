@@ -15,5 +15,3 @@ function testEmail(){
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
-
-

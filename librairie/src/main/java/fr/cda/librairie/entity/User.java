@@ -64,7 +64,7 @@ public class User {
     private String password;
     
     @Column(name = "is_activated")
-    private boolean isActivated;
+    private boolean estActive;
 
 	@Column(name = "date_last_connection")
 	private Date dateConnection;

@@ -33,7 +33,7 @@ public class LogOutServlet extends AbstractController {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/accueil.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}
 
 }
