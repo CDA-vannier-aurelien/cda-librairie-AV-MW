@@ -52,7 +52,7 @@ public class UtilisateurDto {
   
     private String mail;
     private String password;
-    private boolean isActivated;
+    private boolean estActive;
     private Date dateConnection;
     private String nomRue;
     private int numeroPorte;

@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/checkmail")
+@Slf4j
 public class CheckLoginServlet extends AbstractController {
 
     @Autowired

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+
 import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.exception.NomPaysException;
@@ -20,6 +21,7 @@ import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -31,6 +33,7 @@ import fr.cda.librairie.service.IUserService;
  */
 @Controller
 @WebServlet("/addUser.do")
+@Slf4j
 public class AddUserServlet extends AbstractController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
@@ -59,6 +62,7 @@ public class AddUserServlet extends AbstractController {
 				.complementAdresse(req.getParameter("complementAdresse")).mail(req.getParameter("mail"))
 				.password(req.getParameter("password")).pays(req.getParameter("pays")).ville(req.getParameter("ville"))
 				.codePostal(req.getParameter("codePostal")).build();
+		log.debug("ajout de nom: {} et prenom: {}",req.getParameter("nom"),req.getParameter("prenom"));
 
 		try {
 			iUserService.create(user);
