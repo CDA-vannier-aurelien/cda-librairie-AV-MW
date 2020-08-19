@@ -9,11 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.cda.librairie.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.cda.librairie.controller.config.AbstractController;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.IUserService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/checkmail")
