@@ -19,6 +19,7 @@ public interface IUserService {
 
 	List<UtilisateurDto> getAll(int pageEnCours);
 
+	
 	long count();
     
    

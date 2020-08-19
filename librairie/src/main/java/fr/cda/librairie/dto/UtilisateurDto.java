@@ -12,6 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 
+
+
 /**
  * Classe permettant de décupérer toutes es informations des différents utilisateurs à partir des
  * des différents servlet d'inscription et gestion utilisateur.
