@@ -46,6 +46,8 @@ log.debug("list d'utilisateur");
 					pageEnCours = 1;
 				}
 			} catch (NumberFormatException e) {
+				
+				
 				System.err.println("attention : " + e.getMessage());
 			}
 		}
