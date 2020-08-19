@@ -21,10 +21,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-<<<<<<< HEAD
-=======
 
->>>>>>> Dev
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,16 +70,8 @@ public class User {
 	private Date dateConnection;
 
     @Column(name = "date_naissance")
-<<<<<<< HEAD
-    private LocalDateTime dateNaissance;
-
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    Adresse adresse;
-
-=======
     private Date dateNaissance;
-    
->>>>>>> Dev
+
     @OneToMany(cascade = CascadeType.PERSIST)
     List<Commande> commandes = new ArrayList<>();
 

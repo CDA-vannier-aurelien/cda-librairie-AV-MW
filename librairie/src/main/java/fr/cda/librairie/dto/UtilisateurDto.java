@@ -28,15 +28,11 @@ public class UtilisateurDto {
 	 * Identifiant de  l'utilisateur. Est unique et non modifiable. Est généré automatiquement lors de l'inscription de l'entité en BDD.
 	 */
     private int id;
-<<<<<<< HEAD
-    private  int codePostal;
-=======
     
     /**
      * String permettant de déterminer le nom de l'utilisateur. Est non unique modifiable et requis.
      * 
      */
->>>>>>> Dev
     private String nom;
     
     /** 
@@ -44,10 +40,6 @@ public class UtilisateurDto {
      * 
      */
     private String prenom;
-<<<<<<< HEAD
-    private LocalDateTime dateNaissance;
-    private String login;
-=======
     
     /**
      * Date déterminant la date de naissance de l'utilisateur. Requis, modifiable.
@@ -59,7 +51,6 @@ public class UtilisateurDto {
      */
   
     private String mail;
->>>>>>> Dev
     private String password;
     private boolean isActivated;
     private Date dateConnection;

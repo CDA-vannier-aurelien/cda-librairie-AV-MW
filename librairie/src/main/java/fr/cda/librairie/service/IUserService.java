@@ -7,13 +7,8 @@ public interface IUserService {
 
     UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException;
 
-<<<<<<< HEAD
-    UtilisateurDto checkLogin(UtilisateurDto pUser);
-=======
     UtilisateurDto conection(UtilisateurDto pUser);
 
 	UtilisateurDto checkMail(UtilisateurDto user);
-    
-   
->>>>>>> Dev
+
 }
