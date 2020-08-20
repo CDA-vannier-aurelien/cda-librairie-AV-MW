@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	id="WebApp_ID" version="4.0">
-	
-	<display-name>app-web-chien</display-name>
+
+	<display-name>app-web-librairie</display-name>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -26,11 +27,25 @@
 		<param-value>classpath:spring/beans-configuration.xml</param-value>
 	</context-param>
 	
+	<servlet>
+<servlet-name>appServlet</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+<init-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:spring/servlet-context.xml</param-value>
+</init-param>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>appServlet</servlet-name>
+<url-pattern>/</url-pattern>
+</servlet-mapping>
+
 	<jsp-config>
-    <jsp-property-group>
-      <url-pattern> *.jsp </url-pattern>
-      <include-prelude>/WEB-INF/jsp/jstlLib.jsp</include-prelude>
-    </jsp-property-group>
-  </jsp-config>
+		<jsp-property-group>
+			<url-pattern> *.jsp </url-pattern>
+			<include-prelude>/WEB-INF/jsp/jstlLib.jsp</include-prelude>
+		</jsp-property-group>
+	</jsp-config>
 
 </web-app>
