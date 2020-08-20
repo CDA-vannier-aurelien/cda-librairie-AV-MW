@@ -13,14 +13,6 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-<<<<<<< HEAD
-		<!--javax servlet-->
-
-		<javax.servlet.version>4.0.0</javax.servlet.version>
-		<!--Spring-->
-		<org.springframework-version>5.2.2.RELEASE</org.springframework-version>
-=======
->>>>>>> Dev
 
 	</properties>
 
@@ -39,24 +31,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>5.2.8.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -138,11 +112,6 @@
 			<version>2.3.2.RELEASE</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.3.8</version>
-		</dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
