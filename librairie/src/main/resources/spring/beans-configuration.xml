@@ -15,6 +15,7 @@
     	http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
 		">
 
+
 	<context:annotation-config />
 	
 	<context:property-placeholder
