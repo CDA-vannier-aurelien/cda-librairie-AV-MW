@@ -19,7 +19,9 @@ import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.ILivreService;
 import fr.cda.librairie.utils.Constantes;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class LivreServiceImpl implements ILivreService {
 
