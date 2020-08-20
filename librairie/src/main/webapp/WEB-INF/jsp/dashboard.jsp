@@ -21,8 +21,8 @@
 </head>
 
 <body style="background: white;">
-	
-	
+
+
 	<h1 class="text-center text-white d-none d-lg-block site-heading">
 		<span class="site-heading-lower"
 			style="font-family: Lora, serif; color: rgb(68, 79, 81);">La
@@ -60,35 +60,32 @@
 							aria-expanded="false" href="#">${sessionScope.user.nom} </a>
 							<div class="dropdown-menu" role="menu">
 								<a class="dropdown-item" role="presentation" href="#">Mon
-									compte</a>
-
-								<a class="dropdown-item" role="presentation" href="panier">Mon
-									panier</a><a class="dropdown-item" role="presentation"
-									href="deconnexion">LogOut</a>
-							</div>
-							</li>
+									compte</a> <a class="dropdown-item" role="presentation"
+									href="panier">Mon panier</a><a class="dropdown-item"
+									role="presentation" href="deconnexion">LogOut</a>
+							</div></li>
 					</c:if>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
-<!-- 		<div class="header_wrap"> -->
-<!-- 			<div class="num_rows"> -->
+		<!-- 		<div class="header_wrap"> -->
+		<!-- 			<div class="num_rows"> -->
 
-<!-- 				<div class="form-group"> -->
-<!-- 							Show Numbers Of Rows 		 -->
-<!-- 					<select class="form-control" name="state" id="maxRows"> -->
+		<!-- 				<div class="form-group"> -->
+		<!-- 							Show Numbers Of Rows 		 -->
+		<!-- 					<select class="form-control" name="state" id="maxRows"> -->
 
-<!-- 						<option value="5">5</option> -->
-<!-- 						<option value="10">10</option> -->
-<!-- 						<option value="15">15</option> -->
+		<!-- 						<option value="5">5</option> -->
+		<!-- 						<option value="10">10</option> -->
+		<!-- 						<option value="15">15</option> -->
 
-<!-- 					</select> -->
+		<!-- 					</select> -->
 
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
 
 		<table class="table table-striped table-class" id="table-id">
 
@@ -99,7 +96,7 @@
 					<th>Prenom</th>
 					<th>Adresse mail</th>
 					<th>Role</th>
-					<th>Activï¿½</th>
+					<th>Activé</th>
 				</tr>
 			</thead>
 
@@ -112,38 +109,106 @@
 						<td>${u.labelRole}</td>
 						<td>${u.estActive}</td>
 						<td><a href="#"> <i class="fas fa-eraser"
-							onclick="afficherModaleSuppression(${u.mail})"></i>
-					</a></td>
-						
+								onclick="afficherModaleSuppression(${u.mail})"></i>
+						</a></td>
 				</c:forEach>
 			<tbody>
 		</table>
+		<div class="d-flex justify-content-center">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<c:if test="${ pageEnCours > 1 }">
+						<c:url value="/dashboard" var="lienPrecedent">
+							<c:param name="page" value="${ pageEnCours - 1 }" />
+						</c:url>
+						<li class="page-item"><a class="page-link"
+							href="${lienPrecedent }">&lt;</a></li>
+					</c:if>
+					<li class="page-item"><a class="page-link" href="#">${ pageEnCours }</a>
 
-		<nav aria-label="Page navigation">
-			<ul class="pagination">
-				<c:if test="${ pageEnCours > 1 }">
-					<c:url value="/dashboard" var="lienPrecedent">
-						<c:param name="page" value="${ pageEnCours - 1 }" />
-					</c:url>
-					<li class="page-item"><a class="page-link"
-						href="${lienPrecedent }">&lt;</a></li>
-				</c:if>
-				<li class="page-item"><a class="page-link" href="#">${ pageEnCours }</a>
+					</li>
+					<c:if test="${ pageEnCours < (count / nbElementsParPage)  }">
+						<c:url value="/dashboard" var="lienSuivant">
+							<c:param name="page" value="${ pageEnCours + 1 }" />
+						</c:url>
+						<li class="page-item"><a class="page-link"
+							href="${lienSuivant }">&gt;</a></li>
+					</c:if>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div class="container">
+		<!-- 		<div class="header_wrap"> -->
+		<!-- 			<div class="num_rows"> -->
 
-				</li>
-				<c:if test="${ pageEnCours < (count / nbElementsParPage)  }">
-					<c:url value="/dashboard" var="lienSuivant">
-						<c:param name="page" value="${ pageEnCours + 1 }" />
-					</c:url>
-					<li class="page-item"><a class="page-link"
-						href="${lienSuivant }">&gt;</a></li>
-				</c:if>
-			</ul>
-		</nav>
+		<!-- 				<div class="form-group"> -->
+		<!-- 							Show Numbers Of Rows 		 -->
+		<!-- 					<select class="form-control" name="state" id="maxRows"> -->
 
+		<!-- 						<option value="5">5</option> -->
+		<!-- 						<option value="10">10</option> -->
+		<!-- 						<option value="15">15</option> -->
+
+		<!-- 					</select> -->
+
+		<!-- 				</div> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+
+		<table class="table table-striped table-class" id="table-id">
+
+
+			<thead>
+				<tr>
+					<th>Références</th>
+					<th>Titre</th>
+					<th>Auteur</th>
+					<th>Editeur</th>
+					<th>Quantitée</th>
+					<th>Outils</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				 <c:forEach var="livre" items="${listeLivre}"> 
+					<tr>
+						<td>${livre.reference}</td>
+						<td>${livre.titre}</td>
+						<td>${livre.auteur}</td>
+						<td>${livre.editeur}</td>
+						<td>${livre.quantitee}</td>
+						<td><button>Modifier</button> <button>Supprimer</button></td>
+				</c:forEach> 
+			<tbody>
+		</table>
+		<div class="d-flex justify-content-center">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<c:if test="${ pageEnCoursLivre > 1 }">
+						<c:url value="/dashboard" var="lienPrecedent">
+							<c:param name="pageLivre" value="${ pageEnCoursLivre - 1 }" />
+						</c:url>
+						<li class="page-item"><a class="page-link"
+							href="${lienPrecedent }">&lt;</a></li>
+					</c:if>
+					<li class="page-item"><a class="page-link" href="#">${ pageEnCoursLivre }</a>
+
+					</li>
+					<c:if test="${ pageEnCoursLivre < (countLivre / nbElementsParPageLivre)  }">
+						<c:url value="/dashboard" var="lienSuivant">
+							<c:param name="pageLivre" value="${ pageEnCoursLivre + 1 }" />
+						</c:url>
+						<li class="page-item"><a class="page-link"
+							href="${lienSuivant }">&gt;</a></li>
+					</c:if>
+				</ul>
+			</nav>
+		</div>
 	</div>
 
-<div class="modal fade" id="modaleSuppression" tabindex="-1"
+	<div class="modal fade" id="modaleSuppression" tabindex="-1"
 		aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
