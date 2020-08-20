@@ -25,7 +25,7 @@
 	href="<c:url value="/assets/css/styles.min.css"/>">
 </head>
 
-<body style="background-color: white; background: white; ">
+<body onload="calculPrixTotal()" style="background-color: white; background: white; ">
 	<h1 class="text-center text-white d-none d-lg-block site-heading">
 		<span class="site-heading-lower"
 			style="font-family: Lora, serif; color: rgb(33, 37, 41);">La
@@ -83,7 +83,7 @@
 
 							<!-- Shopping cart table -->
 							<div class="table-responsive">
-								<table class="table">
+								<table class="table" >
 									<thead>
 										<tr>
 											<th scope="col" class="border-0 bg-light">
@@ -166,14 +166,14 @@
 									are calculated based on values you have entered.</p>
 								<ul class="list-unstyled mb-4">
 									<li class="d-flex justify-content-between py-3 border-bottom" ><strong
-										class="text-muted">Sous-Total</strong><strong><span id="sousTotal"> </span>$</strong></li>
-									<li class="d-flex justify-content-between py-3 border-bottom" id="frais"><strong
-										class="text-muted">frais de livraison</strong><strong>$10.00</strong></li>
-									<li class="d-flex justify-content-between py-3 border-bottom" id ="taxes"><strong
-									class="text-muted">TVA</strong><strong>$0.00</strong></li>
-									<li class="d-flex justify-content-between py-3 border-bottom" id="totalCommande"><strong
+										class="text-muted">Sous-Total</strong><strong>$<span id="sousTotal"> </span></strong></li>
+									<li class="d-flex justify-content-between py-3 border-bottom" ><strong
+										class="text-muted">frais de livraison</strong><strong>$<span id="frais">10.00</span></strong></li>
+									<li class="d-flex justify-content-between py-3 border-bottom" ><strong
+									class="text-muted">TVA</strong><strong>$<span id="taxes"></span></strong></li>
+									<li class="d-flex justify-content-between py-3 border-bottom" ><strong
 										class="text-muted">Total</strong>
-										<h5 class="font-weight-bold">$ </h5></li>
+										<h5 class="font-weight-bold">$<span id="totalCommande"> </span> </h5></li>
 								</ul>
 								<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Valider la commande</a>
 							</div>
@@ -193,7 +193,7 @@
 	</footer>
 	<!--Modal: Login / Register Form-->
 
-
+	
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js"/>"></script>
