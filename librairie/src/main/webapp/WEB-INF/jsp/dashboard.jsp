@@ -156,9 +156,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					Etes vous s�r de vouloir supprimer cet utilissateur? <span
-						id="idToDeleteText"></span> ?
-				</div>
+					Etes vous sur de vouloir supprimer cet utilisateur? <span id="idToDeleteText"></span></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">non</button>
