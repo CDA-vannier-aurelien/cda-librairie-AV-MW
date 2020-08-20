@@ -22,9 +22,16 @@ public class Commande {
     private int numeroCommande;
 
     @Column(name = "date_commande")
-    private Date date = new Date();
-
-    @OneToMany(cascade = CascadeType.ALL)
-   private List<CommandeLine> listLivre = new ArrayList<>();
+    private Date dateCommande = new Date();
+    
+    @Column(name = "nombre_articles")
+    private int nombreArticles;
+    
+    @Column(name = "prix_total")
+    private double prixTotal;
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    List<CommandeLine> commandeLine = new ArrayList<>();
+    
 
 }
