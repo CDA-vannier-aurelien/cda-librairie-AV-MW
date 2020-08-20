@@ -72,12 +72,12 @@
 										</div>
 										<c:if test="${livre.quantitee>0 }">
 											<div class="footer-imagia text-center">
-											<form method="get" action="gouloulou">
-											<button type="submit" value="${livre.reference }" name="reference">
-													<i class="fa fa-shopping-cart"></i>
-												</button>
-											</form>
-												
+												<form method="post" action="panier">
+													<button type="submit" value="${livre.reference }"
+														name="reference">
+														<i class="fa fa-shopping-cart"></i>
+													</button>
+												</form>
 											</div>
 										</c:if>
 									</div>

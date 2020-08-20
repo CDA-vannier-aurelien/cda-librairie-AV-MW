@@ -12,6 +12,7 @@ import javax.persistence.*;
 		
         @UniqueConstraint(columnNames = {"numero_commande", "reference"}
         )})
+
 public class CommandeLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,7 @@ public class CommandeLine {
             @JoinColumn(name = "reference")
     Livre livre;
 
-    private int quantite;
+  	@Column(name= "quantite_commandee")
+    private int quantiteCommandee;
     
-    private double prixLigne;
 }

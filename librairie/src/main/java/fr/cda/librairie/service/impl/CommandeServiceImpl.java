@@ -2,6 +2,7 @@ package fr.cda.librairie.service.impl;
 
 import fr.cda.librairie.dao.ICommandeDao;
 import fr.cda.librairie.dao.IUserDao;
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.entity.Commande;
 import fr.cda.librairie.entity.User;
 import fr.cda.librairie.service.ICommandeService;
@@ -67,4 +68,10 @@ public class CommandeServiceImpl implements ICommandeService {
     public List<Commande> findAllByUserOrderByDateDesc(int pId) {
         return this.iUserDao.getCommandesByUserIdOrderByDateDesc(pId);
     }
+
+	@Override
+	public CommandeDto create(CommandeDto pCommande) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
