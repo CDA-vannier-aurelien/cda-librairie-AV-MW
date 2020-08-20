@@ -1,13 +1,12 @@
 package fr.cda.librairie.service;
 
-import java.util.List;
-
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.entity.User;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
+
+import java.util.List;
 
 public interface IUserService {
 
