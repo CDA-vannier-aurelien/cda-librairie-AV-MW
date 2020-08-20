@@ -2,18 +2,21 @@ package fr.cda.librairie.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor 
 /**
  * 
  * Classe permettant de recueillir les différentes informations provenant des
- * servlet concernant les livres.
+ * servlet concernant les livres. 
  * 
  * @author Matthieu
  * @version 1.0
  */
 public class LivreDto {
+
 
 	/**
 	 * int permettant de définir l'id d'un livre. Est requis, non modifiable et
