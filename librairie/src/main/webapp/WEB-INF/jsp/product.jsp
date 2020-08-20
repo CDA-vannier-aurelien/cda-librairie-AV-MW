@@ -59,33 +59,37 @@
 												<c:choose>
 													<c:when test="${livre.quantitee>0 }">
 														<p class="color-green ">Disponible</p>
+
+
+													</c:when>
+													<c:otherwise>
+														<p class="color-red">Non-Disponible</p>
+
+
+													</c:otherwise>
+												</c:choose>
 											</div>
 										</div>
+										<c:if test="${livre.quantitee>0 }">
+											<div class="footer-imagia text-center">
+											<form method="get" action="gouloulou">
+											<button type="submit" value="${livre.reference }" name="reference">
+													<i class="fa fa-shopping-cart"></i>
+												</button>
+											</form>
+												
+											</div>
+										</c:if>
 									</div>
-									<div class="footer-imagia">
-										<button>
-											<i class="fa fa-shopping-cart"></i>
-										</button>
-									</div>
-									</c:when>
-									<c:otherwise>
-										<p class="color-red">Non-Disponible</p>
 								</div>
 							</div>
 						</div>
-
-						</c:otherwise>
-						</c:choose>
-
 					</div>
+				</c:forEach>
 			</div>
-		</div>
-		</div>
-		</c:forEach>
-		</div>
 
 		</div>
-		<div class="d-flex justify-content-center"">
+		<div class="d-flex justify-content-center">
 			<nav aria-label="Page navigation">
 				<ul class="pagination">
 					<c:if test="${ pageEnCours > 1 }">
