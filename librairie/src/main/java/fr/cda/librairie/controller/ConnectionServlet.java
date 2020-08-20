@@ -1,4 +1,4 @@
-package fr.cda.librairie.controller;
+/*package fr.cda.librairie.controller;
 
 import java.io.IOException;
 
@@ -51,9 +51,9 @@ public class ConnectionServlet extends AbstractController implements Servlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		} else {
 			HttpSession vSession = request.getSession();
-			System.out.println("connecté");
+			System.out.println("connectï¿½");
 			vSession.setAttribute("user", vUser);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 		}
 	}
-}
+}*/
