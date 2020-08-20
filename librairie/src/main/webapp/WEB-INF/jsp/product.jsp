@@ -59,24 +59,26 @@
 												<c:choose>
 													<c:when test="${livre.quantitee>0 }">
 														<p class="color-green ">Disponible</p>
-
-
 													</c:when>
 													<c:otherwise>
 														<p class="color-red">Non-Disponible</p>
-
-
 													</c:otherwise>
 												</c:choose>
 											</div>
 										</div>
 										<c:if test="${livre.quantitee>0 }">
 											<div class="footer-imagia text-center">
-												<form method="post" action="panier">
-													<button type="submit" value="${livre.reference }"
-														name="reference">
-														<i class="fa fa-shopping-cart"></i>
-													</button>
+												<form method="post" action="ajouter">
+													<div class="container-fluid">
+														<div class="row">
+															<button type="submit" value="${livre.reference }"
+																name="reference" class="col-2">
+																<i class="fa fa-shopping-cart"></i>
+															</button>
+															<span class="col-4" >Quantité</span>
+															<input type="number" min="1" max="${livre.quantitee}" name="quantiteCommandee" class="col-3 offset-1" ></input>
+														</div>
+													</div>
 												</form>
 											</div>
 										</c:if>
