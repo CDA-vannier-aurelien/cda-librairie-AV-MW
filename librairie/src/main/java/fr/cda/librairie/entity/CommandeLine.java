@@ -9,12 +9,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(uniqueConstraints={
+		
         @UniqueConstraint(columnNames = {"numero_commande", "reference"}
         )})
 public class CommandeLine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idLigne;
 
     @ManyToOne
             @JoinColumn(name = "numero_commande")
@@ -25,4 +26,6 @@ public class CommandeLine {
     Livre livre;
 
     private int quantite;
+    
+    private double prixLigne;
 }
