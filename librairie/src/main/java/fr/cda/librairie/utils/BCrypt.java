@@ -18,6 +18,8 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
+
+
 /**
  * BCrypt implements OpenBSD-style Blowfish password hashing using the scheme
  * described in "A Future-Adaptable Password Scheme" by Niels Provos and David

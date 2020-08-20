@@ -25,6 +25,8 @@ public abstract class AbstractController extends HttpServlet {
 				.getRequiredWebApplicationContext(config.getServletContext());
 		final AutowireCapableBeanFactory beanFactory = springContext.getAutowireCapableBeanFactory();
 		beanFactory.autowireBean(this);
+		
+		
 	}
 
 }

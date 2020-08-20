@@ -22,5 +22,7 @@ public class LogFilter implements Filter {
 		((HttpServletResponse) response).addHeader("header-special-cda", new Date().toString());
 
 		chain.doFilter(request, response);
+		
+		
 	}
 }
