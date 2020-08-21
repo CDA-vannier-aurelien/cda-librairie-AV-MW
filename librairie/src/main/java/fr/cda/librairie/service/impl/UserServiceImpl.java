@@ -1,17 +1,28 @@
 package fr.cda.librairie.service.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import fr.cda.librairie.dao.*;
-import fr.cda.librairie.dto.LivreDto;
-import fr.cda.librairie.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.cda.librairie.dao.ILivreDao;
+import fr.cda.librairie.dao.IPaysDao;
+import fr.cda.librairie.dao.IRoleDao;
+import fr.cda.librairie.dao.IRueDao;
+import fr.cda.librairie.dao.IUserDao;
+import fr.cda.librairie.dao.IVilleDao;
+import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.entity.Commande;
+import fr.cda.librairie.entity.CommandeLine;
 import fr.cda.librairie.entity.Pays;
 import fr.cda.librairie.entity.Role;
 import fr.cda.librairie.entity.Rue;
@@ -22,11 +33,8 @@ import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
-import fr.cda.librairie.utils.BCrypt;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Service
@@ -48,6 +56,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IRoleDao iRoleDao;
+
+ @Autowired
+ private BCryptPasswordEncoder encodeur;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -81,7 +92,7 @@ public class UserServiceImpl implements IUserService {
 		user.setPays(optionalPays.get());
 		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
-		user.setPassword(BCrypt.hashpw(pUser.getPassword(), BCrypt.gensalt(12)));
+		user.setPassword(encodeur.encode(pUser.getPassword()));
 		iUserDao.save(user);
 		return pUser;
 	}
@@ -94,7 +105,7 @@ public class UserServiceImpl implements IUserService {
 			log.warn("erreur login");
 			pUser = null;
 		} else {
-			if (!BCrypt.checkpw(pUser.getPassword(), optionalUser.get().getPassword())) {
+			if (!encodeur.matches(pUser.getPassword(), optionalUser.get().getPassword())) {
 				pUser = null;
 				log.warn("Erreur password");
 
@@ -105,7 +116,7 @@ public class UserServiceImpl implements IUserService {
 			} else {
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
 						.labelRole(optionalUser.get().getRole().getRole()).build();
-				log.info("ajout avec succï¿½s");
+				log.info("ajout avec succés");
 				return pUser;
 
 			}
@@ -193,11 +204,22 @@ public class UserServiceImpl implements IUserService {
 		user.setVille(optionalVille.get());
 		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
-		user.setPassword(BCrypt.hashpw(pUser.getPassword(), BCrypt.gensalt(12)));
+		user.setPassword(encodeur.encode(pUser.getPassword()));
 		iUserDao.save(user);
 		
 		return pUser;
 	
+	}
+
+	@Override
+	public UtilisateurDto getByMail(UtilisateurDto pUserDto) {
+		Optional<User> vUserEntity = iUserDao.getUserByMail(pUserDto.getMail());
+		
+		pUserDto = this.modelMapper.map(vUserEntity.get(),UtilisateurDto.class);
+		pUserDto.setVille(vUserEntity.get().getVille().getNom());
+		pUserDto.setCodePostal(vUserEntity.get().getVille().getCodePostal());
+		
+		return pUserDto;
 	}
 
 

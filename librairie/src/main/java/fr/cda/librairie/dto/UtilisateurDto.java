@@ -60,7 +60,7 @@ public class UtilisateurDto {
     private int numeroPorte;
     private String complementAdresse;
     private String ville;
-    private String codePostal;
+    private int codePostal;
     private String pays;
     private String labelRole;
 }

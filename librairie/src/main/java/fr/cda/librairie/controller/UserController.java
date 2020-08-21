@@ -36,7 +36,7 @@ public class UserController {
                                   @RequestParam(value = "password") String password,
                                   @RequestParam(value = "pays") String pays,
                                   @RequestParam(value = "ville") String ville,
-                                  @RequestParam(value = "codePostal") String codePostal) {
+                                  @RequestParam(value = "codePostal") int codePostal) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
 
@@ -89,17 +89,17 @@ public class UserController {
     }
     
     @RequestMapping(value = "monCompte", method = RequestMethod.GET)
-    public ModelAndView afficher(@RequestParam(value = "login") String login,
-            @RequestParam(value = "password") String password,
-            HttpSession httpSession)  {
+    public ModelAndView afficher(  HttpSession httpSession)  {
     	
     	ModelAndView model = new ModelAndView();
-        UtilisateurDto utilisateurDto = UtilisateurDto.builder()
-                .password(password)
-                .mail(login).build();
-        utilisateurDto = iUserService.conection(utilisateurDto);
+    	 model.setViewName("monCompte");
+    	 
+    	   
+        UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+        		
+        utilisateurDto = iUserService.getByMail(utilisateurDto);
         
-        model.setViewName("monCompte");
+        model.addObject("user",utilisateurDto);
         
         return model;
     }
@@ -114,7 +114,7 @@ public class UserController {
                                   @RequestParam(value = "nomRue") String rue,
                                   @RequestParam(value = "mail") String mail,
                                   @RequestParam(value = "ville") String ville,
-                                  @RequestParam(value = "codePostal") String codePostal) throws NomRueException, NomPaysException {
+                                  @RequestParam(value = "codePostal") int codePostal) throws NomRueException, NomPaysException {
         ModelAndView model = new ModelAndView();
         model.setViewName("monCompte");
 
