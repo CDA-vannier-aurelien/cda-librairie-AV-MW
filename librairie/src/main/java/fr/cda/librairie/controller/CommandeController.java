@@ -9,8 +9,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,51 +30,7 @@ public class CommandeController {
 	@Autowired
 	private ILivreService iLivreService;
 
-	@Autowired
-	private IUserService iUserService;
-
 	private HashMap<LivreDto, Integer> listeLivre = new HashMap<>();
-<<<<<<< HEAD
-	
-	
-	 @RequestMapping(value = "/ajouter", method = RequestMethod.POST)
-	    public ModelAndView ajoutCommande( @RequestParam(value = "reference") int reference,HttpSession session,
-	    		@RequestParam(value = "quantiteCommandee") int vQuantite){
-		 
-		    ModelAndView model = new ModelAndView();   
-		    
-	        LivreDto livre = iLivreService.getLivre(reference);	    
-	        
-	        Date dateCommande = new Date();
-	        
-	        listeLivre.put(livre, vQuantite);
-	        
-	        for(Map.Entry<LivreDto, Integer> map : listeLivre.entrySet()) {
-		    if(map.getKey().getReference() == reference) {
-			  map.setValue(vQuantite);
-		  }else {
-			  listeLivre.put(livre, vQuantite);
-		  }
-	  }
-	        
-	        session.setAttribute("panier", listeLivre);
-	        
-	        CommandeDto commande = CommandeDto.builder().dateCommande(new Date()).build();
-	        
-	        log.debug("ajout de commande: {} à la date: {}",commande.getNumeroCommande(), dateCommande);
-	        
-	        
-	        model.setViewName("forward:/listeLivre");
-	        
-	      return model;
-	    }
-	 
-	@RequestMapping(value = "commander", method = RequestMethod.POST)
-	public ModelAndView validerCommande(HttpSession httpSession){
-	 	HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
-		UtilisateurDto user = (UtilisateurDto) httpSession.getAttribute("user");
-		iUserService.passerCommande(user, maCmd);
-=======
 
 	@RequestMapping(value = "ajouter", method = RequestMethod.GET)
 	public ModelAndView ajoutCommande(@RequestParam(value = "reference") int reference, HttpSession session,
@@ -112,7 +66,6 @@ public class CommandeController {
 	@RequestMapping(value = "commander", method = RequestMethod.POST)
 	public ModelAndView validerCommande(HttpSession httpSession) {
 		HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
->>>>>>> Dev
 		for (Map.Entry<LivreDto, Integer> livreDtoIntegerEntry : maCmd.entrySet()) {
 			Map.Entry pair = (Map.Entry) livreDtoIntegerEntry;
 			System.out.println(pair.getKey() + " = " + pair.getValue());
@@ -126,9 +79,7 @@ public class CommandeController {
 			HttpSession httpSession) {
 
 		HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
-
 		Set<Entry<LivreDto, Integer>> entrySet = maCmd.entrySet();
-
 		Iterator<Entry<LivreDto, Integer>> it = entrySet.iterator();
 
 		while (it.hasNext()) {
