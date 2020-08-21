@@ -56,7 +56,7 @@
                             class="dropdown-toggle nav-link" data-toggle="dropdown"
                             aria-expanded="false" href="#">${sessionScope.user.nom} </a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" role="presentation" href="#">Mon
+                            <a class="dropdown-item" role="presentation" href="monCompte">Mon
                                 compte</a><a class="dropdown-item" role="presentation"
                                              href="panier">Mon panier</a><a class="dropdown-item"
                                                                             role="presentation" href="deconnexion">LogOut</a>
@@ -354,8 +354,7 @@
                                                                                  id="complement"
                                                                                  class="form-control form-control-sm validate"
                                                                                  placeholder="Complément d'adresse"
-                                                                                 name="complementAdresse"
-                                                                                 required>
+                                                                                 name="complementAdresse">
                                     </div>
                                     <div class="md-form form-sm mb-2">
                                         <i class="fa fa-calendar-minus-o prefix"></i> <input

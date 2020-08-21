@@ -1,15 +1,16 @@
 package fr.cda.librairie.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(uniqueConstraints={
-		
         @UniqueConstraint(columnNames = {"numero_commande", "reference"}
         )})
 
@@ -18,11 +19,11 @@ public class CommandeLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idLigne;
 
-    @ManyToOne
+    @ManyToOne()
             @JoinColumn(name = "numero_commande")
     Commande commande;
 
-    @ManyToOne
+    @ManyToOne()
             @JoinColumn(name = "reference")
     Livre livre;
 

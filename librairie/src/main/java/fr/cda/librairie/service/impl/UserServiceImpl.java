@@ -1,25 +1,20 @@
 package fr.cda.librairie.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import fr.cda.librairie.dao.*;
 import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.dao.IPaysDao;
-import fr.cda.librairie.dao.IRoleDao;
-import fr.cda.librairie.dao.IRueDao;
-import fr.cda.librairie.dao.IUserDao;
-import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.entity.Pays;
 import fr.cda.librairie.entity.Role;
+import fr.cda.librairie.entity.Rue;
 import fr.cda.librairie.entity.User;
 import fr.cda.librairie.entity.Ville;
 import fr.cda.librairie.exception.NomPaysException;
@@ -42,7 +37,9 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	IVilleDao iVilleDao;
 
-	
+	@Autowired
+	ILivreDao iLivreDao;
+
 	@Autowired
 	IPaysDao iPaysDao;
 
@@ -69,12 +66,6 @@ public class UserServiceImpl implements IUserService {
 		if (!optionalVille.isPresent()) {
 			throw new NomVilleIncorrect();
 		}
-//		String nomRue = pUser.getNomRue();
-//		Optional<Rue> optionalRue = iRueDao.findByNom(nomRue);
-//		if (!optionalRue.isPresent()) {
-//			throw new NomRueException();
-//		}
-
 		Optional<Role> optionalRole = iRoleDao.findByRole("Client");
 		if (!optionalRole.isPresent()) {
 			throw new RoleException();
@@ -83,7 +74,6 @@ public class UserServiceImpl implements IUserService {
 		user.setNom(pUser.getNom());
 		user.setPrenom(pUser.getPrenom());
 		user.setDateConnection(pUser.getDateConnection());
-//		user.setDateNaissance(pUser.getDateNaissance());
 		user.setNumeroPorte(pUser.getNumeroPorte());
 		user.setNomRue(pUser.getNomRue());
 		user.setComplementAdresse(pUser.getComplementAdresse());
@@ -113,7 +103,7 @@ public class UserServiceImpl implements IUserService {
 				log.warn("Erreur Compte inactif");
 
 			} else {
-				pUser = UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
+				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
 						.labelRole(optionalUser.get().getRole().getRole()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
@@ -150,18 +140,65 @@ public class UserServiceImpl implements IUserService {
 		return liste;
 	}
 
-	@Override
-	public UtilisateurDto commander(UtilisateurDto pUser, HashMap<LivreDto, Integer> commande) {
-		Optional<User> optionalUser = iUserDao.getUserByMail(pUser.getMail());
-		if(optionalUser.isPresent()){
-		}
 
-		return null;
-	}
+
+
 
 	@Override
 	public long count() {
 		return this.iUserDao.count();
 	}
+
+	@Override
+	public void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd) {
+		Optional<User> optionalUser = iUserDao.getUserByMail(user.getMail());
+		User utilisateur = optionalUser.get();
+		optionalUser.get().setEstActive(true);
+		Commande commande = new Commande();
+		for(Map.Entry<LivreDto, Integer> entry : maCmd.entrySet()) {
+			CommandeLine cmdLine = new CommandeLine();
+			cmdLine.setLivre(iLivreDao.findById(entry.getKey().getReference()).get());
+			cmdLine.setQuantiteCommandee(entry.getValue());
+			cmdLine.setCommande(commande);
+			commande.getCommandeLine().add(cmdLine);
+		}
+
+		utilisateur.getCommandes().add(commande);
+		iUserDao.save(utilisateur);
+	}
+
+	@Override
+	public UtilisateurDto update(UtilisateurDto pUser) throws NomVilleIncorrect, NomRueException {
+		User user = new User();
+
+		String nomVille = pUser.getVille();
+		Optional<Ville> optionalVille = iVilleDao.findByNom(nomVille);
+		if (!optionalVille.isPresent()) {
+			throw new NomVilleIncorrect();
+		}
+		String nomRue = pUser.getNomRue();
+		Optional<Rue> optionalRue = iRueDao.findByNom(nomRue);
+		if (!optionalRue.isPresent()) {
+			throw new NomRueException();
+		}
+
+	
+		
+		user.setNom(pUser.getNom());
+		user.setPrenom(pUser.getPrenom());
+		user.setDateConnection(pUser.getDateConnection());
+		user.setNumeroPorte(pUser.getNumeroPorte());
+		user.setNomRue(pUser.getNomRue());
+		user.setComplementAdresse(pUser.getComplementAdresse());
+		user.setVille(optionalVille.get());
+		user.setMail(pUser.getMail());
+		user.setDateNaissance(pUser.getDateNaissance());
+		user.setPassword(BCrypt.hashpw(pUser.getPassword(), BCrypt.gensalt(12)));
+		iUserDao.save(user);
+		
+		return pUser;
+	
+	}
+
 
 }
