@@ -1,9 +1,11 @@
 package fr.cda.librairie.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import fr.cda.librairie.dto.LivreDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,8 @@ import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Service
@@ -95,10 +99,6 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public UtilisateurDto conection(UtilisateurDto pUser) {
 
-		// C'est
-		// gagnéééééééééééééééééééééééééééééééééééééééééééééééé
-		// C'est bon j'suis chaud
-
 		Optional<User> optionalUser = iUserDao.getUserByMail(pUser.getMail());
 		if (!optionalUser.isPresent()) {
 			log.warn("erreur login");
@@ -148,6 +148,15 @@ public class UserServiceImpl implements IUserService {
 
 		}
 		return liste;
+	}
+
+	@Override
+	public UtilisateurDto commander(UtilisateurDto pUser, HashMap<LivreDto, Integer> commande) {
+		Optional<User> optionalUser = iUserDao.getUserByMail(pUser.getMail());
+		if(optionalUser.isPresent()){
+		}
+
+		return null;
 	}
 
 	@Override

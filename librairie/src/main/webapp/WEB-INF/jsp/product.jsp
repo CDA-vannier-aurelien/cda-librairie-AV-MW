@@ -76,7 +76,7 @@
 																<i class="fa fa-shopping-cart"></i>
 															</button>
 															<span class="col-4" >Quantité</span>
-															<input type="number" min="1" max="${livre.quantitee}" name="quantiteCommandee" class="col-3 offset-1" ></input>
+															<input type="number" min="1" max="${livre.quantitee}" name="quantiteCommandee" class="col-3 offset-1" >
 														</div>
 													</div>
 												</form>
