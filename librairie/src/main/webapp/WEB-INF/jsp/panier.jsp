@@ -124,7 +124,7 @@
 														€</strong></td>
 												<td class="border-0 align-middle"><strong>${l.value}</strong></td>
 												<td class="border-0 align-middle" name="totalLigne"
-													value="${l.value*l.key.prix}"><strong>${l.value*l.key.prix}</strong></td>
+													value="${l.value*l.key.prix}"><strong>${l.value*l.key.prix} €</strong></td>
 
 												<td class="border-0 align-middle">
 													<form method="post" action="supprimerLigne"
