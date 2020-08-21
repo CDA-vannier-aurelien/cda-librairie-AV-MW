@@ -36,7 +36,7 @@ public class UserController {
                                   @RequestParam(value = "password") String password,
                                   @RequestParam(value = "pays") String pays,
                                   @RequestParam(value = "ville") String ville,
-                                  @RequestParam(value = "codePostal") String codePostal) {
+                                  @RequestParam(value = "codePostal") int codePostal) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
 
@@ -114,7 +114,7 @@ public class UserController {
                                   @RequestParam(value = "nomRue") String rue,
                                   @RequestParam(value = "mail") String mail,
                                   @RequestParam(value = "ville") String ville,
-                                  @RequestParam(value = "codePostal") String codePostal) throws NomRueException, NomPaysException {
+                                  @RequestParam(value = "codePostal") int codePostal) throws NomRueException, NomPaysException {
         ModelAndView model = new ModelAndView();
         model.setViewName("monCompte");
 

@@ -213,7 +213,8 @@ public class UserServiceImpl implements IUserService {
 		Optional<User> vUserEntity = iUserDao.getUserByMail(pUserDto.getMail());
 		
 		pUserDto = this.modelMapper.map(vUserEntity.get(),UtilisateurDto.class);
-		
+		pUserDto.setVille(vUserEntity.get().getVille().getNom());
+		pUserDto.setCodePostal(vUserEntity.get().getVille().getCodePostal());
 		
 		return pUserDto;
 	}
