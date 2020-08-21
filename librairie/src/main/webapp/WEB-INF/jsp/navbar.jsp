@@ -18,7 +18,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="nav navbar-nav mx-auto">
 					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="accueil">Home</a></li>
+						href="index">Home</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
 						href="#a_propos">Nos développeurs</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
