@@ -241,7 +241,7 @@
 			</table>
 			
 			<div class="col-6">
-				<form method="post" action="addUser.do" class="was-validated">
+				<form method="post" action="addLivre" class="was-validated">
 					<div class="modal-body">
 						<div class="container-fluid">
 							<div class="row">
@@ -254,9 +254,9 @@
 								</div>
 								<div class="col-9 md-form form-sm mb-2 mt-4">
 
-									<input type="text" id="adresse"
+									<input type="text" id="titre"
 										class="form-control form-control-sm validate"
-										placeholder="titre" name="nomRue" required>
+										placeholder="titre" name="titre" required>
 
 				
 								</div>
@@ -287,16 +287,16 @@
 
 
 								<div class="col md-form form-sm mb-2 mt-4">
-									<input type="text" id="pays"
+									<input type="text" id="description"
 										class="form-control form-control-sm validate"
-										placeholder="description" name="pays" required>
+										placeholder="description" name="description" required>
 								</div>
 							</div>
-							<div class="md-form form-sm mb-2">
+							<div class="md-form form-sm mb-2" id="divEditeur">
 								<i class="fa fa-lock prefix"></i> <input type="text"
 									list="listEditeur" id="editeur"
 									class="form-control form-control-sm validate"
-									placeholder="editeur" name="editeur" onchange="testEditeur()" required>
+									placeholder="editeur" name="editeur" onkeydown="testEditeur()" required>
 									<span
 										class="error text-danger" id="resultEditeur"></span>
 								<datalist id="listEditeur">
@@ -305,11 +305,11 @@
 
 								</datalist>
 							</div>
-							<div class="md-form form-sm mb-2">
+							<div class="md-form form-sm mb-2" id="divAuteur">
 								<i class="fa fa-envelope prefix"></i> <input type="text"
 									list="listAuteur" id="auteur"
 									class="form-control form-control-sm validate" name="auteur"
-									placeholder="auteur" onchange="testAuteur()" required>
+									placeholder="auteur" onkeypress="testAuteur()" required>
 									<span
 										class="error text-danger" id="resultAuteur"></span>
 							</div>

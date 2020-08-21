@@ -1,25 +1,25 @@
 package fr.cda.librairie.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.entity.User;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 
-import java.util.HashMap;
-import java.util.List;
-
 public interface IUserService {
 
-    UtilisateurDto create(UtilisateurDto pUser) throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException;
+	UtilisateurDto create(UtilisateurDto pUser)
+			throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException;
 
-    UtilisateurDto conection(UtilisateurDto pUser);
+	UtilisateurDto conection(UtilisateurDto pUser);
 
-    UtilisateurDto checkMail(UtilisateurDto user);
+	UtilisateurDto checkMail(UtilisateurDto user);
 
-    List<UtilisateurDto> getAll(int pageEnCours);
+	List<UtilisateurDto> getAll(int pageEnCours);
 
     long count();
 
