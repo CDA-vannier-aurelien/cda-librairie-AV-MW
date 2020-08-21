@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor 
+@AllArgsConstructor 
+@NoArgsConstructor  
 /**
  * 
  * Classe permettant de recueillir les différentes informations provenant des

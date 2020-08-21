@@ -29,7 +29,7 @@ public class CommandeController {
 	private HashMap<LivreDto, Integer> listeLivre = new HashMap<>();
 	
 	
-	 @RequestMapping(value = "ajouter", method = RequestMethod.POST)
+	 @RequestMapping(value = "ajouter", method = RequestMethod.GET)
 	    public ModelAndView ajoutCommande( @RequestParam(value = "reference") int reference,HttpSession session,
 	    		@RequestParam(value = "quantiteCommandee") int vQuantite){
 		 

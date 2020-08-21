@@ -68,7 +68,7 @@
 										</div>
 										<c:if test="${livre.quantitee>0 }">
 											<div class="footer-imagia text-center">
-												<form method="post" action="ajouter">
+												<form method="get" action="ajouter">
 													<div class="container-fluid">
 														<div class="row">
 															<button type="submit" value="${livre.reference }"
@@ -89,7 +89,6 @@
 					</div>
 				</c:forEach>
 			</div>
-
 		</div>
 		<div class="d-flex justify-content-center">
 			<nav aria-label="Page navigation">
