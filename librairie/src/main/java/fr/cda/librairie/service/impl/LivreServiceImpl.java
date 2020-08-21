@@ -119,4 +119,14 @@ public class LivreServiceImpl implements ILivreService {
 		return livreDao.count();
 	}
 
+	@Override
+	public boolean existByReference(int pRef) {
+		boolean verif = false;
+		LivreDto livre = this.getLivre(pRef);
+		if (livre == null) {
+			verif = true;
+		}
+		return verif;
+	}
+
 }

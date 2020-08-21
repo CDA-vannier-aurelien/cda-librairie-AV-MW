@@ -209,10 +209,11 @@
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col md-form form-sm mb-2">
-												<i class="fa fa-user prefix"></i> <input type="text"
+												<i class="fa fa-user prefix"></i> <input type="number" onchange="testReference()"
 													id="reference" class="form-control form-control-sm validate"
 													placeholder="reference" name="reference" required>
-
+													<span class="error text-danger"
+												id="result"></span>
 											</div>
 											<div class="col-9 md-form form-sm mb-2 mt-4">
 
@@ -224,24 +225,22 @@
 											
 										</div>
 										<div class="row">
-											<div class="col-3 md-form form-sm mb-2">
-												<i class="fa fa-home"></i> <input type="number" id="numero"
+											<div class="col-4 md-form form-sm mb-2">
+												<i class="fa fa-home"></i> <input type="number" id="quantitee"
 													class="form-control form-control-sm validate"
 													placeholder="quantitee" name="quantitee" min="0" required>
 
 											</div>
-											
-											<div class="col md-form form-sm mb-2">
-												<i class="fa fa-location-arrow prefix"></i> <input
-													type="text" id="ville" name="ville"
+											<div class="col-4 md-form form-sm mb-2">
+												<i class="fa fa-home"></i> <input type="number" id="prix"
 													class="form-control form-control-sm validate"
-													placeholder="nbPage" required>
+													placeholder="prix" name="prix" min="0" required>
 
 											</div>
-											<div class="col md-form form-sm mb-2 mt-4">
-												<input type="text" id="prix"
+											<div class="col-4 md-form form-sm mb-2">
+												<i class="fa fa-home"></i> <input type="number" id="nbPage"
 													class="form-control form-control-sm validate"
-													placeholder="prix" name="prix" required>
+													placeholder="nbPage" name="nbPage" min="0" required>
 
 											</div>
 										</div>
@@ -262,11 +261,10 @@
 												required>
 										</div>
 										<div class="md-form form-sm mb-2">
-											<i class="fa fa-envelope prefix"></i> <input type="auteur"
-												id="email" class="form-control form-control-sm validate"
-												onchange="testEmail()" name="auteur" placeholder="auteur"
-												required> <span class="error text-danger"
-												id="result"></span>
+											<i class="fa fa-envelope prefix"></i> <input type="text"
+												id="auteur" class="form-control form-control-sm validate"
+												name="auteur" placeholder="auteur"
+												required>
 										</div>
 										
 										<div class="text-center form-sm mt-2 mb-4">
