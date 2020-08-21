@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html style="background: white;">
 
@@ -71,22 +71,22 @@
 						<th>Prenom</th>
 						<th>Adresse mail</th>
 						<th>Role</th>
-						<th>Activ�</th>
+						<th>Activé</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<%--            <c:forEach var="u" items="${utilisateur}">  --%>
-					<tr>
-						<td>${u.nom}</td>
-						<td>${u.prenom}</td>
-						<td>${u.mail}</td>
-						<td>${u.labelRole}</td>
-						<td>${u.estActive}</td>
-						<td><a href="#"> <i class="fa fa-trash"
-								onclick="afficherModaleSuppression(${u.mail})"></i>
-						</a></td>
-						<%--                </c:forEach>  --%>
+					<c:forEach var="u" items="${listeUser}">
+						<tr>
+							<td>${u.nom}</td>
+							<td>${u.prenom}</td>
+							<td>${u.mail}</td>
+							<td>${u.labelRole}</td>
+							<td>${u.estActive}</td>
+							<td><a href="#"> <i class="fa fa-trash"
+									onclick="afficherModaleSuppression(${u.mail})"></i>
+							</a></td>
+					</c:forEach>
 				<tbody>
 			</table>
 
@@ -96,9 +96,9 @@
 
 				<thead>
 					<tr>
-						<th>R�f�rences</th>
+						<th>Référence</th>
 						<th>Titre</th>
-						<th>Quantit�e</th>
+						<th>Quantitée</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
@@ -204,19 +204,24 @@
 				</div>
 			</div>
 		</div>
+		<div class="row mb-1">
+		<div class="col-6">
+		Tableau commande
+		</div>
+		<div class="col-6">
+		Ajout Livre
+		</div>
+		</div>
 		<div class="row">
 			<table class="table table-striped table-class col-6" id="table-id">
-
-
-				<thead>
+			<thead>
 					<tr>
-						<th>R�f�rences</th>
+						<th>Rï¿½fï¿½rences</th>
 						<th>Titre</th>
-						<th>Quantit�e</th>
+						<th>Quantitï¿½e</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					<c:forEach var="livre" items="${listeLivre}">
 						<tr>
@@ -234,17 +239,18 @@
 					</c:forEach>
 				<tbody>
 			</table>
-
+			
 			<div class="col-6">
 				<form method="post" action="addUser.do" class="was-validated">
 					<div class="modal-body">
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col md-form form-sm mb-2">
-									<i class="fa fa-user prefix"></i> <input type="text"
-										id="reference" class="form-control form-control-sm validate"
-										placeholder="reference" name="reference" required>
-
+									<i class="fa fa-user prefix"></i> <input type="number"
+										onchange="testReference()" id="reference"
+										class="form-control form-control-sm validate"
+										placeholder="reference" name="reference" required> <span
+										class="error text-danger" id="result"></span>
 								</div>
 								<div class="col-9 md-form form-sm mb-2 mt-4">
 
@@ -252,28 +258,28 @@
 										class="form-control form-control-sm validate"
 										placeholder="titre" name="nomRue" required>
 
+				
 								</div>
 
 							</div>
 							<div class="row">
-								<div class="col-3 md-form form-sm mb-2">
-									<i class="fa fa-home"></i> <input type="number" id="numero"
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="quantitee"
 										class="form-control form-control-sm validate"
 										placeholder="quantitee" name="quantitee" min="0" required>
+				
 
 								</div>
-
-								<div class="col md-form form-sm mb-2">
-									<i class="fa fa-location-arrow prefix"></i> <input type="text"
-										id="ville" name="ville"
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="prix"
 										class="form-control form-control-sm validate"
-										placeholder="nbPage" required>
+										placeholder="prix" name="prix" min="0" required>
 
 								</div>
-								<div class="col md-form form-sm mb-2 mt-4">
-									<input type="text" id="prix"
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="nbPage"
 										class="form-control form-control-sm validate"
-										placeholder="prix" name="prix" required>
+										placeholder="nbPage" name="nbPage" min="0" required>
 
 								</div>
 							</div>
@@ -288,15 +294,28 @@
 							</div>
 							<div class="md-form form-sm mb-2">
 								<i class="fa fa-lock prefix"></i> <input type="text"
-									id="complement" class="form-control form-control-sm validate"
-									placeholder="editeur" name="complementAdresse" required>
+									list="listEditeur" id="editeur"
+									class="form-control form-control-sm validate"
+									placeholder="editeur" name="editeur" onchange="testEditeur()" required>
+									<span
+										class="error text-danger" id="resultEditeur"></span>
+								<datalist id="listEditeur">
+									
+
+
+								</datalist>
 							</div>
 							<div class="md-form form-sm mb-2">
-								<i class="fa fa-envelope prefix"></i> <input type="auteur"
-									id="email" class="form-control form-control-sm validate"
-									onchange="testEmail()" name="auteur" placeholder="auteur"
-									required> <span class="error text-danger" id="result"></span>
+								<i class="fa fa-envelope prefix"></i> <input type="text"
+									list="listAuteur" id="auteur"
+									class="form-control form-control-sm validate" name="auteur"
+									placeholder="auteur" onchange="testAuteur()" required>
+									<span
+										class="error text-danger" id="resultAuteur"></span>
 							</div>
+							<datalist id="listAuteur">
+
+							</datalist>
 
 							<div class="text-center form-sm mt-2 mb-4">
 								<button class="btn btn-info" id="valider">
@@ -308,13 +327,16 @@
 
 					</div>
 				</form>
+
+
+
 			</div>
 		</div>
 	</div>
 	<footer class="footer text-faded text-center py-5"
 		style="background-color: rgb(238, 244, 247); position: relative;">
 		<div class="container">
-			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;�&nbsp;Brand
+			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;ï¿½&nbsp;Brand
 				2020</p>
 		</div>
 	</footer>

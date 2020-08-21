@@ -17,5 +17,7 @@ public interface ILivreService {
 
 	public int getMaxId();
 
+	public boolean existByReference(int pRef);
+
 	public long count();
 }

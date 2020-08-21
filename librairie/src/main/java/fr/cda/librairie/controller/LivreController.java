@@ -7,9 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
+import fr.cda.librairie.dto.AuteurDto;
+import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.service.IAuteurService;
+import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +28,13 @@ public class LivreController {
 	@Autowired
 	ILivreService serviceLivre;
 
-	@RequestMapping(value = { "/listeLivre" }, method = {RequestMethod.GET, RequestMethod.POST})
+	@Autowired
+	IAuteurService serviceAuteur;
+
+	@Autowired
+	IEditeurService serviceEditeur;
+
+	@RequestMapping(value = { "/listeLivre" }, method = RequestMethod.GET)
 	protected ModelAndView listerLivre(@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
 		log.debug("list livre");
 
@@ -38,21 +51,46 @@ public class LivreController {
 		return model;
 	}
 
-	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
-	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCours) {
-		log.debug("list livre dash");
+	@RequestMapping(value = { "/checkRef" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkRef(@RequestParam(value = "reference") int reference) {
 
-		ModelAndView model = new ModelAndView();
+		String message = "";
 
-		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCours);
+		if (!serviceLivre.existByReference(reference)) {
+			message = "exists";
+		}
+		return message;
+	}
 
-		model.addObject("listeLivre", vList);
-		model.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
-		model.addObject("countLivre", this.serviceLivre.count());
-		model.addObject("pageEnCoursLivre", pageEnCours);
+	@RequestMapping(value = { "/checkAuteur" }, method = RequestMethod.POST)
+	protected @ResponseBody String[] checkAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
 
-		model.setViewName("dashboard");
-		return model;
+		List<AuteurDto> listAuteur = this.serviceAuteur.getAll(nomUsage);
+
+		String[] tabNom = new String[listAuteur.size()];
+
+		for (int i = 0; i < listAuteur.size(); i++) {
+			tabNom[i] = listAuteur.get(i).getNomUsage();
+		}
+
+		return tabNom;
+	}
+
+	@RequestMapping(value = { "/checkEditeur" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkEditeur(@RequestParam(value = "nom") String nomEditeur) {
+
+		List<EditeurDto> listEditeur = this.serviceEditeur.getAll(nomEditeur);
+
+		String[] tabNom = new String[listEditeur.size()];
+
+		for (int i = 0; i < listEditeur.size(); i++) {
+			tabNom[i] = listEditeur.get(i).getNom();
+		}
+		String json = new Gson().toJson(tabNom);
+		System.out.println(json);
+
+		return json;
+
 	}
 
 }
