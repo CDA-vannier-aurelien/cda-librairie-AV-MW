@@ -51,6 +51,24 @@ public class LivreController {
 		return model;
 	}
 
+	@RequestMapping(value = { "/addLivre" }, method = RequestMethod.POST)
+	protected ModelAndView addLivre(@RequestParam(value = "prix") int prix,
+			@RequestParam(value = "reference") int reference, @RequestParam(value = "quantitee") int quantitee,
+			@RequestParam(value = "titre") String titre, @RequestParam(value = "nbPage") int nbPage,
+			@RequestParam(value = "auteur") String auteur, @RequestParam(value = "editeur") String editeur,
+			@RequestParam(value = "description") String description) {
+		log.debug("YOUHOU");
+
+		LivreDto livre = new LivreDto(reference, prix, quantitee, titre, nbPage, auteur, description, editeur);
+
+		livre = serviceLivre.addLivre(livre);
+
+		ModelAndView model = new ModelAndView();
+
+		model.setViewName("dashboard");
+		return model;
+	}
+
 	@RequestMapping(value = { "/checkRef" }, method = RequestMethod.POST)
 	protected @ResponseBody String checkRef(@RequestParam(value = "reference") int reference) {
 
@@ -63,7 +81,7 @@ public class LivreController {
 	}
 
 	@RequestMapping(value = { "/checkAuteur" }, method = RequestMethod.POST)
-	protected @ResponseBody String[] checkAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
+	protected @ResponseBody String checkAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
 
 		List<AuteurDto> listAuteur = this.serviceAuteur.getAll(nomUsage);
 
@@ -72,8 +90,9 @@ public class LivreController {
 		for (int i = 0; i < listAuteur.size(); i++) {
 			tabNom[i] = listAuteur.get(i).getNomUsage();
 		}
+		String json = new Gson().toJson(tabNom);
 
-		return tabNom;
+		return json;
 	}
 
 	@RequestMapping(value = { "/checkEditeur" }, method = RequestMethod.POST)
@@ -87,7 +106,6 @@ public class LivreController {
 			tabNom[i] = listEditeur.get(i).getNom();
 		}
 		String json = new Gson().toJson(tabNom);
-		System.out.println(json);
 
 		return json;
 
