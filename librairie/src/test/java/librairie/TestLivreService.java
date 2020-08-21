@@ -40,7 +40,7 @@ public class TestLivreService {
 		AuteurDto auteur = new AuteurDto();
 		auteur.setNom(Constantes.STRING_TEST);
 		auteur.setPrenom(Constantes.STRING_TEST);
-		auteur.setNomUsuel(Constantes.STRING_TEST);
+		auteur.setNomUsage(Constantes.STRING_TEST);
 		EditeurDto editeur = new EditeurDto();
 		editeur.setNom(Constantes.STRING_TEST);
 		editeur = editeurService.addEditeur(editeur);

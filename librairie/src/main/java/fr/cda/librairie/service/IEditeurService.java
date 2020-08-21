@@ -14,7 +14,7 @@ public interface IEditeurService {
 
 	public EditeurDto getEditeurByNom(String nom);
 
-	public List<EditeurDto> getAll();
+	public List<EditeurDto> getAll(String nom);
 
 	public int getMaxId();
 

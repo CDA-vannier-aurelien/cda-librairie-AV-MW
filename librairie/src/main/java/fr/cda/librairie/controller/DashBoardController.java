@@ -7,11 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.cda.librairie.dto.AuteurDto;
-import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IAuteurService;
@@ -46,11 +43,6 @@ public class DashBoardController {
 
 		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
 		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours);
-		List<AuteurDto> vListAuteur = this.serviceAuteur.getAll();
-		List<EditeurDto> vListEditeur = this.serviceEditeur.getAll();
-
-		model.addObject("listeAuteur", vListAuteur);
-		model.addObject("listeEditeur", vListEditeur);
 
 		model.addObject("listeUser", vListUser);
 		model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
@@ -64,17 +56,6 @@ public class DashBoardController {
 
 		model.setViewName("dashboard");
 		return model;
-	}
-
-	@RequestMapping(value = { "/checkRef" }, method = RequestMethod.POST)
-	protected @ResponseBody String checkRef(@RequestParam(value = "reference") int reference) {
-
-		String message = "";
-
-		if (!serviceLivre.existByReference(reference)) {
-			message = "exists";
-		}
-		return message;
 	}
 
 }

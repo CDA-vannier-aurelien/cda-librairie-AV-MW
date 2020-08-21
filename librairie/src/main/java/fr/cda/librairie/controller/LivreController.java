@@ -7,8 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
+import fr.cda.librairie.dto.AuteurDto;
+import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.service.IAuteurService;
 import fr.cda.librairie.service.IEditeurService;
@@ -44,6 +49,48 @@ public class LivreController {
 
 		model.setViewName("product");
 		return model;
+	}
+
+	@RequestMapping(value = { "/checkRef" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkRef(@RequestParam(value = "reference") int reference) {
+
+		String message = "";
+
+		if (!serviceLivre.existByReference(reference)) {
+			message = "exists";
+		}
+		return message;
+	}
+
+	@RequestMapping(value = { "/checkAuteur" }, method = RequestMethod.POST)
+	protected @ResponseBody String[] checkAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
+
+		List<AuteurDto> listAuteur = this.serviceAuteur.getAll(nomUsage);
+
+		String[] tabNom = new String[listAuteur.size()];
+
+		for (int i = 0; i < listAuteur.size(); i++) {
+			tabNom[i] = listAuteur.get(i).getNomUsage();
+		}
+
+		return tabNom;
+	}
+
+	@RequestMapping(value = { "/checkEditeur" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkEditeur(@RequestParam(value = "nom") String nomEditeur) {
+
+		List<EditeurDto> listEditeur = this.serviceEditeur.getAll(nomEditeur);
+
+		String[] tabNom = new String[listEditeur.size()];
+
+		for (int i = 0; i < listEditeur.size(); i++) {
+			tabNom[i] = listEditeur.get(i).getNom();
+		}
+		String json = new Gson().toJson(tabNom);
+		System.out.println(json);
+
+		return json;
+
 	}
 
 }

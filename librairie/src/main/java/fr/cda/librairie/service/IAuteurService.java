@@ -14,7 +14,7 @@ public interface IAuteurService {
 
 	public AuteurDto getAuteurByNom(String nom);
 
-	public List<AuteurDto> getAll();
+	public List<AuteurDto> getAll(String nom);
 
 	public int getMaxId();
 

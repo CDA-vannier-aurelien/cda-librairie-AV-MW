@@ -94,8 +94,8 @@ public class AuteurServiceImpl implements IAuteurService {
 	}
 
 	@Override
-	public List<AuteurDto> getAll() {
-		List<Auteur> list = auteurDao.findAll();
+	public List<AuteurDto> getAll(String nom) {
+		List<Auteur> list = auteurDao.findByNomUsageContaining(nom);
 		List<AuteurDto> listAuteur = new ArrayList<>();
 
 		for (Auteur auteur : list) {

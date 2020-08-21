@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html style="background: white;">
 
@@ -71,7 +71,7 @@
 						<th>Prenom</th>
 						<th>Adresse mail</th>
 						<th>Role</th>
-						<th>Activ�</th>
+						<th>Activé</th>
 					</tr>
 				</thead>
 
@@ -96,9 +96,9 @@
 
 				<thead>
 					<tr>
-						<th>R�f�rences</th>
+						<th>Référence</th>
 						<th>Titre</th>
-						<th>Quantit�e</th>
+						<th>Quantitée</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
@@ -204,9 +204,42 @@
 				</div>
 			</div>
 		</div>
+		<div class="row mb-1">
+		<div class="col-6">
+		Tableau commande
+		</div>
+		<div class="col-6">
+		Ajout Livre
+		</div>
+		</div>
 		<div class="row">
 			<table class="table table-striped table-class col-6" id="table-id">
-			<div class="col-6"></div>
+			<thead>
+					<tr>
+						<th>Rï¿½fï¿½rences</th>
+						<th>Titre</th>
+						<th>Quantitï¿½e</th>
+						<th>Outils</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="livre" items="${listeLivre}">
+						<tr>
+							<td>${livre.reference}</td>
+							<td>${livre.titre}</td>
+							<td>${livre.quantitee}</td>
+							<td>
+								<button class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+								<button class="btn btn-warning">
+									<i class="fa fa-edit"> </i>
+								</button>
+							</td>
+					</c:forEach>
+				<tbody>
+			</table>
+			
 			<div class="col-6">
 				<form method="post" action="addUser.do" class="was-validated">
 					<div class="modal-body">
@@ -225,14 +258,7 @@
 										class="form-control form-control-sm validate"
 										placeholder="titre" name="nomRue" required>
 
-				<thead>
-					<tr>
-						<th>R�f�rences</th>
-						<th>Titre</th>
-						<th>Quantit�e</th>
-						<th>Outils</th>
-					</tr>
-				</thead>
+				
 								</div>
 
 							</div>
@@ -241,23 +267,7 @@
 									<i class="fa fa-home"></i> <input type="number" id="quantitee"
 										class="form-control form-control-sm validate"
 										placeholder="quantitee" name="quantitee" min="0" required>
-				<tbody>
-					<c:forEach var="livre" items="${listeLivre}">
-						<tr>
-							<td>${livre.reference}</td>
-							<td>${livre.titre}</td>
-							<td>${livre.quantitee}</td>
-							<td>
-								<button class="btn btn-danger">
-									<i class="fa fa-trash"></i>
-								</button>
-								<button class="btn btn-warning">
-									<i class="fa fa-edit"> </i>
-								</button>
-							</td>
-					</c:forEach>
-				<tbody>
-			</table>
+				
 
 								</div>
 								<div class="col-4 md-form form-sm mb-2">
@@ -286,11 +296,11 @@
 								<i class="fa fa-lock prefix"></i> <input type="text"
 									list="listEditeur" id="editeur"
 									class="form-control form-control-sm validate"
-									placeholder="editeur" name="editeur" required>
+									placeholder="editeur" name="editeur" onchange="testEditeur()" required>
+									<span
+										class="error text-danger" id="resultEditeur"></span>
 								<datalist id="listEditeur">
-									<c:forEach items="${listeEditeur }" var="editeur">
-										<option>${editeur.nom }</option>
-									</c:forEach>
+									
 
 
 								</datalist>
@@ -299,12 +309,12 @@
 								<i class="fa fa-envelope prefix"></i> <input type="text"
 									list="listAuteur" id="auteur"
 									class="form-control form-control-sm validate" name="auteur"
-									placeholder="auteur" required>
+									placeholder="auteur" onchange="testAuteur()" required>
+									<span
+										class="error text-danger" id="resultAuteur"></span>
 							</div>
 							<datalist id="listAuteur">
-								<c:forEach items="${listeAuteur }" var="auteur">
-									<option>${auteur.nomUsage }</option>
-								</c:forEach>
+
 							</datalist>
 
 							<div class="text-center form-sm mt-2 mb-4">
@@ -326,7 +336,7 @@
 	<footer class="footer text-faded text-center py-5"
 		style="background-color: rgb(238, 244, 247); position: relative;">
 		<div class="container">
-			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;�&nbsp;Brand
+			<p class="m-0 small" style="color: rgb(102, 109, 112);">Copyright&nbsp;ï¿½&nbsp;Brand
 				2020</p>
 		</div>
 	</footer>

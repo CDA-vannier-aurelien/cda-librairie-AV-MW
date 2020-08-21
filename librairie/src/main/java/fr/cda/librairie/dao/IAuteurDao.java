@@ -27,6 +27,6 @@ public interface IAuteurDao extends CrudRepository<Auteur, Integer> {
 
 	public boolean existsByNomUsage(String nomUsage);
 
-	public List<Auteur> findAll();
+	public List<Auteur> findByNomUsageContaining(String Auteur);
 
 }

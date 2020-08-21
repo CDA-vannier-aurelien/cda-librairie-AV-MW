@@ -35,6 +35,55 @@ function testReference(){
         
     })}
 
+function testAuteur(){
+    var auteur = $('#auteur').val();
+    $.ajax({
+        data:{nomUsage:auteur},
+        type:'post',
+        url:'checkAuteur',
+        success:function (result) {
+            console.log("coucou");
+            if(result==="exists"){
+            	$('#resultAuteur').html("référence non valide");
+            	$('#valider').attr("disabled", true);
+            	$('#resultAuteur').attr("class","text-danger error");
+            }else{
+            	$('#valider').attr("disabled", false);
+            	$('#resultAuteur').html("référence valide");
+            	$('#resultAuteur').attr("class","text-success");
+            	
+            }
+        }
+        
+    })}
+
+function testEditeur(){
+    var editeur = $('#editeur').val();
+    if(editeur.length>2){
+    	
+    
+    $.ajax({
+        data:{nom:editeur},
+        type:'post',
+        url:'checkEditeur',
+        success:function (result) {
+        	console.log(JSON.stringify(result))
+        	
+            
+//            if(result==="exists"){
+//            	$('#resultEditeur').html("référence non valide");
+//            	$('#valider').attr("disabled", true);
+//            	$('#resultEditeur').attr("class","text-danger error");
+//            }else{
+//            	$('#valider').attr("disabled", false);
+//            	
+//            	$('#resultEditeur').attr("class","text-success");
+//            	
+//            }
+        }
+        
+    })}}
+
 
 
 $(function () {

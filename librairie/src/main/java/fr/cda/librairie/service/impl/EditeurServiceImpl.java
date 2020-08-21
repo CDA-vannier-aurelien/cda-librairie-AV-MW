@@ -80,8 +80,8 @@ public class EditeurServiceImpl implements IEditeurService {
 	}
 
 	@Override
-	public List<EditeurDto> getAll() {
-		List<Editeur> list = editeurDao.findAll();
+	public List<EditeurDto> getAll(String nom) {
+		List<Editeur> list = editeurDao.findByNomContaining(nom);
 		List<EditeurDto> listEditeur = new ArrayList<>();
 
 		for (Editeur editeur : list) {

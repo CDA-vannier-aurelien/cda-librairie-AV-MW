@@ -28,4 +28,6 @@ public interface IEditeurDao extends CrudRepository<Editeur, Integer> {
 
 	public List<Editeur> findAll();
 
+	public List<Editeur> findByNomContaining(String nom);
+
 }
