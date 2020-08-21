@@ -2,6 +2,7 @@ package fr.cda.librairie.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -61,5 +62,14 @@ public class CommandeController {
 	      return model;
 	    }
 	 
-	
+	@RequestMapping(value = "commander", method = RequestMethod.POST)
+	public ModelAndView validerCommande(HttpSession httpSession){
+	 	HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
+		for (Map.Entry<LivreDto, Integer> livreDtoIntegerEntry : maCmd.entrySet()) {
+			Map.Entry pair = (Map.Entry) livreDtoIntegerEntry;
+			System.out.println(pair.getKey() + " = " + pair.getValue());
+		}
+
+	 	return null;
+	}
 }
