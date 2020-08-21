@@ -74,7 +74,7 @@ public class User {
     @Column(name = "date_naissance")
     private Date dateNaissance;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Commande> commandes = new ArrayList<>();
 
     @ManyToOne
