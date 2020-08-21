@@ -49,5 +49,14 @@ var listePrix = document.getElementsByName("totalLigne");
 	
 	retour = document.getElementById("totalCommande");
 	retour.innerText = prixTotalCommande;
+
+	}
+
+
+function supprimerLigne(corbeilleId){
+	
+	var corbeille = document.getElementById("corbeille" + corbeilleId);
+	
+	corbeille.submit();
 }
 

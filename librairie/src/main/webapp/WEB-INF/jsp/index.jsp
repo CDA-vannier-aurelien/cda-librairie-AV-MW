@@ -116,13 +116,9 @@
                         <div class="back-imagia">
                             <div class="content-imagia content-back-imagia">
                                 <div>
-                                    <h3 class="text-center">Lorem Ipsum</h3>
-                                    <p class="text-center">Et hanc quidem praeter oppida multa
-                                        duae civitates exornant Seleucia opus Seleuci regis, et
-                                        Claudiopolis quam deduxit coloniam Claudius Caesar. Isaura
-                                        enim antehac nimium potens, olim subversa ut rebellatrix
-                                        interneciva aegre vestigia claritudinis pristinae monstrat
-                                        admodum pauca.</p>
+                                    <h3 class="text-center">Informations</h3>
+                                    <p class="text-center">Coin coin, coin coin coin.
+                                    Coin coin coin, coin coin COIIIIIIIIINNNNNNNNN!!!!</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">
@@ -159,13 +155,10 @@
                         <div class="back-imagia">
                             <div class="content-imagia content-back-imagia">
                                 <div>
-                                    <h3 class="text-center">Lorem Ipsum</h3>
-                                    <p class="text-center">Et hanc quidem praeter oppida multa
-                                        duae civitates exornant Seleucia opus Seleuci regis, et
-                                        Claudiopolis quam deduxit coloniam Claudius Caesar. Isaura
-                                        enim antehac nimium potens, olim subversa ut rebellatrix
-                                        interneciva aegre vestigia claritudinis pristinae monstrat
-                                        admodum pauca.</p>
+                                    <h3 class="text-center">Informations</h3>
+                                    <p class="text-center">Ancien ostéo qui après avoir voulu
+									      casser les dos a préféré casser du code pour éviter
+									       d'autres soucis avec les familles des patients.</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">
@@ -204,13 +197,9 @@
                         <div class="back-imagia">
                             <div class="content-imagia content-back-imagia">
                                 <div>
-                                    <h3 class="text-center">Lorem Ipsum</h3>
-                                    <p class="text-center">Et hanc quidem praeter oppida multa
-                                        duae civitates exornant Seleucia opus Seleuci regis, et
-                                        Claudiopolis quam deduxit coloniam Claudius Caesar. Isaura
-                                        enim antehac nimium potens, olim subversa ut rebellatrix
-                                        interneciva aegre vestigia claritudinis pristinae monstrat
-                                        admodum pauca.</p>
+                                    <h3 class="text-center">Informations</h3>
+                                    <p class="text-center">Des petits pains à la coke, vous trouverez tout
+                                    ce dont vous avez besoin avec El Presidente!</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">
