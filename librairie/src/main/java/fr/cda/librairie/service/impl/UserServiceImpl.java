@@ -1,27 +1,17 @@
 package fr.cda.librairie.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import fr.cda.librairie.dao.*;
 import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.dao.IPaysDao;
-import fr.cda.librairie.dao.IRoleDao;
-import fr.cda.librairie.dao.IRueDao;
-import fr.cda.librairie.dao.IUserDao;
-import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.entity.Pays;
-import fr.cda.librairie.entity.Role;
-import fr.cda.librairie.entity.User;
-import fr.cda.librairie.entity.Ville;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
@@ -42,7 +32,9 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	IVilleDao iVilleDao;
 
-	
+	@Autowired
+	ILivreDao iLivreDao;
+
 	@Autowired
 	IPaysDao iPaysDao;
 
@@ -106,7 +98,7 @@ public class UserServiceImpl implements IUserService {
 				log.warn("Erreur Compte inactif");
 
 			} else {
-				pUser = UtilisateurDto.builder().nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
+				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
 						.labelRole(optionalUser.get().getRole().getRole()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
@@ -155,6 +147,19 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd) {
 		Optional<User> optionalUser = iUserDao.getUserByMail(user.getMail());
+		User utilisateur = optionalUser.get();
+		optionalUser.get().setEstActive(true);
+		Commande commande = new Commande();
+		for(Map.Entry<LivreDto, Integer> entry : maCmd.entrySet()) {
+			CommandeLine cmdLine = new CommandeLine();
+			cmdLine.setLivre(iLivreDao.findById(entry.getKey().getReference()).get());
+			cmdLine.setQuantiteCommandee(entry.getValue());
+			cmdLine.setCommande(commande);
+			commande.getCommandeLine().add(cmdLine);
+		}
+
+		utilisateur.getCommandes().add(commande);
+		iUserDao.save(utilisateur);
 	}
 
 }

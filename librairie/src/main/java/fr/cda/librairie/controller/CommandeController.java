@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +32,12 @@ public class CommandeController {
 	@Autowired
 	private ILivreService iLivreService;
 
+	@Autowired
+	private IUserService iUserService;
+
 	private HashMap<LivreDto, Integer> listeLivre = new HashMap<>();
 
-	@RequestMapping(value = "ajouter", method = RequestMethod.GET)
+	@RequestMapping(value = "ajouter", method = RequestMethod.POST)
 	public ModelAndView ajoutCommande(@RequestParam(value = "reference") int reference, HttpSession session,
 			@RequestParam(value = "quantiteCommandee") int vQuantite) {
 
@@ -66,10 +71,8 @@ public class CommandeController {
 	@RequestMapping(value = "commander", method = RequestMethod.POST)
 	public ModelAndView validerCommande(HttpSession httpSession) {
 		HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
-		for (Map.Entry<LivreDto, Integer> livreDtoIntegerEntry : maCmd.entrySet()) {
-			Map.Entry pair = (Map.Entry) livreDtoIntegerEntry;
-			System.out.println(pair.getKey() + " = " + pair.getValue());
-		}
+		UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+		iUserService.passerCommande(utilisateurDto, maCmd);
 
 		return null;
 	}
