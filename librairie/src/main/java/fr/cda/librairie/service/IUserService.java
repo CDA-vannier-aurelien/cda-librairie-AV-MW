@@ -7,7 +7,6 @@ import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
 import fr.cda.librairie.exception.RoleException;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,13 +16,12 @@ public interface IUserService {
 
     UtilisateurDto conection(UtilisateurDto pUser);
 
-	UtilisateurDto checkMail(UtilisateurDto user);
+    UtilisateurDto checkMail(UtilisateurDto user);
 
-	List<UtilisateurDto> getAll(int pageEnCours);
+    List<UtilisateurDto> getAll(int pageEnCours);
 
-	UtilisateurDto commander(UtilisateurDto pUser, HashMap<LivreDto, Integer> commande);
+    long count();
 
-	long count();
-    
-   
+
+    void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
 }

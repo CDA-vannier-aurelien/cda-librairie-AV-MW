@@ -69,12 +69,6 @@ public class UserServiceImpl implements IUserService {
 		if (!optionalVille.isPresent()) {
 			throw new NomVilleIncorrect();
 		}
-//		String nomRue = pUser.getNomRue();
-//		Optional<Rue> optionalRue = iRueDao.findByNom(nomRue);
-//		if (!optionalRue.isPresent()) {
-//			throw new NomRueException();
-//		}
-
 		Optional<Role> optionalRole = iRoleDao.findByRole("Client");
 		if (!optionalRole.isPresent()) {
 			throw new RoleException();
@@ -83,7 +77,6 @@ public class UserServiceImpl implements IUserService {
 		user.setNom(pUser.getNom());
 		user.setPrenom(pUser.getPrenom());
 		user.setDateConnection(pUser.getDateConnection());
-//		user.setDateNaissance(pUser.getDateNaissance());
 		user.setNumeroPorte(pUser.getNumeroPorte());
 		user.setNomRue(pUser.getNomRue());
 		user.setComplementAdresse(pUser.getComplementAdresse());
@@ -150,18 +143,18 @@ public class UserServiceImpl implements IUserService {
 		return liste;
 	}
 
-	@Override
-	public UtilisateurDto commander(UtilisateurDto pUser, HashMap<LivreDto, Integer> commande) {
-		Optional<User> optionalUser = iUserDao.getUserByMail(pUser.getMail());
-		if(optionalUser.isPresent()){
-		}
 
-		return null;
-	}
+
+
 
 	@Override
 	public long count() {
 		return this.iUserDao.count();
+	}
+
+	@Override
+	public void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd) {
+		Optional<User> optionalUser = iUserDao.getUserByMail(user.getMail());
 	}
 
 }

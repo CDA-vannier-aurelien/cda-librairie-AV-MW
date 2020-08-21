@@ -68,11 +68,12 @@
 										</div>
 										<c:if test="${livre.quantitee>0 }">
 											<div class="footer-imagia text-center">
-												<form method="get" action="ajouter">
+												<form method="post" action="ajouter">
 													<div class="container-fluid">
 														<div class="row">
-															<button type="submit" value="${livre.reference }"
-																name="reference" class="col-2">
+															<input type="hidden" value="${livre.reference}"
+																   name="reference" >
+															<button type="submit" class="col-2">
 																<i class="fa fa-shopping-cart"></i>
 															</button>
 															<span class="col-4" >Quantité</span>
