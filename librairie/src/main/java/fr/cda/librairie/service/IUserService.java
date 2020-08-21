@@ -23,13 +23,9 @@ public interface IUserService {
 
     long count();
 
-	long count();
-
 	UtilisateurDto update(UtilisateurDto user) throws NomVilleIncorrect, NomRueException;
 
-
-    
-   
-
     void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
+
+	UtilisateurDto getByMail(UtilisateurDto pUser);
 }

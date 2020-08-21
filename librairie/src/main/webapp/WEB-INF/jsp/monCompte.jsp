@@ -82,8 +82,7 @@
 							<td>${livre.nombreArticles}</td>
 							<td>${livre.dateCommande}</td>
 							<td>${livre.etatCommande}</td>
-							<td>${livre.prixTotal}</td>
-							
+							<td>${livre.prixTotal}</td>					
 							<td>
 								<button class="btn btn-danger">
 									<i class="fa fa-trash"></i>

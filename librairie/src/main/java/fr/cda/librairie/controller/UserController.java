@@ -89,17 +89,17 @@ public class UserController {
     }
     
     @RequestMapping(value = "monCompte", method = RequestMethod.GET)
-    public ModelAndView afficher(@RequestParam(value = "login") String login,
-            @RequestParam(value = "password") String password,
-            HttpSession httpSession)  {
+    public ModelAndView afficher(  HttpSession httpSession)  {
     	
     	ModelAndView model = new ModelAndView();
-        UtilisateurDto utilisateurDto = UtilisateurDto.builder()
-                .password(password)
-                .mail(login).build();
-        utilisateurDto = iUserService.conection(utilisateurDto);
+    	 model.setViewName("monCompte");
+    	 
+    	   
+        UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+        		
+        utilisateurDto = iUserService.getByMail(utilisateurDto);
         
-        model.setViewName("monCompte");
+        model.addObject("user",utilisateurDto);
         
         return model;
     }

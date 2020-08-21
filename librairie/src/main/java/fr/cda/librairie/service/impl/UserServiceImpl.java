@@ -1,17 +1,27 @@
 package fr.cda.librairie.service.impl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import fr.cda.librairie.dao.*;
-import fr.cda.librairie.dto.LivreDto;
-import fr.cda.librairie.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import fr.cda.librairie.dao.ILivreDao;
+import fr.cda.librairie.dao.IPaysDao;
+import fr.cda.librairie.dao.IRoleDao;
+import fr.cda.librairie.dao.IRueDao;
+import fr.cda.librairie.dao.IUserDao;
+import fr.cda.librairie.dao.IVilleDao;
+import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.entity.Commande;
+import fr.cda.librairie.entity.CommandeLine;
 import fr.cda.librairie.entity.Pays;
 import fr.cda.librairie.entity.Role;
 import fr.cda.librairie.entity.Rue;
@@ -25,8 +35,6 @@ import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.BCrypt;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Service
@@ -198,6 +206,16 @@ public class UserServiceImpl implements IUserService {
 		
 		return pUser;
 	
+	}
+
+	@Override
+	public UtilisateurDto getByMail(UtilisateurDto pUserDto) {
+		Optional<User> vUserEntity = iUserDao.getUserByMail(pUserDto.getMail());
+		
+		pUserDto = this.modelMapper.map(vUserEntity.get(),UtilisateurDto.class);
+		
+		
+		return pUserDto;
 	}
 
 
