@@ -87,5 +87,52 @@ public class UserController {
         }
         return model;
     }
+    
+    @RequestMapping(value = "monCompte", method = RequestMethod.GET)
+    public ModelAndView afficher(@RequestParam(value = "login") String login,
+            @RequestParam(value = "password") String password,
+            HttpSession httpSession)  {
+    	
+    	ModelAndView model = new ModelAndView();
+        UtilisateurDto utilisateurDto = UtilisateurDto.builder()
+                .password(password)
+                .mail(login).build();
+        utilisateurDto = iUserService.conection(utilisateurDto);
+        
+        model.setViewName("monCompte");
+        
+        return model;
+    }
+    
+    @RequestMapping(value = "updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(@RequestParam("dateNaissance")
+    @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                                  @RequestParam(value = "nom") String nom,
+                                  @RequestParam(value = "prenom") String prenom,
+                                  @RequestParam(value = "numeroPorte") int numPorte,
+                                  @RequestParam(value = "complementAdresse") String complement,
+                                  @RequestParam(value = "nomRue") String rue,
+                                  @RequestParam(value = "mail") String mail,
+                                  @RequestParam(value = "ville") String ville,
+                                  @RequestParam(value = "codePostal") String codePostal) throws NomRueException, NomPaysException {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("monCompte");
+
+        UtilisateurDto user = UtilisateurDto.builder().nom(nom)
+                .prenom(prenom)
+                .nomRue(rue)
+                .numeroPorte(numPorte)
+                .complementAdresse(complement)
+                .mail(mail)
+                .codePostal(codePostal).build();
+        log.debug("modificatin de nom: {} et prenom: {}", nom, prenom);
+
+        try {
+            iUserService.update(user);
+        } catch (NomVilleIncorrect nomVilleIncorrect) {
+            nomVilleIncorrect.printStackTrace();
+        } 
+        return model;
+    }
 
 }

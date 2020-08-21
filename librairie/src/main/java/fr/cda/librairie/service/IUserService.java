@@ -2,6 +2,7 @@ package fr.cda.librairie.service;
 
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.entity.User;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
@@ -22,6 +23,13 @@ public interface IUserService {
 
     long count();
 
+	long count();
+
+	UtilisateurDto update(UtilisateurDto user) throws NomVilleIncorrect, NomRueException;
+
+
+    
+   
 
     void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
 }

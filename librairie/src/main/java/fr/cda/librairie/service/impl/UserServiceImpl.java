@@ -12,6 +12,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.entity.Pays;
+import fr.cda.librairie.entity.Role;
+import fr.cda.librairie.entity.Rue;
+import fr.cda.librairie.entity.User;
+import fr.cda.librairie.entity.Ville;
 import fr.cda.librairie.exception.NomPaysException;
 import fr.cda.librairie.exception.NomRueException;
 import fr.cda.librairie.exception.NomVilleIncorrect;
@@ -161,5 +166,39 @@ public class UserServiceImpl implements IUserService {
 		utilisateur.getCommandes().add(commande);
 		iUserDao.save(utilisateur);
 	}
+
+	@Override
+	public UtilisateurDto update(UtilisateurDto pUser) throws NomVilleIncorrect, NomRueException {
+		User user = new User();
+
+		String nomVille = pUser.getVille();
+		Optional<Ville> optionalVille = iVilleDao.findByNom(nomVille);
+		if (!optionalVille.isPresent()) {
+			throw new NomVilleIncorrect();
+		}
+		String nomRue = pUser.getNomRue();
+		Optional<Rue> optionalRue = iRueDao.findByNom(nomRue);
+		if (!optionalRue.isPresent()) {
+			throw new NomRueException();
+		}
+
+	
+		
+		user.setNom(pUser.getNom());
+		user.setPrenom(pUser.getPrenom());
+		user.setDateConnection(pUser.getDateConnection());
+		user.setNumeroPorte(pUser.getNumeroPorte());
+		user.setNomRue(pUser.getNomRue());
+		user.setComplementAdresse(pUser.getComplementAdresse());
+		user.setVille(optionalVille.get());
+		user.setMail(pUser.getMail());
+		user.setDateNaissance(pUser.getDateNaissance());
+		user.setPassword(BCrypt.hashpw(pUser.getPassword(), BCrypt.gensalt(12)));
+		iUserDao.save(user);
+		
+		return pUser;
+	
+	}
+
 
 }
