@@ -1,15 +1,18 @@
 package fr.cda.librairie.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dao.IAuteurDao;
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.entity.Auteur;
-import fr.cda.librairie.service.IAuteurService;
 import fr.cda.librairie.exception.AuteurPresentException;
+import fr.cda.librairie.service.IAuteurService;
 
 @Service
 public class AuteurServiceImpl implements IAuteurService {
@@ -17,18 +20,21 @@ public class AuteurServiceImpl implements IAuteurService {
 	@Autowired
 	IAuteurDao auteurDao;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	@Override
 	public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException {
 		Auteur aut = new Auteur();
 		aut.setNom(auteur.getNom());
 		aut.setPrenom(auteur.getPrenom());
-		aut.setNomUsage(auteur.getNomUsuel());
+		aut.setNomUsage(auteur.getNomUsage());
 
 		if (!auteurDao.existsByNomUsage(aut.getNomUsage())) {
 			aut = auteurDao.save(aut);
 			auteur.setId(aut.getId());
 			auteur.setNom(aut.getNom());
-			auteur.setNomUsuel(aut.getNomUsage());
+			auteur.setNomUsage(aut.getNomUsage());
 			auteur.setPrenom(aut.getPrenom());
 			return auteur;
 		} else {
@@ -52,7 +58,7 @@ public class AuteurServiceImpl implements IAuteurService {
 			Auteur aut = resOp.get();
 			auteur.setNom(aut.getNom());
 			auteur.setPrenom(aut.getPrenom());
-			auteur.setNomUsuel(aut.getNomUsage());
+			auteur.setNomUsage(aut.getNomUsage());
 			auteur.setId(aut.getId());
 
 		}
@@ -69,7 +75,7 @@ public class AuteurServiceImpl implements IAuteurService {
 			Auteur aut = resOp.get();
 			auteur.setNom(aut.getNom());
 			auteur.setPrenom(aut.getPrenom());
-			auteur.setNomUsuel(aut.getNomUsage());
+			auteur.setNomUsage(aut.getNomUsage());
 			auteur.setId(aut.getId());
 
 		}
@@ -85,6 +91,19 @@ public class AuteurServiceImpl implements IAuteurService {
 	@Override
 	public boolean existByName(String nom) {
 		return auteurDao.existsByNomUsage(nom);
+	}
+
+	@Override
+	public List<AuteurDto> getAll(String nom) {
+		List<Auteur> list = auteurDao.findByNomUsageContaining(nom);
+		List<AuteurDto> listAuteur = new ArrayList<>();
+
+		for (Auteur auteur : list) {
+			AuteurDto auteurDto = modelMapper.map(auteur, AuteurDto.class);
+			listAuteur.add(auteurDto);
+		}
+
+		return listAuteur;
 	}
 
 }

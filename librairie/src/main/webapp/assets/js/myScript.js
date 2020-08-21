@@ -13,6 +13,79 @@ function testEmail(){
     });
 }
 
+function testReference(){
+    var reference = $('#reference').val();
+    $.ajax({
+        data:{reference:reference},
+        type:'Post',
+        url:'checkRef',
+        success:function (result) {
+            
+            if(result==="exists"){
+            	$('#result').html("référence non valide");
+            	$('#valider').attr("disabled", true);
+            	$('#result').attr("class","text-danger error");
+            }else{
+            	$('#valider').attr("disabled", false);
+            	$('#result').html("référence valide");
+            	$('#result').attr("class","text-success");
+            	
+            }
+        }
+        
+    })}
+
+function testAuteur(){
+    var auteur = $('#auteur').val();
+    $.ajax({
+        data:{nomUsage:auteur},
+        type:'post',
+        url:'checkAuteur',
+        success:function (result) {
+            console.log("coucou");
+            if(result==="exists"){
+            	$('#resultAuteur').html("référence non valide");
+            	$('#valider').attr("disabled", true);
+            	$('#resultAuteur').attr("class","text-danger error");
+            }else{
+            	$('#valider').attr("disabled", false);
+            	$('#resultAuteur').html("référence valide");
+            	$('#resultAuteur').attr("class","text-success");
+            	
+            }
+        }
+        
+    })}
+
+function testEditeur(){
+    var editeur = $('#editeur').val();
+    if(editeur.length>2){
+    	
+    
+    $.ajax({
+        data:{nom:editeur},
+        type:'post',
+        url:'checkEditeur',
+        success:function (result) {
+        	console.log(JSON.stringify(result))
+        	
+            
+//            if(result==="exists"){
+//            	$('#resultEditeur').html("référence non valide");
+//            	$('#valider').attr("disabled", true);
+//            	$('#resultEditeur').attr("class","text-danger error");
+//            }else{
+//            	$('#valider').attr("disabled", false);
+//            	
+//            	$('#resultEditeur').attr("class","text-success");
+//            	
+//            }
+        }
+        
+    })}}
+
+
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })

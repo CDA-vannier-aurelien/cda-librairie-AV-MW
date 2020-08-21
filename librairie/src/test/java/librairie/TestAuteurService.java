@@ -33,12 +33,12 @@ public class TestAuteurService {
 		AuteurDto auteur = new AuteurDto();
 		auteur.setNom(Constantes.STRING_TEST);
 		auteur.setPrenom(Constantes.STRING_TEST);
-		auteur.setNomUsuel(Constantes.STRING_TEST);
+		auteur.setNomUsage(Constantes.STRING_TEST);
 		auteur = auteurService.addAuteur(auteur);
 		assertNotNull(auteur);
 		assertEquals(Constantes.STRING_TEST, auteur.getNom());
 		assertEquals(Constantes.STRING_TEST, auteur.getPrenom());
-		assertEquals(Constantes.STRING_TEST, auteur.getNomUsuel());
+		assertEquals(Constantes.STRING_TEST, auteur.getNomUsage());
 		assertEquals(auteurService.getMaxId(), auteur.getId());
 
 	}
@@ -51,7 +51,7 @@ public class TestAuteurService {
 		assertNotNull(auteur);
 		assertEquals(Constantes.STRING_TEST, auteur.getNom());
 		assertEquals(Constantes.STRING_TEST, auteur.getPrenom());
-		assertEquals(Constantes.STRING_TEST, auteur.getNomUsuel());
+		assertEquals(Constantes.STRING_TEST, auteur.getNomUsage());
 		assertEquals(auteurService.getMaxId(), auteur.getId());
 
 	}
@@ -63,7 +63,7 @@ public class TestAuteurService {
 		assertNotNull(auteur);
 		assertEquals(Constantes.STRING_TEST, auteur.getNom());
 		assertEquals(Constantes.STRING_TEST, auteur.getPrenom());
-		assertEquals(Constantes.STRING_TEST, auteur.getNomUsuel());
+		assertEquals(Constantes.STRING_TEST, auteur.getNomUsage());
 		assertEquals(auteurService.getMaxId(), auteur.getId());
 
 	}

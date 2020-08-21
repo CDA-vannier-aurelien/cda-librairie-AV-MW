@@ -1,7 +1,10 @@
 package fr.cda.librairie.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +12,15 @@ import fr.cda.librairie.dao.IEditeurDao;
 import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.entity.Editeur;
 import fr.cda.librairie.service.IEditeurService;
-import org.springframework.stereotype.Service;
 
 @Service
 public class EditeurServiceImpl implements IEditeurService {
 
 	@Autowired
 	IEditeurDao editeurDao;
+
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public EditeurDto addEditeur(EditeurDto editeur) {
@@ -72,6 +77,19 @@ public class EditeurServiceImpl implements IEditeurService {
 	@Override
 	public boolean existByName(String nom) {
 		return editeurDao.existsByNom(nom);
+	}
+
+	@Override
+	public List<EditeurDto> getAll(String nom) {
+		List<Editeur> list = editeurDao.findByNomContaining(nom);
+		List<EditeurDto> listEditeur = new ArrayList<>();
+
+		for (Editeur editeur : list) {
+			EditeurDto editeurDto = modelMapper.map(editeur, EditeurDto.class);
+			listEditeur.add(editeurDto);
+		}
+
+		return listEditeur;
 	}
 
 }
