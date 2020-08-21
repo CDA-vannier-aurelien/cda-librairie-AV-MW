@@ -76,7 +76,7 @@
 				</thead>
 
 				<tbody>
-					<%-- <c:forEach var="u" items="${utilisateur}"> --%>
+					<c:forEach var="u" items="${listeUser}">
 						<tr>
 							<td>${u.nom}</td>
 							<td>${u.prenom}</td>
@@ -86,7 +86,7 @@
 							<td><a href="#"> <i class="fa fa-trash"
 									onclick="afficherModaleSuppression(${u.mail})"></i>
 							</a></td>
-					<%-- </c:forEach> --%>
+					</c:forEach>
 				<tbody>
 			</table>
 
@@ -109,15 +109,16 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td><button class="btn btn-danger"> <i class="fa fa-trash"></i>
-							</button>
-								<button class="btn btn-warning"><i class="fa fa-edit">
-									</i>
-							</button></td>
+							<td><button class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+								<button class="btn btn-warning">
+									<i class="fa fa-edit"> </i>
+								</button></td>
 					</c:forEach>
 				<tbody>
 			</table>
-			
+
 		</div>
 
 		<div class="modal fade" id="modaleSuppression" tabindex="-1"
@@ -148,139 +149,150 @@
 			</div>
 		</div>
 		<div class="row">
-		<div class="col-6">
-					<div class="d-flex justify-content-center">
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-						<c:if test="${ pageEnCours > 1 }">
-							<c:url value="/dashboard" var="lienPrecedent">
-								<c:param name="page" value="${ pageEnCours - 1 }" />
-							</c:url>
-							<li class="page-item"><a class="page-link"
-								href="${lienPrecedent }">&lt;</a></li>
-						</c:if>
-						<li class="page-item"><a class="page-link" href="#">${ pageEnCours }</a>
+			<div class="col-6">
+				<div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCours > 1 }">
+								<c:url value="/dashboard" var="lienPrecedent">
+									<c:param name="page" value="${ pageEnCours - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCours }</a>
 
-						</li>
-						<c:if test="${ pageEnCours < (count / nbElementsParPage)  }">
-							<c:url value="/dashboard" var="lienSuivant">
-								<c:param name="page" value="${ pageEnCours + 1 }" />
-							</c:url>
-							<li class="page-item"><a class="page-link"
-								href="${lienSuivant }">&gt;</a></li>
-						</c:if>
-					</ul>
-				</nav>
+							</li>
+							<c:if test="${ pageEnCours < (count / nbElementsParPage)  }">
+								<c:url value="/dashboard" var="lienSuivant">
+									<c:param name="page" value="${ pageEnCours + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
-		<div class="col-6">
-		
-		<div class="d-flex justify-content-center">
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-						<c:if test="${ pageEnCoursLivre > 1 }">
-							<c:url value="/dashboard" var="lienPrecedent">
-								<c:param name="pageLivre" value="${ pageEnCoursLivre - 1 }" />
-							</c:url>
-							<li class="page-item"><a class="page-link"
-								href="${lienPrecedent }">&lt;</a></li>
-						</c:if>
-						<li class="page-item"><a class="page-link" href="#">${ pageEnCoursLivre }</a>
+			<div class="col-6">
 
-						</li>
-						<c:if
-							test="${ pageEnCoursLivre < (countLivre / nbElementsParPageLivre)  }">
-							<c:url value="/dashboard" var="lienSuivant">
-								<c:param name="pageLivre" value="${ pageEnCoursLivre + 1 }" />
-							</c:url>
-							<li class="page-item"><a class="page-link"
-								href="${lienSuivant }">&gt;</a></li>
-						</c:if>
-					</ul>
-				</nav>
+				<div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCoursLivre > 1 }">
+								<c:url value="/dashboard" var="lienPrecedent">
+									<c:param name="pageLivre" value="${ pageEnCoursLivre - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCoursLivre }</a>
+
+							</li>
+							<c:if
+								test="${ pageEnCoursLivre < (countLivre / nbElementsParPageLivre)  }">
+								<c:url value="/dashboard" var="lienSuivant">
+									<c:param name="pageLivre" value="${ pageEnCoursLivre + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
 			</div>
-		</div>
 		</div>
 		<div class="row">
-		<div class="col-6"></div>
-		<div class="col-6">
-	<form method="post" action="addUser.do" class="was-validated">
-								<div class="modal-body">
-									<div class="container-fluid">
-										<div class="row">
-											<div class="col md-form form-sm mb-2">
-												<i class="fa fa-user prefix"></i> <input type="number" onchange="testReference()"
-													id="reference" class="form-control form-control-sm validate"
-													placeholder="reference" name="reference" required>
-													<span class="error text-danger"
-												id="result"></span>
-											</div>
-											<div class="col-9 md-form form-sm mb-2 mt-4">
-
-												<input type="text" id="adresse"
-													class="form-control form-control-sm validate"
-													placeholder="titre" name="nomRue" required>
-
-											</div>
-											
-										</div>
-										<div class="row">
-											<div class="col-4 md-form form-sm mb-2">
-												<i class="fa fa-home"></i> <input type="number" id="quantitee"
-													class="form-control form-control-sm validate"
-													placeholder="quantitee" name="quantitee" min="0" required>
-
-											</div>
-											<div class="col-4 md-form form-sm mb-2">
-												<i class="fa fa-home"></i> <input type="number" id="prix"
-													class="form-control form-control-sm validate"
-													placeholder="prix" name="prix" min="0" required>
-
-											</div>
-											<div class="col-4 md-form form-sm mb-2">
-												<i class="fa fa-home"></i> <input type="number" id="nbPage"
-													class="form-control form-control-sm validate"
-													placeholder="nbPage" name="nbPage" min="0" required>
-
-											</div>
-										</div>
-										<div class="row">
-											
-											
-											<div class="col md-form form-sm mb-2 mt-4">
-												<input type="text" id="pays"
-													class="form-control form-control-sm validate"
-													placeholder="description" name="pays" required>
-											</div>
-										</div>
-										<div class="md-form form-sm mb-2">
-											<i class="fa fa-lock prefix"></i> <input type="text"
-												id="complement"
-												class="form-control form-control-sm validate"
-												placeholder="editeur" name="complementAdresse"
-												required>
-										</div>
-										<div class="md-form form-sm mb-2">
-											<i class="fa fa-envelope prefix"></i> <input type="text"
-												id="auteur" class="form-control form-control-sm validate"
-												name="auteur" placeholder="auteur"
-												required>
-										</div>
-										
-										<div class="text-center form-sm mt-2 mb-4">
-											<button class="btn btn-info" id="valider">
-												Valider <i class="fa fa-sign-in ml-1"></i>
-											</button>
-										</div>
-
-									</div>
-								
+			<div class="col-6"></div>
+			<div class="col-6">
+				<form method="post" action="addUser.do" class="was-validated">
+					<div class="modal-body">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col md-form form-sm mb-2">
+									<i class="fa fa-user prefix"></i> <input type="number"
+										onchange="testReference()" id="reference"
+										class="form-control form-control-sm validate"
+										placeholder="reference" name="reference" required> <span
+										class="error text-danger" id="result"></span>
 								</div>
-							</form>
-		
-		
-		
-		</div>
+								<div class="col-9 md-form form-sm mb-2 mt-4">
+
+									<input type="text" id="adresse"
+										class="form-control form-control-sm validate"
+										placeholder="titre" name="nomRue" required>
+
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="quantitee"
+										class="form-control form-control-sm validate"
+										placeholder="quantitee" name="quantitee" min="0" required>
+
+								</div>
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="prix"
+										class="form-control form-control-sm validate"
+										placeholder="prix" name="prix" min="0" required>
+
+								</div>
+								<div class="col-4 md-form form-sm mb-2">
+									<i class="fa fa-home"></i> <input type="number" id="nbPage"
+										class="form-control form-control-sm validate"
+										placeholder="nbPage" name="nbPage" min="0" required>
+
+								</div>
+							</div>
+							<div class="row">
+
+
+								<div class="col md-form form-sm mb-2 mt-4">
+									<input type="text" id="pays"
+										class="form-control form-control-sm validate"
+										placeholder="description" name="pays" required>
+								</div>
+							</div>
+							<div class="md-form form-sm mb-2">
+								<i class="fa fa-lock prefix"></i> <input type="text"
+									list="listEditeur" id="editeur"
+									class="form-control form-control-sm validate"
+									placeholder="editeur" name="editeur" required>
+								<datalist id="listEditeur">
+									<c:forEach items="${listeEditeur }" var="editeur">
+										<option>${editeur.nom }</option>
+									</c:forEach>
+
+
+								</datalist>
+							</div>
+							<div class="md-form form-sm mb-2">
+								<i class="fa fa-envelope prefix"></i> <input type="text"
+									list="listAuteur" id="auteur"
+									class="form-control form-control-sm validate" name="auteur"
+									placeholder="auteur" required>
+							</div>
+							<datalist id="listAuteur">
+								<c:forEach items="${listeAuteur }" var="auteur">
+									<option>${auteur.nomUsage }</option>
+								</c:forEach>
+							</datalist>
+
+							<div class="text-center form-sm mt-2 mb-4">
+								<button class="btn btn-info" id="valider">
+									Valider <i class="fa fa-sign-in ml-1"></i>
+								</button>
+							</div>
+
+						</div>
+
+					</div>
+				</form>
+
+
+
+			</div>
 		</div>
 	</div>
 	<footer class="footer text-faded text-center py-5"
@@ -292,7 +304,7 @@
 	</footer>
 
 	<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/js/script.min.js"></script>
 	<script src="assets/js/myScript.js"></script>

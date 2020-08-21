@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.cda.librairie.dto.AuteurDto;
+import fr.cda.librairie.dto.EditeurDto;
 import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IAuteurService;
 import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
@@ -35,17 +38,29 @@ public class DashBoardController {
 	IUserService userService;
 
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
-	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCours) {
+	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCoursLivre,
+			@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
 		log.debug("list livre dash");
 
 		ModelAndView model = new ModelAndView();
 
-		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCours);
+		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
+		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours);
+		List<AuteurDto> vListAuteur = this.serviceAuteur.getAll();
+		List<EditeurDto> vListEditeur = this.serviceEditeur.getAll();
+
+		model.addObject("listeAuteur", vListAuteur);
+		model.addObject("listeEditeur", vListEditeur);
+
+		model.addObject("listeUser", vListUser);
+		model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+		model.addObject("count", this.userService.count());
+		model.addObject("pageEnCours", pageEnCours);
 
 		model.addObject("listeLivre", vList);
 		model.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
 		model.addObject("countLivre", this.serviceLivre.count());
-		model.addObject("pageEnCoursLivre", pageEnCours);
+		model.addObject("pageEnCoursLivre", pageEnCoursLivre);
 
 		model.setViewName("dashboard");
 		return model;
