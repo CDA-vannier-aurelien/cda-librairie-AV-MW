@@ -36,30 +36,28 @@ function testReference(){
     })}
 
 function testAuteur(){
-    var auteur = $('#auteur').val();
+	var auteur = $('#auteur').val();
+    if(auteur.length>1){
+    	$('#listAuteur').empty();
+    	
     $.ajax({
         data:{nomUsage:auteur},
         type:'post',
         url:'checkAuteur',
         success:function (result) {
-            console.log("coucou");
-            if(result==="exists"){
-            	$('#resultAuteur').html("référence non valide");
-            	$('#valider').attr("disabled", true);
-            	$('#resultAuteur').attr("class","text-danger error");
-            }else{
-            	$('#valider').attr("disabled", false);
-            	$('#resultAuteur').html("référence valide");
-            	$('#resultAuteur').attr("class","text-success");
-            	
-            }
-        }
+        	console.log(JSON.parse(result))
+        	result = JSON.parse(result);
+        	$.each(result,function(element , nom){
+        		console.log(nom);
+        		 $('#listAuteur').append($("<option>").attr('value', nom).text(nom))
+        	})}
         
-    })}
+    })}}
 
 function testEditeur(){
     var editeur = $('#editeur').val();
-    if(editeur.length>2){
+    if(editeur.length>1){
+    	$('#listEditeur').empty();
     	
     
     $.ajax({
@@ -67,7 +65,12 @@ function testEditeur(){
         type:'post',
         url:'checkEditeur',
         success:function (result) {
-        	console.log(JSON.stringify(result))
+        	console.log(JSON.parse(result))
+        	result = JSON.parse(result);
+        	$.each(result,function(element , nom){
+        		console.log(nom);
+        		 $('#listEditeur').append($("<option>").attr('value', nom).text(nom))
+        	})
         	
             
 //            if(result==="exists"){
