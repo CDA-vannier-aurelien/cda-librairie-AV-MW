@@ -20,11 +20,15 @@ public class Commande {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "numero_commande")
     private int numeroCommande;
+    
+    @Column(name = "est_validee")
+    private boolean estValidee;
 
     @Column(name = "date_commande")
-    private Date date = new Date();
-
-    @OneToMany(cascade = CascadeType.ALL)
-   private List<CommandeLine> listLivre = new ArrayList<>();
+    private Date dateCommande = new Date();
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
+    List<CommandeLine> commandeLine = new ArrayList<>();
+    
 
 }

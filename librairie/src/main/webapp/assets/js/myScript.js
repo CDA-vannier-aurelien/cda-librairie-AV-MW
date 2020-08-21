@@ -1,4 +1,5 @@
 
+
 function testEmail(){
     var email = $('#email').val();
     $.ajax({
@@ -46,3 +47,40 @@ function afficherModaleSuppression(mail){
 	$('#idToDelete').val(mail);
 	$('#modaleSuppression').modal('show');
 }
+
+
+function calculPrixTotal(){
+var listePrix = document.getElementsByName("totalLigne");
+	
+	var prixTotal = 0;
+	
+	listePrix.forEach(elements =>{
+		prixTotal = prixTotal + parseFloat(elements.innerText);
+	})
+	
+	var retour = document.getElementById("sousTotal");
+	retour.innerText = prixTotal;	
+	
+	var frais = parseFloat(document.getElementById("frais").innerText);
+	
+	var taxe = prixTotal*0.2;
+	
+	
+	var taxes = document.getElementById("taxes");
+	taxes.innerText=taxe;
+	
+	var prixTotalCommande = frais +taxe + prixTotal;
+	
+	retour = document.getElementById("totalCommande");
+	retour.innerText = prixTotalCommande;
+
+	}
+
+
+function supprimerLigne(corbeilleId){
+	
+	var corbeille = document.getElementById("corbeille" + corbeilleId);
+	
+	corbeille.submit();
+}
+

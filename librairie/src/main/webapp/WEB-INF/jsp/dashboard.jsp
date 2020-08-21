@@ -35,7 +35,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="nav navbar-nav mx-auto">
 					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="accueil">Home</a></li>
+						href="index">Home</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
 						href="listeLivre">Produits</a></li>
 					<c:if test="${sessionScope.user.labelRole == 'Libraire'}">
@@ -71,7 +71,7 @@
 						<th>Prenom</th>
 						<th>Adresse mail</th>
 						<th>Role</th>
-						<th>Activé</th>
+						<th>Activï¿½</th>
 					</tr>
 				</thead>
 
@@ -96,9 +96,9 @@
 
 				<thead>
 					<tr>
-						<th>Références</th>
+						<th>Rï¿½fï¿½rences</th>
 						<th>Titre</th>
-						<th>Quantitée</th>
+						<th>Quantitï¿½e</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
@@ -109,12 +109,14 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td><button class="btn btn-danger">
+							<td>
+								<button class="btn btn-danger">
 									<i class="fa fa-trash"></i>
 								</button>
 								<button class="btn btn-warning">
 									<i class="fa fa-edit"> </i>
-								</button></td>
+								</button>
+							</td>
 					</c:forEach>
 				<tbody>
 			</table>
@@ -203,6 +205,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<table class="table table-striped table-class col-6" id="table-id">
 			<div class="col-6"></div>
 			<div class="col-6">
 				<form method="post" action="addUser.do" class="was-validated">
@@ -222,6 +225,14 @@
 										class="form-control form-control-sm validate"
 										placeholder="titre" name="nomRue" required>
 
+				<thead>
+					<tr>
+						<th>Rï¿½fï¿½rences</th>
+						<th>Titre</th>
+						<th>Quantitï¿½e</th>
+						<th>Outils</th>
+					</tr>
+				</thead>
 								</div>
 
 							</div>
@@ -230,6 +241,23 @@
 									<i class="fa fa-home"></i> <input type="number" id="quantitee"
 										class="form-control form-control-sm validate"
 										placeholder="quantitee" name="quantitee" min="0" required>
+				<tbody>
+					<c:forEach var="livre" items="${listeLivre}">
+						<tr>
+							<td>${livre.reference}</td>
+							<td>${livre.titre}</td>
+							<td>${livre.quantitee}</td>
+							<td>
+								<button class="btn btn-danger">
+									<i class="fa fa-trash"></i>
+								</button>
+								<button class="btn btn-warning">
+									<i class="fa fa-edit"> </i>
+								</button>
+							</td>
+					</c:forEach>
+				<tbody>
+			</table>
 
 								</div>
 								<div class="col-4 md-form form-sm mb-2">

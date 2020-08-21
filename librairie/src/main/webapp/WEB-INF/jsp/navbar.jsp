@@ -18,7 +18,9 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="nav navbar-nav mx-auto">
 					<li class="nav-item" role="presentation"><a class="nav-link"
-						href="accueil">Home</a></li>
+						href="index">Home</a></li>
+					<li class="nav-item" role="presentation"><a class="nav-link"
+						href="#a_propos">Nos développeurs</a></li>
 					<li class="nav-item" role="presentation"><a class="nav-link"
 						href="listeLivre">Produits</a></li>
 					<c:if test="${sessionScope.user.labelRole == 'Libraire'}">
@@ -36,12 +38,9 @@
 							aria-expanded="false" href="#">${sessionScope.user.nom} </a>
 							<div class="dropdown-menu" role="menu">
 								<a class="dropdown-item" role="presentation" href="#">Mon
-									compte</a>
-							</div>
-							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" role="presentation" href="panier">Mon
-									panier</a><a class="dropdown-item" role="presentation"
-									href="deconnexion">LogOut</a>
+									compte</a><a class="dropdown-item" role="presentation"
+									href="panier">Mon panier</a><a class="dropdown-item"
+									role="presentation" href="deconnexion">LogOut</a>
 							</div></li>
 					</c:if>
 				</ul>
