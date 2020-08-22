@@ -205,16 +205,12 @@
 			</div>
 		</div>
 		<div class="row mb-1">
-		<div class="col-6">
-		Tableau commande
-		</div>
-		<div class="col-6">
-		Ajout Livre
-		</div>
+			<div class="col-6">Tableau commande</div>
+			<div class="col-6">Ajout Livre</div>
 		</div>
 		<div class="row">
 			<table class="table table-striped table-class col-6" id="table-id">
-			<thead>
+				<thead>
 					<tr>
 						<th>Rï¿½fï¿½rences</th>
 						<th>Titre</th>
@@ -239,7 +235,7 @@
 					</c:forEach>
 				<tbody>
 			</table>
-			
+
 			<div class="col-6">
 				<form method="post" action="addLivre" class="was-validated">
 					<div class="modal-body">
@@ -258,7 +254,7 @@
 										class="form-control form-control-sm validate"
 										placeholder="titre" name="titre" required>
 
-				
+
 								</div>
 
 							</div>
@@ -267,7 +263,7 @@
 									<i class="fa fa-home"></i> <input type="number" id="quantitee"
 										class="form-control form-control-sm validate"
 										placeholder="quantitee" name="quantitee" min="0" required>
-				
+
 
 								</div>
 								<div class="col-4 md-form form-sm mb-2">
@@ -296,11 +292,10 @@
 								<i class="fa fa-lock prefix"></i> <input type="text"
 									list="listEditeur" id="editeur"
 									class="form-control form-control-sm validate"
-									placeholder="editeur" name="editeur" onkeydown="testEditeur()" required>
-									<span
-										class="error text-danger" id="resultEditeur"></span>
+									placeholder="editeur" name="editeur"
+									onkeydown="addOptionEditeur()" onchange="addOptionEditeur()" minlength="3" required>
 								<datalist id="listEditeur">
-									
+
 
 
 								</datalist>
@@ -309,9 +304,12 @@
 								<i class="fa fa-envelope prefix"></i> <input type="text"
 									list="listAuteur" id="auteur"
 									class="form-control form-control-sm validate" name="auteur"
-									placeholder="auteur" onkeypress="testAuteur()" required>
-									<span
-										class="error text-danger" id="resultAuteur"></span>
+									placeholder="auteur" minlength="3" onkeydown="addOptionAuteur()" onchange="addOptionAuteur()" required>
+								<span class="error text-danger" id="resultAuteur"></span>
+								
+								
+									<a class="d-none" id="butttonModalAuteur" data-toggle="modal"
+									data-target="#modalLRForm"> Auteur/Editeur non présent cliquez ici pour l'ajouter</a>
 							</div>
 							<datalist id="listAuteur">
 
@@ -330,6 +328,123 @@
 
 
 
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog cascading-modal" role="document">
+			<!--Content-->
+			<div class="modal-content">
+
+				<!--Modal cascading tabs-->
+				<div class="modal-c-tabs">
+
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3"
+						role="tablist">
+						<li class="nav-item"><a class="nav-link active"
+							data-toggle="tab" href="#panel7" role="tab"><i
+								class="fa fa-user-plus"></i>Ajout Editeur</a></li>
+						<li class="nav-item"><a class="nav-link" data-toggle="tab"
+							href="#panel8" role="tab"><i class="fa fa-user-plus"></i>
+								Ajout Auteur</a></li>
+					</ul>
+
+					<!-- Tab panels -->
+					<div class="tab-content">
+						<!--Panel 7-->
+
+						<div class="tab-pane fade in show active" id="panel7"
+							role="tabpanel">
+
+							<!--Body-->
+							<form method="post" action="addEditeur" class="was-validated"
+								novalidate>
+								<div class="modal-body mb-1">
+									<div class="row">
+										<div class="col md-form form-sm mb-2 mt-4">
+											<input type="text" id="nomEditeur"
+												class="form-control form-control-sm validate"
+												placeholder="Nom" name="nomEditeur" required
+												onchange="testEditeur()"> <span
+												id="resultTestEditeur"
+												></span>
+										</div>
+									</div>
+									<div class="text-center mt-2">
+										<button class="btn btn-info" id="ajoutEditeur">
+											Ajouter<i class="fa fa-sign-in ml-1"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+							<!--Footer-->
+							<div class="modal-footer">
+
+								<button type="button"
+									class="btn btn-outline-info waves-effect ml-auto"
+									data-dismiss="modal">Close</button>
+							</div>
+
+						</div>
+						<!--/.Panel 7-->
+
+						<!--Panel 8-->
+						<div class="tab-pane fade" id="panel8" role="tabpanel">
+
+							<!--Body-->
+							<form method="post" action="addAuteur" class="was-validated">
+								<div class="modal-body">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col md-form form-sm mb-2">
+												<i class="fa fa-user prefix"></i> <input type="text"
+													id="nomAuteur"
+													class="form-control form-control-sm validate"
+													placeholder="Nom" name="nomAuteur">
+
+											</div>
+											<div class="col md-form form-sm mb-2 mt-4">
+												<input type="text" id="prenom"
+													class="form-control form-control-sm validate"
+													placeholder="Prenom" name="prenomAuteur">
+
+											</div>
+										</div>
+										<div class="row">
+											<div class="col md-form form-sm mb-2">
+												<i class="fa fa-home"></i> <input type="text"
+													id="nomUsageAuteur"
+													class="form-control form-control-sm validate"
+													placeholder="Nom d'usage" name="nomUsageAuteur"
+													data-toggle="tooltip"
+													title="Si inconus , veuillez renseigner son nom et prénom"
+													onchange="testAuteur()"
+													required> <span id="resultTestAuteur"></span>
+											</div>
+										</div>
+
+										<div class="text-center form-sm mt-2 mb-4">
+											<button class="btn btn-info" id="ajoutAuteur">
+												Ajouter<i class="fa fa-sign-in ml-1"></i>
+											</button>
+										</div>
+
+									</div>
+									<!--Footer-->
+									<div class="modal-footer">
+										<button type="button"
+											class="btn btn-outline-info waves-effect ml-auto"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!--/.Panel 8-->
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>

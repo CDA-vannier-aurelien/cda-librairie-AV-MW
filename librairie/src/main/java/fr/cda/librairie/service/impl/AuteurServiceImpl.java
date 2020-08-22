@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import fr.cda.librairie.dao.IAuteurDao;
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.entity.Auteur;
-import fr.cda.librairie.exception.AuteurPresentException;
 import fr.cda.librairie.service.IAuteurService;
 
 @Service
@@ -24,22 +23,18 @@ public class AuteurServiceImpl implements IAuteurService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException {
+	public AuteurDto addAuteur(AuteurDto auteur) {
 		Auteur aut = new Auteur();
 		aut.setNom(auteur.getNom());
 		aut.setPrenom(auteur.getPrenom());
 		aut.setNomUsage(auteur.getNomUsage());
 
-		if (!auteurDao.existsByNomUsage(aut.getNomUsage())) {
-			aut = auteurDao.save(aut);
-			auteur.setId(aut.getId());
-			auteur.setNom(aut.getNom());
-			auteur.setNomUsage(aut.getNomUsage());
-			auteur.setPrenom(aut.getPrenom());
-			return auteur;
-		} else {
-			throw new AuteurPresentException();
-		}
+		aut = auteurDao.save(aut);
+		auteur.setId(aut.getId());
+		auteur.setNom(aut.getNom());
+		auteur.setNomUsage(aut.getNomUsage());
+		auteur.setPrenom(aut.getPrenom());
+		return auteur;
 
 	}
 
