@@ -218,8 +218,7 @@
     </div>
 </div>
 <!--/.Content-->
-</div>
-</div>
+
 
 <footer class="footer text-faded text-center py-5"
         style="background-color: rgb(238, 244, 247); position: relative;">

@@ -16,7 +16,6 @@
 	href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
 <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/styles.min.css">
-<link rel="stylesheet" href="assets/css/myCss.css">
 </head>
 
 <body style="background: white;">
@@ -63,6 +62,17 @@
 		</div>
 	</nav>
 	<div class="container-fluid">
+		<div class="row mt-2">
+			<div class="col-6 d-flex justify-content-center mt-2">
+				<h2>Tableau Utilisateur</h2>
+
+			</div>
+			<div class="col-6 d-flex justify-content-center mt-2">
+				<h2>Tableau livre Livre</h2>
+			</div>
+		</div>
+
+
 		<div class="row">
 			<table class="table table-striped table-class col-6" id="table-id">
 				<thead>
@@ -78,14 +88,22 @@
 				<tbody>
 					<c:forEach var="u" items="${listeUser}">
 						<tr>
-							<td>${u.nom}</td>
+							<td ><a href="#">${u.nom}</a> </td>
 							<td>${u.prenom}</td>
 							<td>${u.mail}</td>
 							<td>${u.labelRole}</td>
 							<td>${u.estActive}</td>
-							<td><a href="#"> <i class="fa fa-trash"
+							
+							<td>
+							<a href="#" class="text-success"> <i
+									class="fa fa-check"
 									onclick="afficherModaleSuppression(${u.mail})"></i>
-							</a></td>
+							</a>
+							<a href="#" class="text-danger"> <i
+									class="fa fa-trash"
+									onclick="afficherModaleSuppression(${u.mail})"></i>
+							</a>
+							</td>
 					</c:forEach>
 				<tbody>
 			</table>
@@ -109,18 +127,14 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td>
-								<button class="btn btn-danger">
+							<td><a data-toggle="modal" data-target="#modaleSuppression"
+								class="text-danger" onclick="transfertRef(${livre.reference})">
 									<i class="fa fa-trash"></i>
-								</button>
-								<button class="btn btn-warning">
-									<i class="fa fa-edit"> </i>
-								</button>
-							</td>
+							</a> <a data-toggle="modal" onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })" data-target="#modalModification" class="text-warning"> <i class="fa fa-edit">
+								</i></a></td>
 					</c:forEach>
 				<tbody>
 			</table>
-
 		</div>
 
 		<div class="modal fade" id="modaleSuppression" tabindex="-1"
@@ -128,25 +142,60 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="modaleSuppressionLabel">Modal
-							title</h5>
+						<h5 class="modal-title" id="modaleSuppressionLabel">Confirmation
+							Suppression</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						Etes vous sur de vouloir supprimer cet utilisateur? <span
-							id="idToDeleteText"></span>
+						Confirmer vous la suppression du livre id :<span id="idLivre">
+						</span> <span id="idToDeleteText"></span>
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">non</button>
-						<form action="dashboard" method="post">
-							<input type="hidden" name="idToDelete" id="idToDelete">
-							<button type="submit" class="btn btn-primary">oui</button>
+							data-dismiss="modal">Annuler</button>
+						<form action="deleteLivre" method="post">
+							<input type="hidden" name="reference" id="transfert">
+							<button type="submit" class="btn btn-primary">Valider</button>
 						</form>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modalModification" tabindex="-1"
+			aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modaleSuppressionLabel">Modification
+							quantitée livre</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form action="updateLivre" method="post">
+					<div class="modal-body">
+						<label> Ancienne quantitée :<span id="ancienneQuantitee">
+						</span> </label>
+						<br> 
+						
+						<label for="quantiteLivre" >Nouvelle Quantitée</label>
+						<input type="number" name="quantite" id="quantiteLivre" min="0">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Annuler</button>
+						
+							<input type="hidden" name="reference" id="transfertB">
+							<button type="submit" class="btn btn-primary">Valider</button>
+						
+					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -204,9 +253,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="row mb-1">
-			<div class="col-6">Tableau commande</div>
-			<div class="col-6">Ajout Livre</div>
+		<div class="row mb-1 mt-2">
+			<div class="col-6 d-flex justify-content-center">
+				<h2>Tableau commande</h2>
+
+			</div>
+			<div class="col-6 d-flex justify-content-center">
+				<h2>Ajout Livre</h2>
+			</div>
 		</div>
 		<div class="row">
 			<table class="table table-striped table-class col-6" id="table-id">
@@ -224,14 +278,8 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td>
-								<button class="btn btn-danger">
-									<i class="fa fa-trash"></i>
-								</button>
-								<button class="btn btn-warning">
-									<i class="fa fa-edit"> </i>
-								</button>
-							</td>
+							<td><a> <i class="fa fa-trash"></i></a> <a> <i
+									class="fa fa-edit"> </i></a></td>
 					</c:forEach>
 				<tbody>
 			</table>
@@ -245,8 +293,8 @@
 									<i class="fa fa-user prefix"></i> <input type="number"
 										onchange="testReference()" id="reference"
 										class="form-control form-control-sm validate"
-										placeholder="reference" name="reference" required> <span
-										class="error text-danger" id="result"></span>
+										placeholder="reference" name="reference" required min="0">
+									<span class="error text-danger" id="result"></span>
 								</div>
 								<div class="col-9 md-form form-sm mb-2 mt-4">
 
@@ -293,7 +341,8 @@
 									list="listEditeur" id="editeur"
 									class="form-control form-control-sm validate"
 									placeholder="editeur" name="editeur"
-									onkeydown="addOptionEditeur()" onchange="addOptionEditeur()" minlength="3" required>
+									onkeydown="addOptionEditeur()" onchange="addOptionEditeur()"
+									minlength="3" required>
 								<datalist id="listEditeur">
 
 
@@ -304,12 +353,13 @@
 								<i class="fa fa-envelope prefix"></i> <input type="text"
 									list="listAuteur" id="auteur"
 									class="form-control form-control-sm validate" name="auteur"
-									placeholder="auteur" minlength="3" onkeydown="addOptionAuteur()" onchange="addOptionAuteur()" required>
-								<span class="error text-danger" id="resultAuteur"></span>
-								
-								
-									<a class="d-none" id="butttonModalAuteur" data-toggle="modal"
-									data-target="#modalLRForm"> Auteur/Editeur non présent cliquez ici pour l'ajouter</a>
+									placeholder="auteur" minlength="3"
+									onkeydown="addOptionAuteur()" onchange="addOptionAuteur()"
+									required> <span class="error text-danger"
+									id="resultAuteur"></span> <a class="d-none"
+									id="butttonModalAuteur" data-toggle="modal"
+									data-target="#modalLRForm"> Auteur/Editeur non présent
+									cliquez ici pour l'ajouter</a>
 							</div>
 							<datalist id="listAuteur">
 
@@ -368,8 +418,7 @@
 												class="form-control form-control-sm validate"
 												placeholder="Nom" name="nomEditeur" required
 												onchange="testEditeur()"> <span
-												id="resultTestEditeur"
-												></span>
+												id="resultTestEditeur"></span>
 										</div>
 									</div>
 									<div class="text-center mt-2">
@@ -420,8 +469,8 @@
 													placeholder="Nom d'usage" name="nomUsageAuteur"
 													data-toggle="tooltip"
 													title="Si inconus , veuillez renseigner son nom et prénom"
-													onchange="testAuteur()"
-													required> <span id="resultTestAuteur"></span>
+													onchange="testAuteur()" required> <span
+													id="resultTestAuteur"></span>
 											</div>
 										</div>
 

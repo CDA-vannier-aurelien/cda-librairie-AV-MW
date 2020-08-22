@@ -11,6 +11,20 @@ function testEmail() {
     });
 }
 
+function transfertRefAndQuantitee(reference,quantitee){
+	
+	$('#transfertB').val(reference);
+	$('#ancienneQuantitee').html(" " +quantitee);
+	
+}
+
+function transfertRef(reference){
+	
+	$('#transfert').val(reference);
+	$('#idLivre').html(" " +reference);
+	
+}
+
 function testReference() {
     var reference = $('#reference').val();
     $.ajax({
