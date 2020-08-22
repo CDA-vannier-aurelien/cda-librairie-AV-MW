@@ -30,4 +30,6 @@ public interface IUserService {
 	void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
 
 	UtilisateurDto getByMail(UtilisateurDto pUser);
+
+	void activeCompte(String mail);
 }

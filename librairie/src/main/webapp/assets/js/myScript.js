@@ -198,3 +198,10 @@ function supprimerLigne(corbeilleId) {
     corbeille.submit();
 }
 
+function validerMail(mail) {
+
+    var mail = document.getElementById("validateUser" + mail);
+
+    mail.submit();
+}
+

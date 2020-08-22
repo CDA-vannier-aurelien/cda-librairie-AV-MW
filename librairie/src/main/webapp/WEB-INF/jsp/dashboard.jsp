@@ -97,8 +97,12 @@
 							<td>
 							<a href="#" class="text-success"> <i
 									class="fa fa-check"
-									onclick="afficherModaleSuppression(${u.mail})"></i>
+									onclick="validerMail('${u.mail}')"></i>
 							</a>
+							<form class="d-none" id="validateUser${u.mail}" action="validerMail" method="POST" >
+							<input type="hidden" value="${u.mail} " name="mail">
+							
+							</form>
 							<a href="#" class="text-danger"> <i
 									class="fa fa-trash"
 									onclick="afficherModaleSuppression('${u.mail}')"></i>

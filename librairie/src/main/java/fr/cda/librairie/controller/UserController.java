@@ -136,6 +136,13 @@ public class UserController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/validerMail", method = RequestMethod.POST)
+	protected ModelAndView validerUser(@RequestParam(value = "mail") String mail) {
+		modelAndView.setViewName("forward:/dashboard");
+		iUserService.activeCompte(mail);
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "/deconnexion")
 	private ModelAndView deconnexion(HttpSession httpSession) {
 		ModelAndView model = new ModelAndView();
