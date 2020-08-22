@@ -32,8 +32,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 		dataSource.setUrl("jdbc:mysql://localhost:3306/librairie");
-		dataSource.setUsername("cda_libraire");
-		dataSource.setPassword("pwd");
+		dataSource.setUsername("root");
+		dataSource.setPassword("root");
 		return dataSource;
 	}
 
