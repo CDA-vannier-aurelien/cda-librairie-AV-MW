@@ -88,7 +88,7 @@
 				<tbody>
 					<c:forEach var="u" items="${listeUser}">
 						<tr>
-							<td ><a href="#">${u.nom}</a> </td>
+							<td ><a href="#" data-toggle="modal" data-target="#modalUtilisateur">${u.nom}</a> </td>
 							<td>${u.prenom}</td>
 							<td>${u.mail}</td>
 							<td>${u.labelRole}</td>
@@ -97,11 +97,15 @@
 							<td>
 							<a href="#" class="text-success"> <i
 									class="fa fa-check"
-									onclick="afficherModaleSuppression(${u.mail})"></i>
+									onclick="validerMail('${u.mail}')"></i>
 							</a>
+							<form class="d-none" id="validateUser${u.mail}" action="validerMail" method="POST" >
+							<input type="hidden" value="${u.mail} " name="mail">
+							
+							</form>
 							<a href="#" class="text-danger"> <i
 									class="fa fa-trash"
-									onclick="afficherModaleSuppression(${u.mail})"></i>
+									onclick="afficherModaleSuppression('${u.mail}')"></i>
 							</a>
 							</td>
 					</c:forEach>
@@ -127,7 +131,7 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td><a data-toggle="modal" data-target="#modaleSuppression"
+							<td><a data-toggle="modal" data-target="#modaleSuppressionLivre"
 								class="text-danger" onclick="transfertRef(${livre.reference})">
 									<i class="fa fa-trash"></i>
 							</a> <a data-toggle="modal" onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })" data-target="#modalModification" class="text-warning"> <i class="fa fa-edit">
@@ -136,8 +140,36 @@
 				<tbody>
 			</table>
 		</div>
-
+		
 		<div class="modal fade" id="modaleSuppression" tabindex="-1"
+			aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modaleSuppressionLabel">Confirmation
+							Suppression</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Confirmer vous la suppression de la demande de compte ? mail : <span id="idToDeleteText"></span>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Annuler</button>
+						<form action="deleteUser" method="post">
+							<input type="hidden" name="mail" id="idToDelete">
+							<button type="submit" class="btn btn-primary">Valider</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modaleSuppressionLivre" tabindex="-1"
 			aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
