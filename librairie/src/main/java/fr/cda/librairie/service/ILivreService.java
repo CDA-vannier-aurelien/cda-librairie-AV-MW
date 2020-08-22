@@ -1,23 +1,23 @@
 package fr.cda.librairie.service;
 
-import java.util.List;
-
 import fr.cda.librairie.dto.LivreDto;
 
+import java.util.List;
+
 public interface ILivreService {
-	public LivreDto addLivre(LivreDto livre);
+    public LivreDto addLivre(LivreDto livre);
 
-	public void deleteLivre(int pRef);
+    public void deleteLivre(int pRef);
 
-	public void updateQuantiteeLivre(int vQuantitee, int vRef);
+    public void updateQuantiteeLivre(int vQuantitee, int vRef);
 
-	public LivreDto getLivre(int pRef);
+    public LivreDto getLivre(int pRef);
 
-	public List<LivreDto> getAllLivre(int pPageEnCours);
+    public List<LivreDto> getAllLivre(int pPageEnCours);
 
-	public int getMaxId();
+    public int getMaxId();
 
-	public boolean existByReference(int pRef);
+    public boolean existByReference(int pRef);
 
-	public long count();
+    public long count();
 }

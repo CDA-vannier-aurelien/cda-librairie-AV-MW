@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 /**
  * Inteface permettant l'enregistrement des informations de chaque ligne d 'une commande en base de donnée.
- * @author PC
  *
+ * @author PC
  */
 @Repository
 public interface ICommandeLineDao extends CrudRepository<CommandeLine, Integer> {

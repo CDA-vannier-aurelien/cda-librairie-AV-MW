@@ -56,7 +56,8 @@
                             class="dropdown-toggle nav-link" data-toggle="dropdown"
                             aria-expanded="false" href="#">${sessionScope.user.nom} </a>
                         <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" role="presentation" value="${sessionScope.user.mail }" href="monCompte">Mon
+                            <a class="dropdown-item" role="presentation" value="${sessionScope.user.mail }"
+                               href="monCompte">Mon
                                 compte</a><a class="dropdown-item" role="presentation"
                                              href="panier">Mon panier</a><a class="dropdown-item"
                                                                             role="presentation" href="deconnexion">LogOut</a>
@@ -118,7 +119,7 @@
                                 <div>
                                     <h3 class="text-center">Informations</h3>
                                     <p class="text-center">Coin coin, coin coin coin.
-                                    Coin coin coin, coin coin COIIIIIIIIINNNNNNNNN!!!!</p>
+                                        Coin coin coin, coin coin COIIIIIIIIINNNNNNNNN!!!!</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">
@@ -157,8 +158,8 @@
                                 <div>
                                     <h3 class="text-center">Informations</h3>
                                     <p class="text-center">Ancien ostéo qui après avoir voulu
-									      casser les dos a préféré casser du code pour éviter
-									       d'autres soucis avec les familles des patients.</p>
+                                        casser les dos a préféré casser du code pour éviter
+                                        d'autres soucis avec les familles des patients.</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">
@@ -199,7 +200,7 @@
                                 <div>
                                     <h3 class="text-center">Informations</h3>
                                     <p class="text-center">Des petits pains à la coke, vous trouverez tout
-                                    ce dont vous avez besoin avec El Presidente!</p>
+                                        ce dont vous avez besoin avec El Presidente!</p>
                                 </div>
                             </div>
                             <div class="footer-imagia">

@@ -5,9 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+
 @Repository
 /**
- * 
+ *
  * interface permettant l'enregistrement des différentes rues où habitent les utilisateurs.
  * @author PC
  *
