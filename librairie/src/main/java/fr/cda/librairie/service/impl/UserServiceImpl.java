@@ -1,6 +1,7 @@
 package fr.cda.librairie.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,9 +110,12 @@ public class UserServiceImpl implements IUserService {
 				log.warn("Erreur Compte inactif");
 
 			} else {
+				optionalUser.get().setDateConnection(new Date());
+				iUserDao.save(optionalUser.get());
+
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom())
 						.prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole())
-						.build();
+						.dateConnection(optionalUser.get().getDateConnection()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
 
@@ -211,6 +215,15 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void deleteUtilisateur(String email) {
 		iUserDao.removeByMail(email);
+
+	}
+
+	@Override
+	public void activeCompte(String mail) {
+
+		Optional<User> vUser = iUserDao.getUserByMail(mail);
+		vUser.get().setEstActive(Boolean.TRUE);
+		iUserDao.save(vUser.get());
 
 	}
 
