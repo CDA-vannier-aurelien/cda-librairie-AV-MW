@@ -43,7 +43,7 @@ public class DashBoardController {
 		log.debug("list livre dash");
 
 		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
-		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours);
+		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours, Boolean.FALSE);
 
 		modelAndView.addObject("listeUser", vListUser);
 		modelAndView.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
