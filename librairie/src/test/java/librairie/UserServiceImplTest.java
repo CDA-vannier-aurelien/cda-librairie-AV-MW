@@ -1,26 +1,26 @@
-package librairie;
-
-import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.IUserService;
-import fr.cda.librairie.utils.ContextConfigurationType;
-import fr.cda.librairie.utils.ContextFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:spring/beans-configuration.xml")
-class UserServiceImplTest {
-    @Autowired
-    private IUserService iUserService;
-
+//package librairie;
+//
+//import fr.cda.librairie.dto.UtilisateurDto;
+//import fr.cda.librairie.service.IUserService;
+//import fr.cda.librairie.utils.ContextConfigurationType;
+//import fr.cda.librairie.utils.ContextFactory;
+//import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.extension.ExtendWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
+//
+//import java.util.Date;
+//
+//import static org.junit.jupiter.api.Assertions.assertNotNull;
+//@ExtendWith(SpringExtension.class)
+//@ContextConfiguration("classpath:spring/beans-configuration.xml")
+//class UserServiceImplTest {
+//    @Autowired
+//    private IUserService iUserService;
+//
 //    @Test
 //    void create() throws Exception {
 //
@@ -41,4 +41,4 @@ class UserServiceImplTest {
 //          assertNotNull(user1);
 //
 //    }
-}
+//}

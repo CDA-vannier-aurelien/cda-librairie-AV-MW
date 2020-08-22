@@ -34,7 +34,7 @@ public class LivreController {
 	@Autowired
 	IEditeurService serviceEditeur;
 
-	@RequestMapping(value = { "/listeLivre" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/listeLivre" }, method = {RequestMethod.GET, RequestMethod.POST})
 	protected ModelAndView listerLivre(@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
 		log.debug("list livre");
 

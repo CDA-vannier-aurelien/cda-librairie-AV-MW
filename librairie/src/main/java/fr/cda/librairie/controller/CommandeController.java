@@ -13,6 +13,7 @@ import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.ILivreService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.View;
 
 @Slf4j
 @Controller
@@ -97,5 +99,7 @@ public class CommandeController {
 		model.setViewName("panier");
 		return model;
 	}
-
+	@GetMapping(value = "/panier")
+	public void monPanier() {
+	}
 }

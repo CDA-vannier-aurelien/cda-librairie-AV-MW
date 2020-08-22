@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.Date;
 
 @Slf4j
@@ -135,4 +137,26 @@ public class UserController {
         return model;
     }
 
+    @RequestMapping(value = { "/checkmail" }, method = RequestMethod.POST)
+    protected @ResponseBody
+    String checkMail(@RequestParam(value = "mail") String mail) {
+        UtilisateurDto user = UtilisateurDto.builder().mail(mail).build();
+        user = iUserService.checkMail(user);
+        String message = "";
+        if (user == null) {
+            message = "Adresse mail valide";
+            return message;
+        } else {
+            message = "Adresse invalide";
+            return message;
+        }
+    }
+
+    @RequestMapping(value = "/deconnexion")
+    private ModelAndView deconnexion(HttpSession httpSession){
+        ModelAndView model = new ModelAndView();
+        httpSession.invalidate();
+        model.setViewName("index");
+        return model;
+    }
 }

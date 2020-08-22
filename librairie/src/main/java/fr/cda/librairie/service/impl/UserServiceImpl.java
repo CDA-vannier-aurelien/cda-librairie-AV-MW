@@ -58,7 +58,7 @@ public class UserServiceImpl implements IUserService {
 	IRoleDao iRoleDao;
 
  @Autowired
- private BCryptPasswordEncoder encodeur;
+ private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -92,7 +92,7 @@ public class UserServiceImpl implements IUserService {
 		user.setPays(optionalPays.get());
 		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
-		user.setPassword(encodeur.encode(pUser.getPassword()));
+		user.setPassword(bCryptPasswordEncoder.encode(pUser.getPassword()));
 		iUserDao.save(user);
 		return pUser;
 	}
@@ -105,7 +105,7 @@ public class UserServiceImpl implements IUserService {
 			log.warn("erreur login");
 			pUser = null;
 		} else {
-			if (!encodeur.matches(pUser.getPassword(), optionalUser.get().getPassword())) {
+			if (!bCryptPasswordEncoder.matches(pUser.getPassword(), optionalUser.get().getPassword())) {
 				pUser = null;
 				log.warn("Erreur password");
 
@@ -116,7 +116,7 @@ public class UserServiceImpl implements IUserService {
 			} else {
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom()).prenom(optionalUser.get().getPrenom())
 						.labelRole(optionalUser.get().getRole().getRole()).build();
-				log.info("ajout avec succés");
+				log.info("ajout avec succï¿½s");
 				return pUser;
 
 			}
@@ -204,7 +204,7 @@ public class UserServiceImpl implements IUserService {
 		user.setVille(optionalVille.get());
 		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
-		user.setPassword(encodeur.encode(pUser.getPassword()));
+		user.setPassword(bCryptPasswordEncoder.encode(pUser.getPassword()));
 		iUserDao.save(user);
 		
 		return pUser;
