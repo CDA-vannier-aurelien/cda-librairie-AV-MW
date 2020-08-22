@@ -3,7 +3,6 @@ package fr.cda.librairie.service.impl;
 import fr.cda.librairie.dao.IAuteurDao;
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.entity.Auteur;
-import fr.cda.librairie.exception.AuteurPresentException;
 import fr.cda.librairie.service.IAuteurService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +21,19 @@ public class AuteurServiceImpl implements IAuteurService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Override
-    public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException {
-        Auteur aut = new Auteur();
-        aut.setNom(auteur.getNom());
-        aut.setPrenom(auteur.getPrenom());
-        aut.setNomUsage(auteur.getNomUsage());
+	@Override
+	public AuteurDto addAuteur(AuteurDto auteur) {
+		Auteur aut = new Auteur();
+		aut.setNom(auteur.getNom());
+		aut.setPrenom(auteur.getPrenom());
+		aut.setNomUsage(auteur.getNomUsage());
 
-        if (!auteurDao.existsByNomUsage(aut.getNomUsage())) {
-            aut = auteurDao.save(aut);
-            auteur.setId(aut.getId());
-            auteur.setNom(aut.getNom());
-            auteur.setNomUsage(aut.getNomUsage());
-            auteur.setPrenom(aut.getPrenom());
-            return auteur;
-        } else {
-            throw new AuteurPresentException();
-        }
+		aut = auteurDao.save(aut);
+		auteur.setId(aut.getId());
+		auteur.setNom(aut.getNom());
+		auteur.setNomUsage(aut.getNomUsage());
+		auteur.setPrenom(aut.getPrenom());
+		return auteur;
 
     }
 

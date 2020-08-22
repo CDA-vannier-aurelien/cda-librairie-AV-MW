@@ -79,11 +79,32 @@ public class LivreController {
         return message;
     }
 
-    @RequestMapping(value = {"/checkAuteur"}, method = RequestMethod.POST)
-    protected @ResponseBody
-    String checkAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
+	@RequestMapping(value = { "/checkAuteur" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkAuteur(@RequestParam(value = "nomUsage") String nomUsageAuteur) {
 
-        List<AuteurDto> listAuteur = this.serviceAuteur.getAll(nomUsage);
+		String message = "";
+
+		if (serviceAuteur.existByName(nomUsageAuteur)) {
+			message = "exists";
+		}
+		return message;
+	}
+
+	@RequestMapping(value = { "/checkEditeur" }, method = RequestMethod.POST)
+	protected @ResponseBody String checkEditeur(@RequestParam(value = "nom") String nomEditeur) {
+
+		String message = "";
+
+		if (serviceEditeur.existByName(nomEditeur)) {
+			message = "exists";
+		}
+		return message;
+	}
+
+	@RequestMapping(value = { "/addOptionAuteur" }, method = RequestMethod.POST)
+	protected @ResponseBody String addOptionAuteur(@RequestParam(value = "nomUsage") String nomUsage) {
+
+		List<AuteurDto> listAuteur = this.serviceAuteur.getAll(nomUsage);
 
         String[] tabNom = new String[listAuteur.size()];
 
@@ -95,9 +116,8 @@ public class LivreController {
         return json;
     }
 
-    @RequestMapping(value = {"/checkEditeur"}, method = RequestMethod.POST)
-    protected @ResponseBody
-    String checkEditeur(@RequestParam(value = "nom") String nomEditeur) {
+	@RequestMapping(value = { "/addOptionEditeur" }, method = RequestMethod.POST)
+	protected @ResponseBody String addOptionEditeur(@RequestParam(value = "nom") String nomEditeur) {
 
         List<EditeurDto> listEditeur = this.serviceEditeur.getAll(nomEditeur);
 
@@ -111,5 +131,36 @@ public class LivreController {
         return json;
 
     }
+
+	@RequestMapping(value = { "/addAuteur" }, method = RequestMethod.POST)
+	protected ModelAndView addAuteur(@RequestParam(value = "nomAuteur") String nom,
+			@RequestParam(value = "prenomAuteur") String prenom, @RequestParam(value = "nomUsage") String nomUsage) {
+		log.debug("add auteur");
+
+		AuteurDto auteur = new AuteurDto();
+		auteur.setNom(nom);
+		auteur.setNomUsage(nomUsage);
+		auteur.setPrenom(prenom);
+		auteur = serviceAuteur.addAuteur(auteur);
+
+		ModelAndView model = new ModelAndView();
+
+		model.setViewName("dashboard");
+		return model;
+	}
+
+	@RequestMapping(value = { "/addEditeur" }, method = RequestMethod.POST)
+	protected ModelAndView addEditeur(@RequestParam(value = "nomEditeur") String nomEditeur) {
+		log.debug("add editeur");
+
+		EditeurDto editeur = new EditeurDto();
+		editeur.setNom(nomEditeur);
+		editeur = serviceEditeur.addEditeur(editeur);
+
+		ModelAndView model = new ModelAndView();
+
+		model.setViewName("dashboard");
+		return model;
+	}
 
 }

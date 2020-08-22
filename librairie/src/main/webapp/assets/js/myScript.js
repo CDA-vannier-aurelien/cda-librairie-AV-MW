@@ -30,66 +30,111 @@ function testReference() {
 
             }
         }
-
-    })
-}
-
-function testAuteur() {
-    var auteur = $('#auteur').val();
-    if (auteur.length > 1) {
-        $('#listAuteur').empty();
-
-        $.ajax({
-            data: {nomUsage: auteur},
-            type: 'post',
-            url: 'checkAuteur',
-            success: function (result) {
-                console.log(JSON.parse(result))
-                result = JSON.parse(result);
-                $.each(result, function (element, nom) {
-                    console.log(nom);
-                    $('#listAuteur').append($("<option>").attr('value', nom).text(nom))
-                })
+        
+    })}
+function testAuteur(){
+	var auteur = $('#nomUsageAuteur').val();
+    $.ajax({
+    	data:{nomUsage:auteur},
+        type:'Post',
+        url:'checkAuteur',
+        success:function (result) {
+            
+            if(result==="exists"){
+            	$('#resultTestAuteur').html("Auteur déjà présent");
+            	$('#ajoutAuteur').attr("disabled", true);
+            	$('#resultTestAuteur').attr("class","text-danger error");
+            }else{
+            	$('#ajoutAuteur').attr("disabled", false);
+            	$('#resultTestAuteur').html("Auteur valide");
+            	$('#resultTestAuteur').attr("class","text-success");
+            	
             }
+        }
+        
+    })}
+function testEditeur(){
+	var editeur = $('#nomEditeur').val();
+    $.ajax({
+        data:{nom:editeur},
+        type:'Post',
+        url:'checkEditeur',
+        success:function (result) {
+            
+            if(result==="exists"){
+            	$('#resultTestEditeur').html("Editeur déjà présent");
+            	$('#ajoutEditeur').attr("disabled", true);
+            	$('#resultTestEditeur').attr("class","text-danger error");
+            }else{
+            	$('#ajoutEditeur').attr("disabled", false);
+            	$('#resultTestEditeur').html("Editeur valide");
+            	$('#resultTestEditeur').attr("class","text-success");
+            	
+            }
+        }
+        
+    })}
 
-        })
-    }
-}
+function addOptionAuteur(){
+	var auteur = $('#auteur').val();
+	
+    if(auteur.length>1) {
+    	$('#listAuteur').empty();
+    	
+    $.ajax({
+        data:{nomUsage:auteur},
+        type:'post',
+        url:'addOptionAuteur',
+        success:function (result) {
+        	result = JSON.parse(result);
+        	if(result.length>0){
+        		$("#butttonModalAuteur").attr('class',"d-none");
+        		$.each(result,function(element , nom){
+            		
+            		 $('#listAuteur').append($("<option>").attr('value', nom).text(nom));
+            		  $('#valider').attr("disabled", false);
+ 
+            	})
+        	}else {
+        		$("#butttonModalAuteur").attr('class',"text-danger error");
+        		  $('#valider').attr("disabled", true);
+        	}
+        	}
+        
+    })}else {
+    	$("#butttonModalAuteur").attr('class',"d-none");
+    }}
 
-function testEditeur() {
+function addOptionEditeur(){
     var editeur = $('#editeur').val();
-    if (editeur.length > 1) {
-        $('#listEditeur').empty();
+    if(editeur.length>1){
+    	$('#listEditeur').empty();
+    	
+    
+    $.ajax({
+        data:{nom:editeur},
+        type:'post',
+        url:'addOptionEditeur',
+        success:function (result) {
+        	result = JSON.parse(result);
+        	if(result.length>0){
+        		$("#butttonModalAuteur").attr('class',"d-none");
+        		$.each(result,function(element , nom){
+            		 $('#listEditeur').append($("<option>").attr('value', nom).text(nom));
+            		  $('#valider').attr("disabled", false);
+            	})
+        	}else {
+        		$("#butttonModalAuteur").attr('class',"text-danger error");
+        		  $('#valider').attr("disabled", true);
+        	}
+        	
+        	
+        }
+        
+    })}else {
+    	$("#butttonModalAuteur").attr('class',"d-none");
+    }}
 
-
-        $.ajax({
-            data: {nom: editeur},
-            type: 'post',
-            url: 'checkEditeur',
-            success: function (result) {
-                console.log(JSON.parse(result))
-                result = JSON.parse(result);
-                $.each(result, function (element, nom) {
-                    console.log(nom);
-                    $('#listEditeur').append($("<option>").attr('value', nom).text(nom))
-                })
-
-
-//            if(result==="exists"){
-//            	$('#resultEditeur').html("référence non valide");
-//            	$('#valider').attr("disabled", true);
-//            	$('#resultEditeur').attr("class","text-danger error");
-//            }else{
-//            	$('#valider').attr("disabled", false);
-//            	
-//            	$('#resultEditeur').attr("class","text-success");
-//            	
-//            }
-            }
-
-        })
-    }
-}
 
 
 $(function () {
