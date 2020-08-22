@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
-import java.io.PrintWriter;
 import java.util.Date;
 
 @Slf4j
@@ -89,34 +89,34 @@ public class UserController {
         }
         return model;
     }
-    
+
     @RequestMapping(value = "monCompte", method = RequestMethod.GET)
-    public ModelAndView afficher(  HttpSession httpSession)  {
-    	
-    	ModelAndView model = new ModelAndView();
-    	 model.setViewName("monCompte");
-    	 
-    	   
+    public ModelAndView afficher(HttpSession httpSession) {
+
+        ModelAndView model = new ModelAndView();
+        model.setViewName("monCompte");
+
+
         UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
-        		
+
         utilisateurDto = iUserService.getByMail(utilisateurDto);
-        
-        model.addObject("user",utilisateurDto);
-        
+
+        model.addObject("user", utilisateurDto);
+
         return model;
     }
-    
+
     @RequestMapping(value = "updateUser", method = RequestMethod.POST)
     public ModelAndView updateUser(@RequestParam("dateNaissance")
-    @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
-                                  @RequestParam(value = "nom") String nom,
-                                  @RequestParam(value = "prenom") String prenom,
-                                  @RequestParam(value = "numeroPorte") int numPorte,
-                                  @RequestParam(value = "complementAdresse") String complement,
-                                  @RequestParam(value = "nomRue") String rue,
-                                  @RequestParam(value = "mail") String mail,
-                                  @RequestParam(value = "ville") String ville,
-                                  @RequestParam(value = "codePostal") int codePostal) throws NomRueException, NomPaysException {
+                                   @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                                   @RequestParam(value = "nom") String nom,
+                                   @RequestParam(value = "prenom") String prenom,
+                                   @RequestParam(value = "numeroPorte") int numPorte,
+                                   @RequestParam(value = "complementAdresse") String complement,
+                                   @RequestParam(value = "nomRue") String rue,
+                                   @RequestParam(value = "mail") String mail,
+                                   @RequestParam(value = "ville") String ville,
+                                   @RequestParam(value = "codePostal") int codePostal) throws NomRueException, NomPaysException {
         ModelAndView model = new ModelAndView();
         model.setViewName("monCompte");
 
@@ -133,11 +133,11 @@ public class UserController {
             iUserService.update(user);
         } catch (NomVilleIncorrect nomVilleIncorrect) {
             nomVilleIncorrect.printStackTrace();
-        } 
+        }
         return model;
     }
 
-    @RequestMapping(value = { "/checkmail" }, method = RequestMethod.POST)
+    @RequestMapping(value = {"/checkmail"}, method = RequestMethod.POST)
     protected @ResponseBody
     String checkMail(@RequestParam(value = "mail") String mail) {
         UtilisateurDto user = UtilisateurDto.builder().mail(mail).build();
@@ -153,7 +153,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deconnexion")
-    private ModelAndView deconnexion(HttpSession httpSession){
+    private ModelAndView deconnexion(HttpSession httpSession) {
         ModelAndView model = new ModelAndView();
         httpSession.invalidate();
         model.setViewName("index");

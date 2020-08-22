@@ -1,23 +1,23 @@
 package fr.cda.librairie.service;
 
-import java.util.List;
-
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.exception.AuteurPresentException;
 
+import java.util.List;
+
 public interface IAuteurService {
-	public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException;
+    public AuteurDto addAuteur(AuteurDto auteur) throws AuteurPresentException;
 
-	public void deleteAuteur(int id);
+    public void deleteAuteur(int id);
 
-	public AuteurDto getAuteur(int id);
+    public AuteurDto getAuteur(int id);
 
-	public AuteurDto getAuteurByNom(String nom);
+    public AuteurDto getAuteurByNom(String nom);
 
-	public List<AuteurDto> getAll(String nom);
+    public List<AuteurDto> getAll(String nom);
 
-	public int getMaxId();
+    public int getMaxId();
 
-	public boolean existByName(String nom);
+    public boolean existByName(String nom);
 
 }
