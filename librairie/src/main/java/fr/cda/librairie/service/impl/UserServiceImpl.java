@@ -132,11 +132,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<UtilisateurDto> getAll(int pageEnCours) {
+	public List<UtilisateurDto> getAll(int pageEnCours, boolean verif) {
 
 		List<UtilisateurDto> liste = new ArrayList<>();
 		PageRequest page = PageRequest.of(pageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
-		Page<User> u = this.iUserDao.findAll(page);
+		Page<User> u = this.iUserDao.getUserByEstActive(verif, page);
 
 		for (User user : u) {
 			UtilisateurDto uDto = this.modelMapper.map(user, UtilisateurDto.class);
@@ -206,6 +206,12 @@ public class UserServiceImpl implements IUserService {
 		pUserDto.setCodePostal(vUserEntity.get().getVille().getCodePostal());
 
 		return pUserDto;
+	}
+
+	@Override
+	public void deleteUtilisateur(String email) {
+		iUserDao.removeByMail(email);
+
 	}
 
 }
