@@ -1,6 +1,7 @@
 package fr.cda.librairie.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,11 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.exception.NomPaysException;
-import fr.cda.librairie.exception.NomRueException;
-import fr.cda.librairie.exception.NomVilleIncorrect;
-import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,17 +44,8 @@ public class UserController {
 				.password(password).pays(pays).ville(ville).codePostal(codePostal).build();
 		log.debug("ajout de nom: {} et prenom: {}", nom, prenom);
 
-		try {
-			iUserService.create(user);
-		} catch (NomVilleIncorrect nomVilleIncorrect) {
-			nomVilleIncorrect.printStackTrace();
-		} catch (NomRueException nomRueException) {
-			nomRueException.printStackTrace();
-		} catch (NomPaysException e) {
-			e.printStackTrace();
-		} catch (RoleException roleException) {
-			roleException.printStackTrace();
-		}
+		iUserService.create(user);
+
 		return model;
 	}
 
@@ -78,7 +67,7 @@ public class UserController {
 		return model;
 	}
 
-	@RequestMapping(value = "monCompte", method = RequestMethod.GET)
+	@RequestMapping(value = "monCompte", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView afficher(HttpSession httpSession) {
 
 		ModelAndView model = new ModelAndView();
@@ -88,30 +77,31 @@ public class UserController {
 
 		utilisateurDto = iUserService.getByMail(utilisateurDto);
 
+		List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail());
 		model.addObject("user", utilisateurDto);
+		model.addObject("listeCommande", listcom);
 
 		return model;
 	}
 
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
-	public ModelAndView updateUser(@RequestParam("dateNaissance") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
-			@RequestParam(value = "nom") String nom, @RequestParam(value = "prenom") String prenom,
-			@RequestParam(value = "numeroPorte") int numPorte,
+	public ModelAndView updateUser(@RequestParam(value = "nom") String nom,
+			@RequestParam(value = "prenom") String prenom, @RequestParam(value = "numeroPorte") int numPorte,
 			@RequestParam(value = "complementAdresse") String complement, @RequestParam(value = "nomRue") String rue,
-			@RequestParam(value = "mail") String mail, @RequestParam(value = "ville") String ville,
-			@RequestParam(value = "codePostal") int codePostal) throws NomRueException, NomPaysException {
+			@RequestParam(value = "ville") String ville, @RequestParam(value = "codePostal") int codePostal,
+			@RequestParam(value = "pays") String pays, @RequestParam(value = "password") String password,
+			HttpSession session) {
 		ModelAndView model = new ModelAndView();
-		model.setViewName("monCompte");
+		model.setViewName("forward:/monCompte");
+		UtilisateurDto userTemp = (UtilisateurDto) session.getAttribute("user");
 
-		UtilisateurDto user = UtilisateurDto.builder().nom(nom).prenom(prenom).nomRue(rue).numeroPorte(numPorte)
-				.complementAdresse(complement).mail(mail).codePostal(codePostal).build();
+		UtilisateurDto user = UtilisateurDto.builder().nom(nom).pays(pays).prenom(prenom).nomRue(rue)
+				.numeroPorte(numPorte).complementAdresse(complement).password(password).codePostal(codePostal)
+				.mail(userTemp.getMail()).ville(ville).build();
 		log.debug("modificatin de nom: {} et prenom: {}", nom, prenom);
 
-		try {
-			iUserService.update(user);
-		} catch (NomVilleIncorrect nomVilleIncorrect) {
-			nomVilleIncorrect.printStackTrace();
-		}
+		iUserService.update(user);
+
 		return model;
 	}
 

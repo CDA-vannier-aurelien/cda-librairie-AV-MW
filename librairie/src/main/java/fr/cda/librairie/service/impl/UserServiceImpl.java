@@ -19,6 +19,7 @@ import fr.cda.librairie.dao.IPaysDao;
 import fr.cda.librairie.dao.IRoleDao;
 import fr.cda.librairie.dao.IUserDao;
 import fr.cda.librairie.dao.IVilleDao;
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.entity.Commande;
@@ -27,12 +28,9 @@ import fr.cda.librairie.entity.Pays;
 import fr.cda.librairie.entity.Role;
 import fr.cda.librairie.entity.User;
 import fr.cda.librairie.entity.Ville;
-import fr.cda.librairie.exception.NomPaysException;
-import fr.cda.librairie.exception.NomRueException;
-import fr.cda.librairie.exception.NomVilleIncorrect;
-import fr.cda.librairie.exception.RoleException;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.Constantes;
+import fr.cda.librairie.utils.Tools;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -60,32 +58,41 @@ public class UserServiceImpl implements IUserService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public UtilisateurDto create(UtilisateurDto pUser)
-			throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException {
+	public UtilisateurDto create(UtilisateurDto pUser) {
 		User user = new User();
 		String nomPays = pUser.getPays();
-		Optional<Pays> optionalPays = iPaysDao.findByNomPays(nomPays);
+		Optional<Pays> optionalPays = iPaysDao.findByNomPays(nomPays.toUpperCase());
 		if (!optionalPays.isPresent()) {
+			Pays pays = new Pays(pUser.getPays().toUpperCase());
+			iPaysDao.save(pays);
+			Optional<Pays> optionalPays2 = iPaysDao.findByNomPays(nomPays.toUpperCase());
+			user.setPays(optionalPays2.get());
 
+		} else {
+			user.setPays(optionalPays.get());
 		}
-		String nomVille = pUser.getVille();
-		Optional<Ville> optionalVille = iVilleDao.findByNom(nomVille);
+		pUser.getVille();
+		Optional<Ville> optionalVille = iVilleDao.findByNomAndCodePostal(pUser.getVille().toUpperCase(),
+				pUser.getCodePostal());
 		if (!optionalVille.isPresent()) {
-			throw new NomVilleIncorrect();
+			Ville ville = new Ville(pUser.getVille().toUpperCase(), pUser.getCodePostal());
+			iVilleDao.save(ville);
+			Optional<Ville> optionalVille2 = iVilleDao.findByNomAndCodePostal(pUser.getVille().toUpperCase(),
+					pUser.getCodePostal());
+			user.setVille(optionalVille2.get());
+
+		} else {
+			user.setVille(optionalVille.get());
 		}
 		Optional<Role> optionalRole = iRoleDao.findByRole("Client");
-		if (!optionalRole.isPresent()) {
-			throw new RoleException();
-		}
+
 		user.setRole(optionalRole.get());
-		user.setNom(pUser.getNom());
-		user.setPrenom(pUser.getPrenom());
+		user.setNom(Tools.capitalize(pUser.getNom()));
+		user.setPrenom(Tools.capitalize(pUser.getPrenom()));
 		user.setDateConnection(pUser.getDateConnection());
 		user.setNumeroPorte(pUser.getNumeroPorte());
 		user.setNomRue(pUser.getNomRue());
 		user.setComplementAdresse(pUser.getComplementAdresse());
-		user.setVille(optionalVille.get());
-		user.setPays(optionalPays.get());
 		user.setMail(pUser.getMail());
 		user.setDateNaissance(pUser.getDateNaissance());
 		user.setPassword(bCryptPasswordEncoder.encode(pUser.getPassword()));
@@ -175,27 +182,44 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UtilisateurDto update(UtilisateurDto pUser) throws NomVilleIncorrect, NomRueException {
-		User user = new User();
+	public UtilisateurDto update(UtilisateurDto pUser) {
+		Optional<User> user = iUserDao.getUserByMail(pUser.getMail());
+		String nomPays = pUser.getPays();
+		Optional<Pays> optionalPays = iPaysDao.findByNomPays(nomPays.toUpperCase());
+		if (!optionalPays.isPresent()) {
+			Pays pays = new Pays(pUser.getPays().toUpperCase());
+			iPaysDao.save(pays);
+			Optional<Pays> optionalPays2 = iPaysDao.findByNomPays(nomPays.toUpperCase());
+			user.get().setPays(optionalPays2.get());
 
-		String nomVille = pUser.getVille();
-		Optional<Ville> optionalVille = iVilleDao.findByNom(nomVille);
-		if (!optionalVille.isPresent()) {
-			throw new NomVilleIncorrect();
+		} else {
+			user.get().setPays(optionalPays.get());
 		}
-		String nomRue = pUser.getNomRue();
 
-		user.setNom(pUser.getNom());
-		user.setPrenom(pUser.getPrenom());
-		user.setDateConnection(pUser.getDateConnection());
-		user.setNumeroPorte(pUser.getNumeroPorte());
-		user.setNomRue(pUser.getNomRue());
-		user.setComplementAdresse(pUser.getComplementAdresse());
-		user.setVille(optionalVille.get());
-		user.setMail(pUser.getMail());
-		user.setDateNaissance(pUser.getDateNaissance());
-		user.setPassword(bCryptPasswordEncoder.encode(pUser.getPassword()));
-		iUserDao.save(user);
+		Optional<Ville> optionalVille = iVilleDao.findByNomAndCodePostal(pUser.getVille().toUpperCase(),
+				pUser.getCodePostal());
+		if (!optionalVille.isPresent()) {
+			Ville ville = new Ville(pUser.getVille().toUpperCase(), pUser.getCodePostal());
+			iVilleDao.save(ville);
+			Optional<Ville> optionalVille2 = iVilleDao.findByNomAndCodePostal(pUser.getVille().toUpperCase(),
+					pUser.getCodePostal());
+			user.get().setVille(optionalVille2.get());
+
+		} else {
+			user.get().setVille(optionalVille.get());
+		}
+
+		if (!pUser.getPassword().equals("")) {
+			user.get().setPassword(bCryptPasswordEncoder.encode(pUser.getPassword()));
+		}
+
+		user.get().setNom(Tools.capitalize(pUser.getNom()));
+		user.get().setPrenom(Tools.capitalize(pUser.getPrenom()));
+		user.get().setNumeroPorte(pUser.getNumeroPorte());
+		user.get().setNomRue(pUser.getNomRue());
+		user.get().setComplementAdresse(pUser.getComplementAdresse());
+
+		iUserDao.save(user.get());
 
 		return pUser;
 
@@ -208,7 +232,7 @@ public class UserServiceImpl implements IUserService {
 		pUserDto = this.modelMapper.map(vUserEntity.get(), UtilisateurDto.class);
 		pUserDto.setVille(vUserEntity.get().getVille().getNom());
 		pUserDto.setCodePostal(vUserEntity.get().getVille().getCodePostal());
-
+		log.debug(pUserDto.getId() + "");
 		return pUserDto;
 	}
 
@@ -225,6 +249,18 @@ public class UserServiceImpl implements IUserService {
 		vUser.get().setEstActive(Boolean.TRUE);
 		iUserDao.save(vUser.get());
 
+	}
+
+	@Override
+	public List<CommandeDto> getCommandeByMail(String mail) {
+		Optional<User> opsRes = iUserDao.getUserByMail(mail);
+		List<CommandeDto> list = new ArrayList<>();
+		for (Commande iterable_element : opsRes.get().getCommandes()) {
+			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);
+			list.add(commande);
+		}
+
+		return list;
 	}
 
 }

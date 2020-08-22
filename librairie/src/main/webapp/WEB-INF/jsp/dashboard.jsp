@@ -80,8 +80,7 @@
 						<th>Nom</th>
 						<th>Prenom</th>
 						<th>Adresse mail</th>
-						<th>Role</th>
-						<th>Activé</th>
+						<th>Outils</th>
 					</tr>
 				</thead>
 
@@ -91,8 +90,6 @@
 							<td ><a href="#" data-toggle="modal" data-target="#modalUtilisateur">${u.nom}</a> </td>
 							<td>${u.prenom}</td>
 							<td>${u.mail}</td>
-							<td>${u.labelRole}</td>
-							<td>${u.estActive}</td>
 							
 							<td>
 							<a href="#" class="text-success"> <i
