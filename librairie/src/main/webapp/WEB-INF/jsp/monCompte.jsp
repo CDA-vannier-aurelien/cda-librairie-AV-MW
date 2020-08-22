@@ -16,7 +16,6 @@
           href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
-    <link rel="stylesheet" href="assets/css/myCss.css">
 </head>
 
 <body style="background-color: white; background: white;">
@@ -24,7 +23,7 @@
 
 <div class="container-fluid">
     <div class="row mt-2 mb-4">
-    <div class="h1 col-6 text-center"> Mes Informations</div>
+        <div class="h1 col-6 text-center"> Mes Informations</div>
         <div class="h1 col-6 text-center">Mes commandes</div>
     </div>
     <div class="row">
@@ -104,7 +103,8 @@
                                                              placeholder="${user.mail}"
                                                              readonly>
             </div>
-            <button data-toggle="modal" data-target="#modalModifier" type="button" class="btn btn-outline-info waves-effect ml-auto">
+            <button data-toggle="modal" data-target="#modalModifier" type="button"
+                    class="btn btn-outline-info waves-effect ml-auto">
                 Modifier
             </button>
         </div>
@@ -144,9 +144,37 @@
     </div>
 
 
-
 </div>
-
+<div class="modal fade" id="modalModifier" tabindex="-1"
+     aria-labelledby="modalModifierLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaleSuppressionLabel">Modification
+                    quantitée livre</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="updateLivre" method="post">
+                <div class="modal-body">
+                    <label> Ancienne quantitée :<span id="ancienneQuantitee">
+						</span> </label>
+                    <br>
+                    <label for="quantiteLivre" >Nouvelle Quantitée</label>
+                    <input type="number" name="quantite" id="quantiteLivre" min="0">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Annuler</button>
+                    <input type="hidden" name="reference" id="transfertB">
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <footer class="footer fixed-bottom text-faded text-center py-5"
         style="background-color: rgb(238, 244, 247);">
     <div class="container">
@@ -154,135 +182,6 @@
             2020</p>
     </div>
 </footer>
-<div class="modal fade" id="modalModifier" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog cascading-modal" role="document">
-        <!--Content-->
-        <div class="modal-content">
 
-            <!--Modal cascading tabs-->
-            <div class="modal-c-tabs">
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3"
-                    role="tablist">
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                            href="#panel8" role="tab"><i class="fa fa-user-plus"></i>
-                        Register</a></li>
-                </ul>
-
-                <!-- Tab panels -->
-                <div class="tab-content">
-                    <!--Panel 8-->
-                    <div class="tab-pane fade" id="panel8" role="tabpanel">
-
-                        <!--Body-->
-                        <form method="post" action="addUser.do" class="was-validated">
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col md-form form-sm mb-2">
-                                            <i class="fa fa-user prefix"></i> <input type="text"
-                                                                                     id="nomModifier"
-                                                                                     class="form-control form-control-sm validate"
-                                                                                     placeholder="Nom" name="nom"
-                                                                                     required>
-
-                                        </div>
-                                        <div class="col md-form form-sm mb-2 mt-4">
-                                            <input type="text" id="prenomModifier"
-                                                   class="form-control form-control-sm validate"
-                                                   placeholder="Prenom" name="prenom" required>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3 md-form form-sm mb-2">
-                                            <i class="fa fa-home"></i> <input type="number" id="numeroModifier"
-                                                                              class="form-control form-control-sm validate"
-                                                                              placeholder="N°" name="numeroPorte"
-                                                                              min="0" required>
-
-                                        </div>
-                                        <div class="col-9 md-form form-sm mb-2 mt-4">
-
-                                            <input type="text" id="adresseModifier"
-                                                   class="form-control form-control-sm validate"
-                                                   placeholder="Nom de la rue" name="nomRue" required>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col md-form form-sm mb-2">
-                                            <i class="fa fa-location-arrow prefix"></i> <input
-                                                type="text" id="villeModifier" name="ville"
-                                                class="form-control form-control-sm validate"
-                                                placeholder="Ville" required>
-
-                                        </div>
-                                        <div class="col md-form form-sm mb-2 mt-4">
-                                            <input type="number" id="codePostalModifier"
-                                                   class="form-control form-control-sm validate"
-                                                   placeholder="Code Postal" name="codePostal" required>
-                                        </div>
-                                        <div class="col md-form form-sm mb-2 mt-4">
-                                            <input type="text" id="paysModifier"
-                                                   class="form-control form-control-sm validate"
-                                                   placeholder="Pays" name="pays" required>
-                                        </div>
-                                    </div>
-                                    <div class="md-form form-sm mb-2">
-                                        <i class="fa fa-lock prefix"></i> <input type="text"
-                                                                                 id="complementModifier"
-                                                                                 class="form-control form-control-sm validate"
-                                                                                 placeholder="Complément d'adresse"
-                                                                                 name="complementAdresse">
-                                    </div>
-                                    <div class="md-form form-sm mb-2">
-                                        <i class="fa fa-calendar-minus-o prefix"></i> <input
-                                            type="date" id="datenaissModifier"
-                                            class="form-control form-control-sm validate"
-                                            placeholder="Date de Naissance" name="dateNaissance"
-                                            required>
-
-                                    </div>
-                                    <div class="md-form form-sm mb-2">
-                                        <i class="fa fa-lock prefix"></i> <input type="password"
-                                                                                 id="password"
-                                                                                 class="form-control form-control-sm validate"
-                                                                                 placeholder="Password" name="password"
-                                                                                 required>
-                                    </div>
-
-                                    <div class="text-center form-sm mt-2 mb-4">
-                                        <button class="btn btn-info" id="valider">
-                                            Modifier <i class="fa fa-sign-in ml-1"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                                <!--Footer-->
-                                <div class="modal-footer">
-                                    <button type="button"
-                                            class="btn btn-outline-info waves-effect ml-auto"
-                                            data-dismiss="modal">Close
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <!--/.Panel 8-->
-                </div>
-
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/script.min.js"></script>
-<script src="assets/js/myScript.js"></script>
 </body>
 </html>
