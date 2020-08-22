@@ -91,12 +91,13 @@ function addOptionAuteur(){
         		$("#butttonModalAuteur").attr('class',"d-none");
         		$.each(result,function(element , nom){
             		
-            		 $('#listAuteur').append($("<option>").attr('value', nom).text(nom))
+            		 $('#listAuteur').append($("<option>").attr('value', nom).text(nom));
+            		  $('#valider').attr("disabled", false);
  
             	})
         	}else {
         		$("#butttonModalAuteur").attr('class',"text-danger error");
-        		
+        		  $('#valider').attr("disabled", true);
         	}
         	}
         
@@ -119,11 +120,12 @@ function addOptionEditeur(){
         	if(result.length>0){
         		$("#butttonModalAuteur").attr('class',"d-none");
         		$.each(result,function(element , nom){
-            		 $('#listEditeur').append($("<option>").attr('value', nom).text(nom))
+            		 $('#listEditeur').append($("<option>").attr('value', nom).text(nom));
+            		  $('#valider').attr("disabled", false);
             	})
         	}else {
         		$("#butttonModalAuteur").attr('class',"text-danger error");
-        		
+        		  $('#valider').attr("disabled", true);
         	}
         	
         	
@@ -133,9 +135,6 @@ function addOptionEditeur(){
     	$("#butttonModalAuteur").attr('class',"d-none");
     }}
 
-        })
-    }
-}
 
 
 $(function () {
