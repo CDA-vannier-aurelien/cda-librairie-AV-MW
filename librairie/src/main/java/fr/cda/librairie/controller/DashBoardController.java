@@ -34,28 +34,29 @@ public class DashBoardController {
 	@Autowired
 	IUserService userService;
 
-	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
+	@Autowired
+	ModelAndView modelAndView;
+
+	@RequestMapping(value = { "/dashboard" }, method = { RequestMethod.GET, RequestMethod.POST })
 	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCoursLivre,
 			@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
 		log.debug("list livre dash");
 
-		ModelAndView model = new ModelAndView();
-
 		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
-		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours);
+		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours, Boolean.FALSE);
 
-		model.addObject("listeUser", vListUser);
-		model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
-		model.addObject("count", this.userService.count());
-		model.addObject("pageEnCours", pageEnCours);
+		modelAndView.addObject("listeUser", vListUser);
+		modelAndView.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("count", this.userService.count());
+		modelAndView.addObject("pageEnCours", pageEnCours);
 
-		model.addObject("listeLivre", vList);
-		model.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
-		model.addObject("countLivre", this.serviceLivre.count());
-		model.addObject("pageEnCoursLivre", pageEnCoursLivre);
+		modelAndView.addObject("listeLivre", vList);
+		modelAndView.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("countLivre", this.serviceLivre.count());
+		modelAndView.addObject("pageEnCoursLivre", pageEnCoursLivre);
 
-		model.setViewName("dashboard");
-		return model;
+		modelAndView.setViewName("dashboard");
+		return modelAndView;
 	}
 
 }

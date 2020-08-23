@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints={
+@Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"numero_commande", "reference"}
         )})
 
@@ -20,14 +20,14 @@ public class CommandeLine {
     private int idLigne;
 
     @ManyToOne()
-            @JoinColumn(name = "numero_commande")
+    @JoinColumn(name = "numero_commande")
     Commande commande;
 
     @ManyToOne()
-            @JoinColumn(name = "reference")
+    @JoinColumn(name = "reference")
     Livre livre;
 
-  	@Column(name= "quantite_commandee")
+    @Column(name = "quantite_commandee")
     private int quantiteCommandee;
-    
+
 }

@@ -28,7 +28,7 @@ public class Commande {
     private Date dateCommande = new Date();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-            @JoinColumn(name = "numero_commande")
+    @JoinColumn(name = "numero_commande")
     List<CommandeLine> commandeLine = new ArrayList<>();
 
 

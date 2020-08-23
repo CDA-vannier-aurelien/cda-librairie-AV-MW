@@ -98,7 +98,7 @@ public class LivreServiceImpl implements ILivreService {
 	@Override
 	public List<LivreDto> getAllLivre(int pPageEnCours) {
 		List<LivreDto> listLivre = new ArrayList<LivreDto>();
-		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAGE);
+		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
 		Page<Livre> livres = this.livreDao.findAll(page);
 		for (Livre livre : livres) {
 			LivreDto livre2 = new LivreDto(livre.getReference(), livre.getPrix(), livre.getQuantitee(),

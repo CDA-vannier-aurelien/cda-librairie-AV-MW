@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class AccueilController {
 
-	@GetMapping(value = "/index")
-	public void sayHello() {
-	
-	}
+    @GetMapping(value = "/index")
+    public void sayHello() {
+
+    }
 }
