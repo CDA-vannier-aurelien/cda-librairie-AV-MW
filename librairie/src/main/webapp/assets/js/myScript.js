@@ -234,6 +234,18 @@ function modifierUser(nom, prenom, numRue, rue, ville, pays, codePostal, complem
     $('#complementAdresseModifier').val(complementAdresse);
 
 }
+function transfertUser(mail , nom , prenom , numRue ,rue , ville , pays ,codePostal , complementAdresse ){
+	$('#nomModifier').val(nom);
+	$('#prenomModifier').val(prenom);
+	$('#numeroModifier').val(numRue);
+	$('#rueModifier').val(rue);
+	$('#villeModifier').val(ville);
+	$('#paysModifier').val(pays);
+	$('#codePostalModifier').val(codePostal);
+	$('#complementAdresseModifier').val(complementAdresse);
+	$('#mailModifier').val(mail);
+	
+}
 
 function supprimerCommande(reference) {
     $('#referenceCommande').val(reference);
