@@ -117,7 +117,7 @@
 					<c:forEach var="commande" items="${listeCommande}">
 					<div class="accordion">
 						<tr>
-							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable">${commande.numeroCommande}</td>
+							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable" onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
 							<td>${commande.dateCommande}</td>
 							<td>
 							<c:choose  >
@@ -158,13 +158,8 @@
 										</tr>
 										</thead>
 
-										<tbody>
+										<tbody id="commandeLine${commande.numeroCommande}">
 
-										<tr >
-											<td>Enginner Software</td>
-											<td>Google</td>
-											<td>U$8.00000 </td>
-										</tr>
 										</tbody>
 									</table>
 								</div>
