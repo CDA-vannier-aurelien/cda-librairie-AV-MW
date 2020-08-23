@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import fr.cda.librairie.dao.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +14,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.cda.librairie.dao.ICommandeDao;
+import fr.cda.librairie.dao.ILivreDao;
+import fr.cda.librairie.dao.IPaysDao;
+import fr.cda.librairie.dao.IRoleDao;
+import fr.cda.librairie.dao.IUserDao;
+import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
@@ -37,7 +42,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IVilleDao iVilleDao;
-@Autowired
+	@Autowired
 	ICommandeDao iCommandeDao;
 	@Autowired
 	ILivreDao iLivreDao;
@@ -149,6 +154,8 @@ public class UserServiceImpl implements IUserService {
 		for (User user : u) {
 			UtilisateurDto uDto = this.modelMapper.map(user, UtilisateurDto.class);
 			uDto.setLabelRole(user.getRole().getRole());
+			uDto.setVille(user.getVille().getNom());
+			uDto.setCodePostal(user.getVille().getCodePostal());
 			liste.add(uDto);
 
 		}
@@ -263,8 +270,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public void deleteCommandeByIdCommande(int idCommande, String mail) {
 		Optional<User> optionalUser = iUserDao.getUserByMail(mail);
-		for(Commande commande : optionalUser.get().getCommandes()){
-			if(commande.getNumeroCommande()==idCommande){
+		for (Commande commande : optionalUser.get().getCommandes()) {
+			if (commande.getNumeroCommande() == idCommande) {
 				optionalUser.get().getCommandes().remove(commande);
 				break;
 			}

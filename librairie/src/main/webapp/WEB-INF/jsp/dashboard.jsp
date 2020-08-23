@@ -87,24 +87,20 @@
 				<tbody>
 					<c:forEach var="u" items="${listeUser}">
 						<tr>
-							<td ><a href="#" data-toggle="modal" data-target="#modalUtilisateur">${u.nom}</a> </td>
-							<td>${u.prenom}</td>
-							<td>${u.mail}</td>
-							
-							<td>
-							<a href="#" class="text-success"> <i
-									class="fa fa-check"
-									onclick="validerMail('${u.mail}')"></i>
+							<td>${u.nom}</td>
+							<td >${u.prenom}</td>
+							<td data-toggle="modal" data-target="#modalUtilisateur" onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
+
+							<td><a href="#" class="text-success"> <i
+									class="fa fa-check" onclick="validerMail('${u.mail}')"></i>
 							</a>
-							<form class="d-none" id="validateUser${u.mail}" action="validerMail" method="POST" >
-							<input type="hidden" value="${u.mail} " name="mail">
-							
-							</form>
-							<a href="#" class="text-danger"> <i
-									class="fa fa-trash"
+								<form class="d-none" id="validateUser${u.mail}"
+									action="validerMail" method="POST">
+									<input type="hidden" value="${u.mail} " name="mail">
+
+								</form> <a href="#" class="text-danger"> <i class="fa fa-trash"
 									onclick="afficherModaleSuppression('${u.mail}')"></i>
-							</a>
-							</td>
+							</a></td>
 					</c:forEach>
 				<tbody>
 			</table>
@@ -128,16 +124,19 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td><a data-toggle="modal" data-target="#modaleSuppressionLivre"
-								class="text-danger" onclick="transfertRef(${livre.reference})">
-									<i class="fa fa-trash"></i>
-							</a> <a data-toggle="modal" onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })" data-target="#modalModification" class="text-warning"> <i class="fa fa-edit">
-								</i></a></td>
+							<td><a data-toggle="modal"
+								data-target="#modaleSuppressionLivre" class="text-danger"
+								onclick="transfertRef(${livre.reference})"> <i
+									class="fa fa-trash"></i>
+							</a> <a data-toggle="modal"
+								onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })"
+								data-target="#modalModification" class="text-warning"> <i
+									class="fa fa-edit"> </i></a></td>
 					</c:forEach>
 				<tbody>
 			</table>
 		</div>
-		
+
 		<div class="modal fade" id="modaleSuppression" tabindex="-1"
 			aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -151,7 +150,8 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Confirmer vous la suppression de la demande de compte ? mail : <span id="idToDeleteText"></span>
+						Confirmer vous la suppression de la demande de compte ? mail : <span
+							id="idToDeleteText"></span>
 
 					</div>
 					<div class="modal-footer">
@@ -208,22 +208,20 @@
 						</button>
 					</div>
 					<form action="updateLivre" method="post">
-					<div class="modal-body">
-						<label> Ancienne quantitée :<span id="ancienneQuantitee">
-						</span> </label>
-						<br> 
-						
-						<label for="quantiteLivre" >Nouvelle Quantitée</label>
-						<input type="number" name="quantite" id="quantiteLivre" min="0">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Annuler</button>
-						
+						<div class="modal-body">
+							<label> Ancienne quantitée :<span id="ancienneQuantitee">
+							</span>
+							</label> <br> <label for="quantiteLivre">Nouvelle Quantitée</label>
+							<input type="number" name="quantite" id="quantiteLivre" min="0">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Annuler</button>
+
 							<input type="hidden" name="reference" id="transfertB">
 							<button type="submit" class="btn btn-primary">Valider</button>
-						
-					</div>
+
+						</div>
 					</form>
 				</div>
 			</div>
@@ -406,6 +404,93 @@
 				</form>
 
 
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalUtilisateur" tabindex="-1"
+		aria-labelledby="modalModifierLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modaleSuppressionLabel">Mon Compte
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col md-form form-sm mb-2">
+								<i class="fa fa-user prefix"></i> <input type="text"
+									id="nomModifier" class="form-control form-control-sm validate"
+									placeholder="Nom" name="nom" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="text" id="prenomModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Prenom" name="prenom" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-8 md-form form-sm mb-2">
+								<i class="fa fa-envelope prefix"></i> <input type="email"
+									id="mailModifier"
+									class="form-control form-control-sm validate" 
+									name="mail" min="0" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3 md-form form-sm mb-2">
+								<i class="fa fa-home"></i> <input type="number"
+									id="numeroModifier"
+									class="form-control form-control-sm validate"
+									name="numeroPorte" min="0" readonly>
+							</div>
+							<div class=" col-3 md-form form-sm mb-2">
+								<i class="fa fa-lock prefix"></i> <input type="text"
+									id="complementAdresseModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Complément d'adresse" name="complementAdresse" readonly>
+							</div>
+							<div class="col-6 md-form form-sm mb-2 mt-4">
+								<input type="text" id="rueModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Nom de la rue" name="nomRue" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col md-form form-sm mb-2">
+								<i class="fa fa-location-arrow prefix"></i> <input type="text"
+									id="villeModifier" name="ville"
+									class="form-control form-control-sm validate"
+									placeholder="Ville" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="number" id="codePostalModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Code Postal" name="codePostal" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="text" id="paysModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Pays" name="pays" readonly>
+							</div>
+						</div>
+
+
+					</div>
+					<!--Footer-->
+					<div class="modal-footer">
+						<button type="button"
+							class="btn btn-outline-info waves-effect ml-auto"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
 
 			</div>
 		</div>
