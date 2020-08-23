@@ -10,9 +10,7 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -171,7 +169,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public long countCommandeByMail(String mail) {
-		return 	iUserDao.getUserByMail(mail).get().getCommandes().size();
+		return iUserDao.getUserByMail(mail).get().getCommandes().size();
 	}
 
 	@Override
@@ -265,7 +263,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<CommandeDto> getCommandeById(int id, int pPageEnCours) {
 		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
-		Page<Commande> pageCommande = iCommandeDao.getCommandeByIdClient(id, page);
+		Page<Commande> pageCommande = iCommandeDao.getCommandeByIdUser(page, id);
 		List<CommandeDto> list = new ArrayList<>();
 		for (Commande iterable_element : pageCommande) {
 			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);
