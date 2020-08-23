@@ -116,9 +116,9 @@
 
 				<tbody>
 					<c:forEach var="commande" items="${listeCommande}">
+					<div class="accordion">
 						<tr>
-							<td>${commande.numeroCommande}</td>
-							
+							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable">${commande.numeroCommande}</td>
 							<td>${commande.dateCommande}</td>
 							<td>
 							<c:choose  >
@@ -134,16 +134,51 @@
 							</td>
 							
 							<td>
-								<a class="text-danger">
+								<c:choose>
+									<c:when test="${commande.etatCommande eq 0}">
+								<a class="text-danger" onclick="supprimerCommande('${commande.numeroCommande}')">
 									<i class="fa fa-trash"></i>
 								</a>
+									</c:when>
+									<c:otherwise>
+										<i class="fa fa-check-circle text-success" ></i>
+									</c:otherwise>
+								</c:choose>
 								
 							</td>
+						</tr>
+						<tr>
+							<td colspan="12" class="hiddenRow">
+								<div class="accordian-body collapse" id="accordion${commande.numeroCommande}">
+									<table class="table table-striped">
+										<thead>
+										<tr class="info">
+											<th>Livre</th>
+											<th>Quantité</th>
+											<th>Prix</th>
+										</tr>
+										</thead>
+
+										<tbody>
+
+										<tr >
+											<td>Enginner Software</td>
+											<td>Google</td>
+											<td>U$8.00000 </td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</div>
 					</c:forEach>
 				<tbody>
 			</table>
 		</div>
-
+<form action="supprimerCommande" method="post" class="d-none" id="suppCommande">
+	<input type="hidden" id="referenceCommande" name="refeCommande">
+</form>
 
 	</div>
 	<div class="modal fade" id="modalModifier" tabindex="-1"

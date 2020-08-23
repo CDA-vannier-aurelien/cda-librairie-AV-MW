@@ -4,6 +4,7 @@ import fr.cda.librairie.entity.Commande;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -13,7 +14,10 @@ import java.util.Optional;
  */
 @Repository
 public interface ICommandeDao extends CrudRepository<Commande, Integer> {
-    @Override
+
     Optional<Commande> findById(Integer integer);
+
+    @Transactional
+    void removeByNumeroCommande(int id);
 
 }

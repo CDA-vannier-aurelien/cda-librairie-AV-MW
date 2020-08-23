@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import fr.cda.librairie.dao.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,11 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import fr.cda.librairie.dao.ILivreDao;
-import fr.cda.librairie.dao.IPaysDao;
-import fr.cda.librairie.dao.IRoleDao;
-import fr.cda.librairie.dao.IUserDao;
-import fr.cda.librairie.dao.IVilleDao;
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
@@ -41,7 +37,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IVilleDao iVilleDao;
-
+@Autowired
+	ICommandeDao iCommandeDao;
 	@Autowired
 	ILivreDao iLivreDao;
 
@@ -261,6 +258,20 @@ public class UserServiceImpl implements IUserService {
 		}
 
 		return list;
+	}
+
+	@Override
+	public void deleteCommandeByIdCommande(int idCommande, String mail) {
+		Optional<User> optionalUser = iUserDao.getUserByMail(mail);
+		for(Commande commande : optionalUser.get().getCommandes()){
+			if(commande.getNumeroCommande()==idCommande){
+				optionalUser.get().getCommandes().remove(commande);
+				break;
+			}
+		}
+		iUserDao.save(optionalUser.get());
+		iCommandeDao.removeByNumeroCommande(idCommande);
+
 	}
 
 }

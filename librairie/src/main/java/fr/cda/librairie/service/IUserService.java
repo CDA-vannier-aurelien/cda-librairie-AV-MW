@@ -30,4 +30,6 @@ public interface IUserService {
 	void activeCompte(String mail);
 
 	List<CommandeDto> getCommandeByMail(String mail);
+
+	void deleteCommandeByIdCommande(int idCommande, String mail);
 }

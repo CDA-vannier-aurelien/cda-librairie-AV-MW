@@ -231,3 +231,8 @@ function modifierUser(nom , prenom , numRue ,rue , ville , pays ,codePostal , co
 	
 }
 
+function supprimerCommande(reference){
+    $('#referenceCommande').val(reference);
+    $('#suppCommande').submit();
+}
+

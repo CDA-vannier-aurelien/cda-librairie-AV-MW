@@ -295,9 +295,9 @@
 			<table class="table table-striped table-class col-6" id="table-id">
 				<thead>
 					<tr>
-						<th>Rï¿½fï¿½rences</th>
+						<th>References</th>
 						<th>Titre</th>
-						<th>Quantitï¿½e</th>
+						<th>Quantitee</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
