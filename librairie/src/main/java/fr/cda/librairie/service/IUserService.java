@@ -1,12 +1,11 @@
 package fr.cda.librairie.service;
 
-import java.util.HashMap;
-import java.util.List;
-
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
-import org.springframework.data.domain.Page;
+
+import java.util.HashMap;
+import java.util.List;
 
 public interface IUserService {
 
@@ -32,7 +31,7 @@ public interface IUserService {
 
 	void activeCompte(String mail);
 
-	List<CommandeDto> getCommandeByMail(String mail, int page);
+	List<CommandeDto> getCommandeById(int id, int pageEncours);
 
 	void deleteCommandeByIdCommande(int idCommande, String mail);
 }

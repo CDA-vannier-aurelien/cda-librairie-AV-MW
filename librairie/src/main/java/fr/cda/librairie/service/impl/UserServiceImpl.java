@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -125,7 +126,7 @@ public class UserServiceImpl implements IUserService {
 
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom())
 						.prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole())
-						.dateConnection(optionalUser.get().getDateConnection()).build();
+						.dateConnection(optionalUser.get().getDateConnection()).id(optionalUser.get().getId()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
 
@@ -262,10 +263,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<CommandeDto> getCommandeByMail(String mail, int pPageEnCours) {
-		Optional<User> opsRes = iUserDao.getUserByMail(mail);
+	public List<CommandeDto> getCommandeById(int id, int pPageEnCours) {
 		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
-		Page <Commande> pageCommande = new PageImpl<>(opsRes.get().getCommandes(),page, Constantes.ELEMENTS_PAR_PAGE);
+		Page<Commande> pageCommande = iCommandeDao.getCommandeByIdClient(id, page);
 		List<CommandeDto> list = new ArrayList<>();
 		for (Commande iterable_element : pageCommande) {
 			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);

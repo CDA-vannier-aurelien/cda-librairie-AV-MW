@@ -20,6 +20,12 @@ import fr.cda.librairie.entity.Commande;
  */
 @Repository
 public interface ICommandeDao extends PagingAndSortingRepository<Commande, Integer> {
+	@Query(value = "select * from commande c\n" +
+			"join utilisateur_commande cu on c.numero_commande = cu.commandes_numero_commande\n" +
+			"join utilisateur u on u.id = cu.User_id \n" +
+			"where u.id= :id ", nativeQuery = true)
+	Page<Commande>
+
 
 	Optional<Commande> findById(Integer integer);
 

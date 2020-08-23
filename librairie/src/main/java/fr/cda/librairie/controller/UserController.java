@@ -85,7 +85,7 @@ public class UserController {
 
         UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
         utilisateurDto = iUserService.getByMail(utilisateurDto);
-        List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail(), pageEnCours);
+        List<CommandeDto> listcom = iUserService.getCommandeById(utilisateurDto.getId(), pageEnCours);
         model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
         model.addObject("count", this.iUserService.countCommandeByMail(utilisateurDto.getMail()));
         model.addObject("pageEnCours", pageEnCours);
