@@ -68,7 +68,7 @@
 
 			</div>
 			<div class="col-6 d-flex justify-content-center mt-2">
-				<h2>Tableau livre Livre</h2>
+				<h2>Tableau Livre</h2>
 			</div>
 		</div>
 
