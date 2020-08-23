@@ -64,7 +64,7 @@ public class DashBoardController {
 
 		modelAndView.addObject("listeCommande", vListCommande);
 		modelAndView.addObject("nbElementsParPageCommande", Constantes.ELEMENTS_PAR_PAGE);
-		modelAndView.addObject("countLivre", this.serviceCommande.count());
+		modelAndView.addObject("countCommande", this.serviceCommande.count());
 		modelAndView.addObject("pageEnCoursCommande", pageEnCoursCommande);
 
 		modelAndView.setViewName("dashboard");
