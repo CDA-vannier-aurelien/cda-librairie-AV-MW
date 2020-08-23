@@ -80,8 +80,7 @@
 						<th>Nom</th>
 						<th>Prenom</th>
 						<th>Adresse mail</th>
-						<th>Role</th>
-						<th>Activé</th>
+						<th>Outils</th>
 					</tr>
 				</thead>
 
@@ -91,8 +90,6 @@
 							<td ><a href="#" data-toggle="modal" data-target="#modalUtilisateur">${u.nom}</a> </td>
 							<td>${u.prenom}</td>
 							<td>${u.mail}</td>
-							<td>${u.labelRole}</td>
-							<td>${u.estActive}</td>
 							
 							<td>
 							<a href="#" class="text-success"> <i
@@ -298,9 +295,9 @@
 			<table class="table table-striped table-class col-6" id="table-id">
 				<thead>
 					<tr>
-						<th>Rï¿½fï¿½rences</th>
+						<th>References</th>
 						<th>Titre</th>
-						<th>Quantitï¿½e</th>
+						<th>Quantitee</th>
 						<th>Outils</th>
 					</tr>
 				</thead>

@@ -204,4 +204,35 @@ function validerMail(mail) {
 
     mail.submit();
 }
+function modifierUser(nom , prenom , numRue ,rue , ville , pays ,codePostal , complementAdresse ){
+	$('#nom').val(nom);
+	$('#nomModifier').val(nom);
+	
+	$('#prenom').val(prenom);
+	$('#prenomModifier').val(prenom);
+	
+	$('#numero').val(numRue);
+	$('#numeroModifier').val(numRue);
+	
+	$('#rue').val(rue);
+	$('#rueModifier').val(rue);
+	
+	$('#ville').val(ville);
+	$('#villeModifier').val(ville);
+	
+	$('#pays').val(pays);
+	$('#paysModifier').val(pays);
+	
+	$('#codePostal').val(codePostal);
+	$('#codePostalModifier').val(codePostal);
+	
+	$('#complementAdresse').val(complementAdresse);
+	$('#complementAdresseModifier').val(complementAdresse);
+	
+}
+
+function supprimerCommande(reference){
+    $('#referenceCommande').val(reference);
+    $('#suppCommande').submit();
+}
 

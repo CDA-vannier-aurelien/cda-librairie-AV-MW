@@ -3,6 +3,7 @@ package fr.cda.librairie.controller;
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.service.ICommandeService;
 import fr.cda.librairie.service.ILivreService;
 import fr.cda.librairie.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -25,6 +29,9 @@ public class CommandeController {
 
     @Autowired
     private ILivreService iLivreService;
+
+    @Autowired
+    private ICommandeService iCommandeService;
 
     @Autowired
     private IUserService iUserService;
@@ -43,7 +50,7 @@ public class CommandeController {
 
         listeLivre.put(livre, vQuantite);
 
-        for (Map.Entry<LivreDto, Integer> map : listeLivre.entrySet()) {
+        for (Entry<LivreDto, Integer> map : listeLivre.entrySet()) {
             if (map.getKey().getReference() == reference) {
                 map.setValue(vQuantite);
             } else {
@@ -94,5 +101,15 @@ public class CommandeController {
 
     @GetMapping(value = "/panier")
     public void monPanier() {
+    }
+
+    @RequestMapping(value = "supprimerCommande", method = RequestMethod.POST)
+    public ModelAndView supprimerCommande(@RequestParam(value = "refeCommande") int refCommande,HttpSession httpSession) {
+        UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+
+        iUserService.deleteCommandeByIdCommande(refCommande, utilisateurDto.getMail());
+        ModelAndView model = new ModelAndView();
+        model.setViewName("forward:/monCompte");
+        return model;
     }
 }

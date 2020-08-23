@@ -3,17 +3,13 @@ package fr.cda.librairie.service;
 import java.util.HashMap;
 import java.util.List;
 
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.exception.NomPaysException;
-import fr.cda.librairie.exception.NomRueException;
-import fr.cda.librairie.exception.NomVilleIncorrect;
-import fr.cda.librairie.exception.RoleException;
 
 public interface IUserService {
 
-	UtilisateurDto create(UtilisateurDto pUser)
-			throws NomVilleIncorrect, NomPaysException, NomRueException, RoleException;
+	UtilisateurDto create(UtilisateurDto pUser);
 
 	UtilisateurDto conection(UtilisateurDto pUser);
 
@@ -25,11 +21,15 @@ public interface IUserService {
 
 	long count();
 
-	UtilisateurDto update(UtilisateurDto user) throws NomVilleIncorrect, NomRueException;
+	UtilisateurDto update(UtilisateurDto user);
 
 	void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
 
 	UtilisateurDto getByMail(UtilisateurDto pUser);
 
 	void activeCompte(String mail);
+
+	List<CommandeDto> getCommandeByMail(String mail);
+
+	void deleteCommandeByIdCommande(int idCommande, String mail);
 }

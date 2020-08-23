@@ -36,4 +36,6 @@ public interface IUserDao extends PagingAndSortingRepository<User, String> {
 	@Transactional
 	void removeByMail(String mail);
 
+
+
 }

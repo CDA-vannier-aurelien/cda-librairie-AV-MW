@@ -27,7 +27,7 @@ public class CommandeServiceImpl implements ICommandeService {
      */
     @Override
     public void deleteCommandeById(int id) {
-        this.iCommandeDao.deleteById(id);
+        this.iCommandeDao.removeByNumeroCommande(id);
     }
 
     /**
