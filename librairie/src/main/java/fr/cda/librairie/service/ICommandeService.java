@@ -16,5 +16,7 @@ public interface ICommandeService {
 
 	CommandeDto create(CommandeDto pCommande);
 
+	void validateCommande(int numCommande);
+
 	public long count();
 }

@@ -88,8 +88,9 @@
 					<c:forEach var="u" items="${listeUser}">
 						<tr>
 							<td>${u.nom}</td>
-							<td >${u.prenom}</td>
-							<td data-toggle="modal" data-target="#modalUtilisateur" onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
+							<td>${u.prenom}</td>
+							<td data-toggle="modal" data-target="#modalUtilisateur"
+								onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
 
 							<td><a href="#" class="text-success"> <i
 									class="fa fa-checkcircle" onclick="validerMail('${u.mail}')"></i>
@@ -304,57 +305,84 @@
 
 				<tbody>
 					<c:forEach var="commande" items="${listeCommande}">
-					<div class="accordion">
-						<tr>
-							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable" onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
-							<td>${commande.userMail}</td>
-							<td>${commande.dateCommande}</td>
-							<td>
-							<c:choose  >
-							<c:when test="${!commande.estValidee}">
+						<div class="accordion">
+							<tr>
+								<td data-toggle="collapse"
+									data-target="#accordion${commande.numeroCommande}"
+									class="clickable"
+									onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
+								<td data-toggle="modal" data-target="#modalUtilisateur"
+									onclick="userMail('${commande.userMail}')">${commande.userMail}</td>
+								<td>${commande.dateCommande}</td>
+								<td><c:choose>
+										<c:when test="${!commande.estValidee}">
 							 en cours de validation
 
 							</c:when>
-							<c:otherwise>
+										<c:otherwise>
 							 en cours de livraison
 							</c:otherwise>
 
-							</c:choose>
-							</td>
+									</c:choose></td>
 
-							<td>
-								
-									<c:if test="${!commande.estValidee}">
-								<a><em class="fa fa-check-circle text-success" ></em>
-								</a>
-									</c:if>
-									
+								<td><c:if test="${!commande.estValidee}">
+										<a onclick="validerCommande('${commande.numeroCommande}')"><em class="fa fa-check-circle text-success"></em> </a>
+										<form class="d-none" id="validateCommande${commande.numeroCommande}"
+									action="valideCommandes" method="POST">
+									<input type="hidden" value="${commande.numeroCommande} " name="numCommande">
 
-							</td>
-						</tr>
-						<tr>
-							<td colspan="12" class="hiddenRow">
-								<div class="accordian-body collapse" id="accordion${commande.numeroCommande}">
-									<table class="table table-striped">
-										<thead>
-										<tr class="info">
-											<th>Livre</th>
-											<th>Quantité</th>
-											<th>Prix</th>
-										</tr>
-										</thead>
+								</form>
+									</c:if></td>
+							</tr>
+							<tr>
+								<td colspan="12" class="hiddenRow">
+									<div class="accordian-body collapse"
+										id="accordion${commande.numeroCommande}">
+										<table class="table table-striped">
+											<thead>
+												<tr class="info">
+													<th>Livre</th>
+													<th>Quantité</th>
+													<th>Prix</th>
+												</tr>
+											</thead>
 
-										<tbody id="commandeLine${commande.numeroCommande}">
+											<tbody id="commandeLine${commande.numeroCommande}">
 
-										</tbody>
-									</table>
-								</div>
-							</td>
-						</tr>
-					</div>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</div>
 					</c:forEach>
 				<tbody>
 			</table>
+			<br>
+			<div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCoursCommande > 1 }">
+								<c:url value="/dashboard" var="lienPrecedent">
+									<c:param name="pageLivre" value="${ pageEnCoursCommande - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCoursLivre }</a>
+
+							</li>
+							<c:if
+								test="${ pageEnCoursCommande < (countCommande / nbElementsParPageCommande)  }">
+								<c:url value="/dashboard" var="lienSuivant">
+									<c:param name="pageLivre" value="${ pageEnCoursCommande + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
 
 			<div class="col-6">
 				<form method="post" action="addLivre" class="was-validated">
@@ -484,8 +512,7 @@
 						<div class="row">
 							<div class=" col-8 md-form form-sm mb-2">
 								<i class="fa fa-envelope prefix"></i> <input type="email"
-									id="mailModifier"
-									class="form-control form-control-sm validate" 
+									id="mailModifier" class="form-control form-control-sm validate"
 									name="mail" min="0" readonly>
 							</div>
 						</div>
@@ -500,7 +527,8 @@
 								<i class="fa fa-lock prefix"></i> <input type="text"
 									id="complementAdresseModifier"
 									class="form-control form-control-sm validate"
-									placeholder="Complément d'adresse" name="complementAdresse" readonly>
+									placeholder="Complément d'adresse" name="complementAdresse"
+									readonly>
 							</div>
 							<div class="col-6 md-form form-sm mb-2 mt-4">
 								<input type="text" id="rueModifier"
