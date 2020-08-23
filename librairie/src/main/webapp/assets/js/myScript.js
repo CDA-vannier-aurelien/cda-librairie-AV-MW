@@ -270,3 +270,9 @@ function listCommandeLine(numeroCommande) {
     })
 }
 
+function commander(reference){
+
+    var commander = document.getElementById("commande" + reference);
+    commander.submit();
+}
+

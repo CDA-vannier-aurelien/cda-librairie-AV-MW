@@ -1,13 +1,12 @@
 package fr.cda.librairie.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.servlet.http.HttpSession;
-
+import fr.cda.librairie.dto.CommandeDto;
+import fr.cda.librairie.dto.LivreDto;
+import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.service.ICommandeService;
+import fr.cda.librairie.service.ILivreService;
+import fr.cda.librairie.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.cda.librairie.dto.CommandeDto;
-import fr.cda.librairie.dto.LivreDto;
-import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.ICommandeService;
-import fr.cda.librairie.service.ILivreService;
-import fr.cda.librairie.service.IUserService;
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -78,6 +76,8 @@ public class CommandeController {
 		HashMap<LivreDto, Integer> maCmd = (HashMap<LivreDto, Integer>) httpSession.getAttribute("panier");
 		UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
 		iUserService.passerCommande(utilisateurDto, maCmd);
+		maCmd.clear();
+		httpSession.setAttribute("panier", maCmd);
 		modelAndView.setViewName("forward:/monCompte");
 		return modelAndView;
 	}
