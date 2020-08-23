@@ -5,6 +5,7 @@ import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.CommandeLineDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.ICommandeLineService;
+import fr.cda.librairie.service.ICommandeService;
 import fr.cda.librairie.service.IUserService;
 import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
@@ -17,15 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-
-import fr.cda.librairie.dto.CommandeDto;
-import fr.cda.librairie.dto.CommandeLineDto;
-import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.ICommandeLineService;
-import fr.cda.librairie.service.ICommandeService;
-import fr.cda.librairie.service.IUserService;
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Controller

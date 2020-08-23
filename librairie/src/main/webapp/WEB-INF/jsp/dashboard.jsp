@@ -51,7 +51,7 @@
 							class="dropdown-toggle nav-link" data-toggle="dropdown"
 							aria-expanded="false" href="#">${sessionScope.user.nom} </a>
 							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" role="presentation" href="#">Mon
+								<a class="dropdown-item" role="presentation" href="monCompte">Mon
 									compte</a> <a class="dropdown-item" role="presentation"
 									href="panier">Mon panier</a><a class="dropdown-item"
 									role="presentation" href="deconnexion">LogOut</a>
