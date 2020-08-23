@@ -124,7 +124,7 @@ public class UserServiceImpl implements IUserService {
 
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom())
 						.prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole())
-						.dateConnection(optionalUser.get().getDateConnection()).build();
+						.dateConnection(optionalUser.get().getDateConnection()).id(optionalUser.get().getId()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
 
@@ -165,6 +165,11 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public long count() {
 		return this.iUserDao.count();
+	}
+
+	@Override
+	public long countCommandeByMail(String mail) {
+		return iUserDao.getUserByMail(mail).get().getCommandes().size();
 	}
 
 	@Override
@@ -256,14 +261,14 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<CommandeDto> getCommandeByMail(String mail) {
-		Optional<User> opsRes = iUserDao.getUserByMail(mail);
+	public List<CommandeDto> getCommandeById(int id, int pPageEnCours) {
+		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
+		Page<Commande> pageCommande = iCommandeDao.getCommandeByIdUser(page, id);
 		List<CommandeDto> list = new ArrayList<>();
-		for (Commande iterable_element : opsRes.get().getCommandes()) {
+		for (Commande iterable_element : pageCommande) {
 			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);
 			list.add(commande);
 		}
-
 		return list;
 	}
 

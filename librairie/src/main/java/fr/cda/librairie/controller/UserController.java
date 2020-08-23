@@ -1,10 +1,13 @@
 package fr.cda.librairie.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.google.gson.Gson;
+import fr.cda.librairie.dto.CommandeDto;
+import fr.cda.librairie.dto.CommandeLineDto;
+import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.service.ICommandeLineService;
+import fr.cda.librairie.service.IUserService;
+import fr.cda.librairie.utils.Constantes;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -84,16 +87,19 @@ public class UserController {
 		return json;
 	}
 
-	@RequestMapping(value = "monCompte", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView afficher(HttpSession httpSession) {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("monCompte");
+    @RequestMapping(value = "monCompte", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView afficher(@RequestParam(value = "page", defaultValue = "1") int pageEnCours , HttpSession httpSession) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("monCompte");
 
-		UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
-		utilisateurDto = iUserService.getByMail(utilisateurDto);
-		List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail());
-		model.addObject("user", utilisateurDto);
-		model.addObject("listeCommande", listcom);
+        UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+        utilisateurDto = iUserService.getByMail(utilisateurDto);
+        List<CommandeDto> listcom = iUserService.getCommandeById(utilisateurDto.getId(), pageEnCours);
+        model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+        model.addObject("count", this.iUserService.countCommandeByMail(utilisateurDto.getMail()));
+        model.addObject("pageEnCours", pageEnCours);
+        model.addObject("user", utilisateurDto);
+        model.addObject("listeCommande", listcom);
 
 		return model;
 	}
