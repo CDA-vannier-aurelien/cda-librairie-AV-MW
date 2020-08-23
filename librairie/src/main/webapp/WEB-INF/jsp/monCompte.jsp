@@ -31,7 +31,7 @@
 			<div class="container col-6">
 				<div class="row">
 					<div class="col md-form form-sm mb-2">
-						<i class="fa fa-user prefix"></i> <input type="text" id="nom"
+						<em class="fa fa-user prefix"></em> <input type="text" id="nom"
 							class="form-control form-control-sm validate"
 							placeholder="${user.nom}" name="nom" readonly>
 
@@ -45,7 +45,7 @@
 				</div>
 				<div class="row">
 					<div class="col-3 md-form form-sm mb-2">
-						<i class="fa fa-home"></i> <input type="number" id="numero"
+						<em class="fa fa-home"></em> <input type="number" id="numero"
 							class="form-control form-control-sm validate"
 							placeholder="${user.numeroPorte}" name="numeroPorte" min="0"
 							readonly>
@@ -61,7 +61,7 @@
 				</div>
 				<div class="row">
 					<div class="col md-form form-sm mb-2">
-						<i class="fa fa-location-arrow prefix"></i> <input type="text"
+						<em class="fa fa-location-arrow prefix"></em> <input type="text"
 							id="ville" name="ville"
 							class="form-control form-control-sm validate"
 							placeholder="${user.ville}" readonly>
@@ -79,19 +79,19 @@
 					</div>
 				</div>
 				<div class="md-form form-sm mb-2">
-					<i class="fa fa-lock prefix"></i> <input type="text"
+					<em class="fa fa-lock prefix"></em> <input type="text"
 						id="complement" class="form-control form-control-sm validate"
 						placeholder="${user.complementAdresse}" name="complementAdresse"
 						readonly>
 				</div>
 				<div class="md-form form-sm mb-2">
-					<i class="fa fa-calendar-minus-o prefix"></i> <input type="text"
+					<em class="fa fa-calendar-minus-o prefix"></em> <input type="text"
 						id="datenaiss" class="form-control form-control-sm validate"
 						placeholder="${user.dateNaissance}" name="dateNaissance" readonly>
 
 				</div>
 				<div class="md-form form-sm mb-2">
-					<i class="fa fa-envelope prefix"></i> <input type="email"
+					<em class="fa fa-envelope prefix"></em> <input type="email"
 						id="email" class="form-control form-control-sm validate"
 						name="mail" placeholder="${user.mail}" readonly>
 				</div>
@@ -102,15 +102,14 @@
 			</div>
 
 			<!-- Tableau livre  -->
-			<table class="table table-striped table-class col-6" id="">
+			<table class="table table-striped table-class col-6">
 
 				<thead>
 					<tr>
 						<th>N° commande</th>
-						
 						<th>Date de commande</th>
-						
 						<th>Etat de la commande</th>
+						<th>Outils</th>
 					</tr>
 				</thead>
 
@@ -118,33 +117,33 @@
 					<c:forEach var="commande" items="${listeCommande}">
 					<div class="accordion">
 						<tr>
-							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable">${commande.numeroCommande}</td>
+							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable" onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
 							<td>${commande.dateCommande}</td>
 							<td>
 							<c:choose  >
-							<c:when test="${commande.etatCommande eq 0 }">
+							<c:when test="${!commande.estValidee}">
 							 en cours de validation
-							
+
 							</c:when>
 							<c:otherwise>
 							 en cours de livraison
 							</c:otherwise>
-							
+
 							</c:choose>
 							</td>
-							
+
 							<td>
 								<c:choose>
-									<c:when test="${commande.etatCommande eq 0}">
+									<c:when test="${!commande.estValidee}">
 								<a class="text-danger" onclick="supprimerCommande('${commande.numeroCommande}')">
-									<i class="fa fa-trash"></i>
+									<em class="fa fa-trash"></em>
 								</a>
 									</c:when>
 									<c:otherwise>
-										<i class="fa fa-check-circle text-success" ></i>
+										<em class="fa fa-check-circle text-success" ></em>
 									</c:otherwise>
 								</c:choose>
-								
+
 							</td>
 						</tr>
 						<tr>
@@ -159,13 +158,8 @@
 										</tr>
 										</thead>
 
-										<tbody>
+										<tbody id="commandeLine${commande.numeroCommande}">
 
-										<tr >
-											<td>Enginner Software</td>
-											<td>Google</td>
-											<td>U$8.00000 </td>
-										</tr>
 										</tbody>
 									</table>
 								</div>
@@ -198,7 +192,7 @@
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col md-form form-sm mb-2">
-									<i class="fa fa-user prefix"></i> <input type="text"
+									<em class="fa fa-user prefix"></em> <input type="text"
 										id="nomModifier" class="form-control form-control-sm validate"
 										placeholder="Nom" name="nom" required>
 								</div>
@@ -210,7 +204,7 @@
 							</div>
 							<div class="row">
 								<div class="col-3 md-form form-sm mb-2">
-									<i class="fa fa-home"></i> <input type="number"
+									<em class="fa fa-home"></em> <input type="number"
 										id="numeroModifier"
 										class="form-control form-control-sm validate" placeholder="N°"
 										name="numeroPorte" min="0" required>
@@ -223,7 +217,7 @@
 							</div>
 							<div class="row">
 								<div class="col md-form form-sm mb-2">
-									<i class="fa fa-location-arrow prefix"></i> <input type="text"
+									<em class="fa fa-location-arrow prefix"></em> <input type="text"
 										id="villeModifier" name="ville"
 										class="form-control form-control-sm validate"
 										placeholder="Ville" required>
@@ -240,20 +234,20 @@
 								</div>
 							</div>
 							<div class="md-form form-sm mb-2">
-								<i class="fa fa-lock prefix"></i> <input type="text"
+								<em class="fa fa-lock prefix"></em> <input type="text"
 									id="complementAdresseModifier"
 									class="form-control form-control-sm validate"
 									placeholder="Complément d'adresse" name="complementAdresse">
 							</div>
 
 							<div class="md-form form-sm mb-2">
-								<i class="fa fa-lock prefix"></i> <input type="password"
+								<em class="fa fa-lock prefix"></em> <input type="password"
 									id="password" class="form-control form-control-sm validate"
 									placeholder="Password" name="password">
 							</div>
 							<div class="text-center form-sm mt-2 mb-4">
 								<button class="btn btn-info" id="valider">
-									Modifier <i class="fa fa-sign-in ml-1"></i>
+									Modifier <em class="fa fa-sign-in ml-1"></em>
 								</button>
 							</div>
 						</div>

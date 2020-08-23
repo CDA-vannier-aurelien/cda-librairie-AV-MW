@@ -1,6 +1,8 @@
 package fr.cda.librairie.controller;
 
+import com.google.gson.Gson;
 import fr.cda.librairie.dto.CommandeDto;
+import fr.cda.librairie.dto.CommandeLineDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.ICommandeLineService;
 import fr.cda.librairie.service.IUserService;
@@ -67,15 +69,21 @@ public class UserController {
         return model;
     }
 
+    @RequestMapping(value = "listCommandeLine", method = RequestMethod.POST)
+    public @ResponseBody String listCommandeLine(@RequestParam(value = "numeroCommande") int numeroCommande){
+        List<CommandeLineDto> maListeDto = iCommandeLineService.findCommandeLineByCommande_NumeroCommande(numeroCommande);
+        String json = new Gson().toJson(maListeDto);
+        log.debug(json);
+        return json;
+    }
+
     @RequestMapping(value = "monCompte", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView afficher(HttpSession httpSession) {
         ModelAndView model = new ModelAndView();
         model.setViewName("monCompte");
 
         UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
-
         utilisateurDto = iUserService.getByMail(utilisateurDto);
-
         List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail());
         model.addObject("user", utilisateurDto);
         model.addObject("listeCommande", listcom);
