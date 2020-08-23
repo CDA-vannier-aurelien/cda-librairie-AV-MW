@@ -11,9 +11,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fr.cda.librairie.dao.ICommandeDao;
+import fr.cda.librairie.dao.ILivreDao;
 import fr.cda.librairie.dao.IUserDao;
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.entity.Commande;
+import fr.cda.librairie.entity.CommandeLine;
+import fr.cda.librairie.entity.Livre;
 import fr.cda.librairie.service.ICommandeService;
 import fr.cda.librairie.utils.Constantes;
 
@@ -27,6 +30,8 @@ public class CommandeServiceImpl implements ICommandeService {
 	IUserDao iUserDao;
 	@Autowired
 	ModelMapper modelMapper;
+	@Autowired
+	ILivreDao livreDao;
 
 	/**
 	 * @param id Methode de suppression de commande par id
@@ -88,5 +93,26 @@ public class CommandeServiceImpl implements ICommandeService {
 	@Override
 	public long count() {
 		return iCommandeDao.count();
+	}
+
+	@Override
+	public void validateCommande(int numCommande) {
+		Optional<Commande> opsCommande = iCommandeDao.findById(numCommande);
+
+		opsCommande.get().setEstValidee(Boolean.TRUE);
+
+		for (CommandeLine ligne : opsCommande.get().getCommandeLine()) {
+			Optional<Livre> opsLivre = livreDao.findById(ligne.getLivre().getReference());
+			int result = (opsLivre.get().getQuantitee() - ligne.getQuantiteCommandee());
+			if (result < 0) {
+				result = 0;
+			}
+			opsLivre.get().setQuantitee(result);
+
+			livreDao.save(opsLivre.get());
+
+		}
+		iCommandeDao.save(opsCommande.get());
+
 	}
 }

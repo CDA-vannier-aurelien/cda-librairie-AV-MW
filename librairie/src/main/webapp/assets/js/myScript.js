@@ -270,3 +270,31 @@ function listCommandeLine(numeroCommande) {
     })
 }
 
+function userMail( mail) {
+    
+    $.ajax({
+        data: {mail: mail},
+        type: 'POST',
+        url: 'getUsersMail',
+        success: function (result) {
+            result = JSON.parse(result);
+            $('#nomModifier').val(result.nom);
+        	$('#prenomModifier').val(result.prenom);
+        	$('#numeroModifier').val(result.numeroPorte);
+        	$('#rueModifier').val(result.nomRue);
+        	$('#villeModifier').val(result.ville);
+        	$('#paysModifier').val(result.pays);
+        	$('#codePostalModifier').val(result.codePostal);
+        	$('#complementAdresseModifier').val(result.complementAdresse);
+        	$('#mailModifier').val(result.mail);
+
+        }
+    });
+}
+function validerCommande(numCommande) {
+
+    var mail = document.getElementById("validateCommande" + numCommande);
+
+    mail.submit();
+}
+
