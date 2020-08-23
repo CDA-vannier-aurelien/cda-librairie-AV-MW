@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IAuteurService;
+import fr.cda.librairie.service.ICommandeService;
 import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
 import fr.cda.librairie.service.IUserService;
@@ -32,6 +34,9 @@ public class DashBoardController {
 	IEditeurService serviceEditeur;
 
 	@Autowired
+	ICommandeService serviceCommande;
+
+	@Autowired
 	IUserService userService;
 
 	@Autowired
@@ -39,11 +44,13 @@ public class DashBoardController {
 
 	@RequestMapping(value = { "/dashboard" }, method = { RequestMethod.GET, RequestMethod.POST })
 	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCoursLivre,
-			@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
+			@RequestParam(value = "page", defaultValue = "1") int pageEnCours,
+			@RequestParam(value = "pageCommande", defaultValue = "1") int pageEnCoursCommande) {
 		log.debug("list livre dash");
 
 		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
 		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours, Boolean.FALSE);
+		List<CommandeDto> vListCommande = this.serviceCommande.findAll(pageEnCoursCommande);
 
 		modelAndView.addObject("listeUser", vListUser);
 		modelAndView.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
@@ -54,6 +61,11 @@ public class DashBoardController {
 		modelAndView.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
 		modelAndView.addObject("countLivre", this.serviceLivre.count());
 		modelAndView.addObject("pageEnCoursLivre", pageEnCoursLivre);
+
+		modelAndView.addObject("listeCommande", vListCommande);
+		modelAndView.addObject("nbElementsParPageCommande", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("countLivre", this.serviceCommande.count());
+		modelAndView.addObject("pageEnCoursCommande", pageEnCoursCommande);
 
 		modelAndView.setViewName("dashboard");
 		return modelAndView;

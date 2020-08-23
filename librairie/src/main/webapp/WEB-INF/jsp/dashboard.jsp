@@ -92,7 +92,7 @@
 							<td data-toggle="modal" data-target="#modalUtilisateur" onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
 
 							<td><a href="#" class="text-success"> <i
-									class="fa fa-check" onclick="validerMail('${u.mail}')"></i>
+									class="fa fa-checkcircle" onclick="validerMail('${u.mail}')"></i>
 							</a>
 								<form class="d-none" id="validateUser${u.mail}"
 									action="validerMail" method="POST">
@@ -290,23 +290,68 @@
 			</div>
 		</div>
 		<div class="row">
-			<table class="table table-striped table-class col-6" id="table-id">
+			<table class="table table-striped table-class col-6">
+
 				<thead>
 					<tr>
-						<th>References</th>
-						<th>Titre</th>
-						<th>Quantitee</th>
+						<th>N°</th>
+						<th>Mail</th>
+						<th>Date de commande</th>
+						<th>Etat de la commande</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
+
 				<tbody>
-					<c:forEach var="livre" items="${listeLivre}">
+					<c:forEach var="commande" items="${listeCommande}">
+					<div class="accordion">
 						<tr>
-							<td>${livre.reference}</td>
-							<td>${livre.titre}</td>
-							<td>${livre.quantitee}</td>
-							<td><a> <i class="fa fa-trash"></i></a> <a> <i
-									class="fa fa-edit"> </i></a></td>
+							<td data-toggle="collapse" data-target="#accordion${commande.numeroCommande}" class="clickable" onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
+							<td>${commande.userMail}</td>
+							<td>${commande.dateCommande}</td>
+							<td>
+							<c:choose  >
+							<c:when test="${!commande.estValidee}">
+							 en cours de validation
+
+							</c:when>
+							<c:otherwise>
+							 en cours de livraison
+							</c:otherwise>
+
+							</c:choose>
+							</td>
+
+							<td>
+								
+									<c:if test="${!commande.estValidee}">
+								<a><em class="fa fa-check-circle text-success" ></em>
+								</a>
+									</c:if>
+									
+
+							</td>
+						</tr>
+						<tr>
+							<td colspan="12" class="hiddenRow">
+								<div class="accordian-body collapse" id="accordion${commande.numeroCommande}">
+									<table class="table table-striped">
+										<thead>
+										<tr class="info">
+											<th>Livre</th>
+											<th>Quantité</th>
+											<th>Prix</th>
+										</tr>
+										</thead>
+
+										<tbody id="commandeLine${commande.numeroCommande}">
+
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</div>
 					</c:forEach>
 				<tbody>
 			</table>
