@@ -20,10 +20,10 @@
 <%@include file="navbar.jsp" %>
 
 
-<section class="card-section-imagia">
+<section class="card-section-imagia ">
 
     <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
 
 
             <c:forEach items="${listeLivre}" var="livre">
