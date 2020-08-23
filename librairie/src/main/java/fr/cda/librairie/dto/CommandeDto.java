@@ -16,5 +16,6 @@ public class CommandeDto {
 	private int numeroCommande;
 	private Date dateCommande;
 	private boolean estValidee;
+	private String userMail;
 
 }

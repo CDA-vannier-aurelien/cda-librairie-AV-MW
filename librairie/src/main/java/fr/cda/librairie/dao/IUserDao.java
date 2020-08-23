@@ -24,7 +24,7 @@ import fr.cda.librairie.entity.User;
  *
  */
 public interface IUserDao extends PagingAndSortingRepository<User, String> {
-	@Query(value = "select u.commandes from User u where u.id = :id")
+	@Query(value = "select u.commandes from User u where u.id = :id", nativeQuery = true)
 	List<Commande> getCommandesByUserIdOrderByDateDesc(@Param("id") int id);
 
 	Optional<User> getUserByMail(String pUser);
@@ -37,7 +37,5 @@ public interface IUserDao extends PagingAndSortingRepository<User, String> {
 
 	@Transactional
 	void removeByMail(String mail);
-
-
 
 }

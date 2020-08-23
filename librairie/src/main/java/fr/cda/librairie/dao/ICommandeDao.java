@@ -1,13 +1,17 @@
 package fr.cda.librairie.dao;
 
-import fr.cda.librairie.entity.Commande;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import fr.cda.librairie.entity.Commande;
 
 /**
  * Interface permetant l'ajout des commandes en base de donnée.
@@ -15,15 +19,15 @@ import java.util.Optional;
  * @author Fethi
  */
 @Repository
-public interface ICommandeDao extends CrudRepository<Commande, Integer> {
+public interface ICommandeDao extends PagingAndSortingRepository<Commande, Integer> {
 
-    Optional<Commande> findById(Integer integer);
+	Optional<Commande> findById(Integer integer);
 
-    @Query
+	@Transactional
+	void removeByNumeroCommande(int id);
 
+	Page<Commande> findCommandeByOrderByDateCommandeDesc(Pageable page);
 
-    @Transactional
-    void removeByNumeroCommande(int id);
-
-
+	@Query(value = "select mail from utilisateur join utilisateur_commande cu on utilisateur.id = cu.User_id join commande c on c.numero_commande = cu.commandes_numero_commande where c.numero_commande = :numCom", nativeQuery = true)
+	String getMailByNumCommande(@Param("numCom") int numCom);
 }
