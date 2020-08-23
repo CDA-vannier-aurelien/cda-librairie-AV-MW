@@ -159,7 +159,6 @@
 										</thead>
 
 										<tbody id="commandeLine${commande.numeroCommande}">
-
 										</tbody>
 									</table>
 								</div>
@@ -169,6 +168,31 @@
 					</c:forEach>
 				<tbody>
 			</table>
+			<div class="col-6 offset-6">
+				<div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCours > 1 }">
+								<c:url value="/monCompte" var="lienPrecedent">
+									<c:param name="page" value="${ pageEnCours - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+														 href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCours }</a>
+
+							</li>
+							<c:if test="${ pageEnCours < (count / nbElementsParPage)  }">
+								<c:url value="/monCompte" var="lienSuivant">
+									<c:param name="page" value="${ pageEnCours + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+														 href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
 <form action="supprimerCommande" method="post" class="d-none" id="suppCommande">
 	<input type="hidden" id="referenceCommande" name="refeCommande">

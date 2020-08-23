@@ -6,6 +6,7 @@ import fr.cda.librairie.dto.CommandeLineDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.ICommandeLineService;
 import fr.cda.librairie.service.IUserService;
+import fr.cda.librairie.utils.Constantes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -78,13 +79,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "monCompte", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView afficher(HttpSession httpSession) {
+    public ModelAndView afficher(@RequestParam(value = "page", defaultValue = "1") int pageEnCours , HttpSession httpSession) {
         ModelAndView model = new ModelAndView();
         model.setViewName("monCompte");
 
         UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
         utilisateurDto = iUserService.getByMail(utilisateurDto);
-        List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail());
+        List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail(), pageEnCours);
+        model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+        model.addObject("count", this.iUserService.countCommandeByMail(utilisateurDto.getMail()));
+        model.addObject("pageEnCours", pageEnCours);
         model.addObject("user", utilisateurDto);
         model.addObject("listeCommande", listcom);
 

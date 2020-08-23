@@ -6,6 +6,7 @@ import java.util.List;
 import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
+import org.springframework.data.domain.Page;
 
 public interface IUserService {
 
@@ -21,6 +22,8 @@ public interface IUserService {
 
 	long count();
 
+	long countCommandeByMail(String mail);
+
 	UtilisateurDto update(UtilisateurDto user);
 
 	void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd);
@@ -29,7 +32,7 @@ public interface IUserService {
 
 	void activeCompte(String mail);
 
-	List<CommandeDto> getCommandeByMail(String mail);
+	List<CommandeDto> getCommandeByMail(String mail, int page);
 
 	void deleteCommandeByIdCommande(int idCommande, String mail);
 }

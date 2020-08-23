@@ -29,6 +29,8 @@ public interface IUserDao extends PagingAndSortingRepository<User, String> {
 
 	Optional<User> getUserByMail(String pUser);
 
+	Optional<User> getUserById(int id);
+
 	Page<User> findAll();
 
 	Page<User> getUserByEstActive(boolean actif, Pageable page);

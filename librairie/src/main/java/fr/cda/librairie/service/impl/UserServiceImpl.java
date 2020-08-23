@@ -11,6 +11,7 @@ import fr.cda.librairie.dao.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -161,6 +162,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+	public long countCommandeByMail(String mail) {
+		return 	iUserDao.getUserByMail(mail).get().getCommandes().size();
+	}
+
+	@Override
 	public void passerCommande(UtilisateurDto user, HashMap<LivreDto, Integer> maCmd) {
 		Optional<User> optionalUser = iUserDao.getUserByMail(user.getMail());
 		User utilisateur = optionalUser.get();
@@ -249,14 +255,15 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<CommandeDto> getCommandeByMail(String mail) {
+	public List<CommandeDto> getCommandeByMail(String mail, int pPageEnCours) {
 		Optional<User> opsRes = iUserDao.getUserByMail(mail);
+		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
+		Page <Commande> pageCommande = new PageImpl<>(opsRes.get().getCommandes(),page, Constantes.ELEMENTS_PAR_PAGE);
 		List<CommandeDto> list = new ArrayList<>();
-		for (Commande iterable_element : opsRes.get().getCommandes()) {
+		for (Commande iterable_element : pageCommande) {
 			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);
 			list.add(commande);
 		}
-
 		return list;
 	}
 
