@@ -270,6 +270,12 @@ function listCommandeLine(numeroCommande) {
     })
 }
 
+
+function commander(reference) {
+
+    var commander = document.getElementById("commande" + reference);
+    commander.submit();
+}
 function userMail( mail) {
     
     $.ajax({
@@ -296,5 +302,6 @@ function validerCommande(numCommande) {
     var mail = document.getElementById("validateCommande" + numCommande);
 
     mail.submit();
+
 }
 
