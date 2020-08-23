@@ -358,32 +358,6 @@
 					</c:forEach>
 				<tbody>
 			</table>
-			<br>
-			<div class="d-flex justify-content-center">
-					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<c:if test="${ pageEnCoursCommande > 1 }">
-								<c:url value="/dashboard" var="lienPrecedent">
-									<c:param name="pageLivre" value="${ pageEnCoursCommande - 1 }" />
-								</c:url>
-								<li class="page-item"><a class="page-link"
-									href="${lienPrecedent }">&lt;</a></li>
-							</c:if>
-							<li class="page-item"><a class="page-link" href="#">${ pageEnCoursLivre }</a>
-
-							</li>
-							<c:if
-								test="${ pageEnCoursCommande < (countCommande / nbElementsParPageCommande)  }">
-								<c:url value="/dashboard" var="lienSuivant">
-									<c:param name="pageLivre" value="${ pageEnCoursCommande + 1 }" />
-								</c:url>
-								<li class="page-item"><a class="page-link"
-									href="${lienSuivant }">&gt;</a></li>
-							</c:if>
-						</ul>
-					</nav>
-				</div>
-
 			<div class="col-6">
 				<form method="post" action="addLivre" class="was-validated">
 					<div class="modal-body">
@@ -479,6 +453,32 @@
 
 
 			</div>
+		</div>
+		<div class="row">
+		<div class="col-6"><div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCoursCommande > 1 }">
+								<c:url value="/dashboard" var="lienPrecedent">
+									<c:param name="pageCommande" value="${ pageEnCoursCommande - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCoursCommande }</a>
+
+							</li>
+							<c:if
+								test="${ pageEnCoursCommande < (countCommande / nbElementsParPageCommande)  }">
+								<c:url value="/dashboard" var="lienSuivant">
+									<c:param name="pageCommande" value="${ pageEnCoursCommande + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div> </div>
 		</div>
 	</div>
 
