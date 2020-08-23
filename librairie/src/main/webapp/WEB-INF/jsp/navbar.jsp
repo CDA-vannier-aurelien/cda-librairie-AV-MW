@@ -18,8 +18,7 @@
             <ul class="nav navbar-nav mx-auto">
                 <li class="nav-item" role="presentation"><a class="nav-link"
                                                             href="index">Home</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link"
-                                                            href="#a_propos">Nos d�veloppeurs</a></li>
+                
                 <li class="nav-item" role="presentation"><a class="nav-link"
                                                             href="listeLivre">Produits</a></li>
                 <c:if test="${sessionScope.user.labelRole == 'Libraire'}">

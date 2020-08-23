@@ -20,10 +20,10 @@
 <%@include file="navbar.jsp" %>
 
 
-<section class="card-section-imagia">
+<section class="card-section-imagia ">
 
     <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
 
 
             <c:forEach items="${listeLivre}" var="livre">
@@ -68,14 +68,14 @@
                                     </div>
                                     <c:if test="${livre.quantitee>0 }">
                                         <div class="footer-imagia text-center">
-                                            <form method="post" action="ajouter">
+                                            <form method="post" action="ajouter" id="commande${livre.reference}">
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <input type="hidden" value="${livre.reference}"
                                                                name="reference">
-                                                        <button type="submit" class="col-2">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </button>
+                                                        <a onclick="commander('${livre.reference}')" class="col-2">
+                                                            <em class="fa fa-shopping-cart"></em>
+                                                        </a>
                                                         <span class="col-4">Quantité</span>
                                                         <input type="number" min="1" max="${livre.quantitee}"
                                                                name="quantiteCommandee" class="col-3 offset-1">

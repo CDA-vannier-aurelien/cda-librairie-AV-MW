@@ -1,10 +1,14 @@
 package fr.cda.librairie.controller;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.google.gson.Gson;
+import fr.cda.librairie.dto.CommandeDto;
+import fr.cda.librairie.dto.CommandeLineDto;
+import fr.cda.librairie.dto.UtilisateurDto;
+import fr.cda.librairie.service.ICommandeLineService;
+import fr.cda.librairie.service.ICommandeService;
+import fr.cda.librairie.service.IUserService;
+import fr.cda.librairie.utils.Constantes;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -14,19 +18,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import fr.cda.librairie.dto.CommandeDto;
-import fr.cda.librairie.dto.UtilisateurDto;
-import fr.cda.librairie.service.IUserService;
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Controller
 public class UserController {
-
+	@Autowired
+	private ICommandeLineService iCommandeLineService;
 	@Autowired
 	private IUserService iUserService;
 	@Autowired
 	private ModelAndView modelAndView;
+	@Autowired
+	private ICommandeService serviceCommande;
 
 	@RequestMapping(value = "addUser.do", method = RequestMethod.POST)
 	public ModelAndView ajoutUser(@RequestParam("dateNaissance") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
@@ -67,19 +73,28 @@ public class UserController {
 		return model;
 	}
 
-	@RequestMapping(value = "monCompte", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView afficher(HttpSession httpSession) {
+	@RequestMapping(value = "listCommandeLine", method = RequestMethod.POST)
+	public @ResponseBody String listCommandeLine(@RequestParam(value = "numeroCommande") int numeroCommande) {
+		List<CommandeLineDto> maListeDto = iCommandeLineService
+				.findCommandeLineByCommande_NumeroCommande(numeroCommande);
+		String json = new Gson().toJson(maListeDto);
+		log.debug(json);
+		return json;
+	}
 
-		ModelAndView model = new ModelAndView();
-		model.setViewName("monCompte");
+    @RequestMapping(value = "monCompte", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView afficher(@RequestParam(value = "page", defaultValue = "1") int pageEnCours , HttpSession httpSession) {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("monCompte");
 
-		UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
-
-		utilisateurDto = iUserService.getByMail(utilisateurDto);
-
-		List<CommandeDto> listcom = iUserService.getCommandeByMail(utilisateurDto.getMail());
-		model.addObject("user", utilisateurDto);
-		model.addObject("listeCommande", listcom);
+        UtilisateurDto utilisateurDto = (UtilisateurDto) httpSession.getAttribute("user");
+        utilisateurDto = iUserService.getByMail(utilisateurDto);
+        List<CommandeDto> listcom = iUserService.getCommandeById(utilisateurDto.getId(), pageEnCours);
+        model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+        model.addObject("count", this.iUserService.countCommandeByMail(utilisateurDto.getMail()));
+        model.addObject("pageEnCours", pageEnCours);
+        model.addObject("user", utilisateurDto);
+        model.addObject("listeCommande", listcom);
 
 		return model;
 	}
@@ -139,5 +154,21 @@ public class UserController {
 		httpSession.invalidate();
 		model.setViewName("index");
 		return model;
+	}
+
+	@RequestMapping(value = "/getUsersMail")
+	protected @ResponseBody String getUserMail(@RequestParam(value = "mail") String mail) {
+
+		UtilisateurDto user = UtilisateurDto.builder().mail(mail).build();
+		user = iUserService.getByMail(user);
+		String json = new Gson().toJson(user);
+		return json;
+	}
+
+	@RequestMapping(value = "/valideCommandes", method = RequestMethod.POST)
+	protected ModelAndView validerCommandes(@RequestParam(value = "numCommande") int numCommande) {
+		modelAndView.setViewName("forward:/dashboard");
+		serviceCommande.validateCommande(numCommande);
+		return modelAndView;
 	}
 }

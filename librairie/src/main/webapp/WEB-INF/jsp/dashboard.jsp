@@ -51,7 +51,7 @@
 							class="dropdown-toggle nav-link" data-toggle="dropdown"
 							aria-expanded="false" href="#">${sessionScope.user.nom} </a>
 							<div class="dropdown-menu" role="menu">
-								<a class="dropdown-item" role="presentation" href="#">Mon
+								<a class="dropdown-item" role="presentation" href="monCompte">Mon
 									compte</a> <a class="dropdown-item" role="presentation"
 									href="panier">Mon panier</a><a class="dropdown-item"
 									role="presentation" href="deconnexion">LogOut</a>
@@ -68,7 +68,7 @@
 
 			</div>
 			<div class="col-6 d-flex justify-content-center mt-2">
-				<h2>Tableau livre Livre</h2>
+				<h2>Tableau Livre</h2>
 			</div>
 		</div>
 
@@ -87,24 +87,21 @@
 				<tbody>
 					<c:forEach var="u" items="${listeUser}">
 						<tr>
-							<td ><a href="#" data-toggle="modal" data-target="#modalUtilisateur">${u.nom}</a> </td>
+							<td>${u.nom}</td>
 							<td>${u.prenom}</td>
-							<td>${u.mail}</td>
-							
-							<td>
-							<a href="#" class="text-success"> <i
-									class="fa fa-check"
-									onclick="validerMail('${u.mail}')"></i>
+							<td data-toggle="modal" data-target="#modalUtilisateur"
+								onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
+
+							<td><a href="#" class="text-success"> <i
+									class="fa fa-checkcircle" onclick="validerMail('${u.mail}')"></i>
 							</a>
-							<form class="d-none" id="validateUser${u.mail}" action="validerMail" method="POST" >
-							<input type="hidden" value="${u.mail} " name="mail">
-							
-							</form>
-							<a href="#" class="text-danger"> <i
-									class="fa fa-trash"
+								<form class="d-none" id="validateUser${u.mail}"
+									action="validerMail" method="POST">
+									<input type="hidden" value="${u.mail} " name="mail">
+
+								</form> <a href="#" class="text-danger"> <i class="fa fa-trash"
 									onclick="afficherModaleSuppression('${u.mail}')"></i>
-							</a>
-							</td>
+							</a></td>
 					</c:forEach>
 				<tbody>
 			</table>
@@ -128,16 +125,19 @@
 							<td>${livre.reference}</td>
 							<td>${livre.titre}</td>
 							<td>${livre.quantitee}</td>
-							<td><a data-toggle="modal" data-target="#modaleSuppressionLivre"
-								class="text-danger" onclick="transfertRef(${livre.reference})">
-									<i class="fa fa-trash"></i>
-							</a> <a data-toggle="modal" onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })" data-target="#modalModification" class="text-warning"> <i class="fa fa-edit">
-								</i></a></td>
+							<td><a data-toggle="modal"
+								data-target="#modaleSuppressionLivre" class="text-danger"
+								onclick="transfertRef(${livre.reference})"> <i
+									class="fa fa-trash"></i>
+							</a> <a data-toggle="modal"
+								onclick="transfertRefAndQuantitee(${livre.reference},${livre.quantitee })"
+								data-target="#modalModification" class="text-warning"> <i
+									class="fa fa-edit"> </i></a></td>
 					</c:forEach>
 				<tbody>
 			</table>
 		</div>
-		
+
 		<div class="modal fade" id="modaleSuppression" tabindex="-1"
 			aria-labelledby="modaleSuppressionLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -151,7 +151,8 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						Confirmer vous la suppression de la demande de compte ? mail : <span id="idToDeleteText"></span>
+						Confirmer vous la suppression de la demande de compte ? mail : <span
+							id="idToDeleteText"></span>
 
 					</div>
 					<div class="modal-footer">
@@ -208,22 +209,20 @@
 						</button>
 					</div>
 					<form action="updateLivre" method="post">
-					<div class="modal-body">
-						<label> Ancienne quantitée :<span id="ancienneQuantitee">
-						</span> </label>
-						<br> 
-						
-						<label for="quantiteLivre" >Nouvelle Quantitée</label>
-						<input type="number" name="quantite" id="quantiteLivre" min="0">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Annuler</button>
-						
+						<div class="modal-body">
+							<label> Ancienne quantitée :<span id="ancienneQuantitee">
+							</span>
+							</label> <br> <label for="quantiteLivre">Nouvelle Quantitée</label>
+							<input type="number" name="quantite" id="quantiteLivre" min="0">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Annuler</button>
+
 							<input type="hidden" name="reference" id="transfertB">
 							<button type="submit" class="btn btn-primary">Valider</button>
-						
-					</div>
+
+						</div>
 					</form>
 				</div>
 			</div>
@@ -292,27 +291,73 @@
 			</div>
 		</div>
 		<div class="row">
-			<table class="table table-striped table-class col-6" id="table-id">
+			<table class="table table-striped table-class col-6">
+
 				<thead>
 					<tr>
-						<th>Rï¿½fï¿½rences</th>
-						<th>Titre</th>
-						<th>Quantitï¿½e</th>
+						<th>N°</th>
+						<th>Mail</th>
+						<th>Date de commande</th>
+						<th>Etat de la commande</th>
 						<th>Outils</th>
 					</tr>
 				</thead>
+
 				<tbody>
-					<c:forEach var="livre" items="${listeLivre}">
-						<tr>
-							<td>${livre.reference}</td>
-							<td>${livre.titre}</td>
-							<td>${livre.quantitee}</td>
-							<td><a> <i class="fa fa-trash"></i></a> <a> <i
-									class="fa fa-edit"> </i></a></td>
+					<c:forEach var="commande" items="${listeCommande}">
+						<div class="accordion">
+							<tr>
+								<td data-toggle="collapse"
+									data-target="#accordion${commande.numeroCommande}"
+									class="clickable"
+									onclick="listCommandeLine('${commande.numeroCommande}')">${commande.numeroCommande}</td>
+								<td data-toggle="modal" data-target="#modalUtilisateur"
+									onclick="userMail('${commande.userMail}')">${commande.userMail}</td>
+								<td>${commande.dateCommande}</td>
+								<td><c:choose>
+										<c:when test="${!commande.estValidee}">
+							 en cours de validation
+
+							</c:when>
+										<c:otherwise>
+							 en cours de livraison
+							</c:otherwise>
+
+									</c:choose></td>
+
+								<td><c:if test="${!commande.estValidee}">
+										<a onclick="validerCommande('${commande.numeroCommande}')"><em class="fa fa-check-circle text-success"></em> </a>
+										<form class="d-none" id="validateCommande${commande.numeroCommande}"
+									action="valideCommandes" method="POST">
+									<input type="hidden" value="${commande.numeroCommande} " name="numCommande">
+
+								</form>
+									</c:if></td>
+							</tr>
+							<tr>
+								<td colspan="12" class="hiddenRow">
+									<div class="accordian-body collapse"
+										id="accordion${commande.numeroCommande}">
+										<table class="table table-striped">
+											<thead>
+												<tr class="info">
+													<th>Livre</th>
+													<th>Quantité</th>
+													<th>Prix</th>
+												</tr>
+											</thead>
+
+											<tbody id="commandeLine${commande.numeroCommande}">
+
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</div>
 					</c:forEach>
 				<tbody>
 			</table>
-
 			<div class="col-6">
 				<form method="post" action="addLivre" class="was-validated">
 					<div class="modal-body">
@@ -406,6 +451,119 @@
 				</form>
 
 
+
+			</div>
+		</div>
+		<div class="row">
+		<div class="col-6"><div class="d-flex justify-content-center">
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<c:if test="${ pageEnCoursCommande > 1 }">
+								<c:url value="/dashboard" var="lienPrecedent">
+									<c:param name="pageCommande" value="${ pageEnCoursCommande - 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienPrecedent }">&lt;</a></li>
+							</c:if>
+							<li class="page-item"><a class="page-link" href="#">${ pageEnCoursCommande }</a>
+
+							</li>
+							<c:if
+								test="${ pageEnCoursCommande < (countCommande / nbElementsParPageCommande)  }">
+								<c:url value="/dashboard" var="lienSuivant">
+									<c:param name="pageCommande" value="${ pageEnCoursCommande + 1 }" />
+								</c:url>
+								<li class="page-item"><a class="page-link"
+									href="${lienSuivant }">&gt;</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div> </div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modalUtilisateur" tabindex="-1"
+		aria-labelledby="modalModifierLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modaleSuppressionLabel">Mon Compte
+					</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col md-form form-sm mb-2">
+								<i class="fa fa-user prefix"></i> <input type="text"
+									id="nomModifier" class="form-control form-control-sm validate"
+									placeholder="Nom" name="nom" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="text" id="prenomModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Prenom" name="prenom" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class=" col-8 md-form form-sm mb-2">
+								<i class="fa fa-envelope prefix"></i> <input type="email"
+									id="mailModifier" class="form-control form-control-sm validate"
+									name="mail" min="0" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3 md-form form-sm mb-2">
+								<i class="fa fa-home"></i> <input type="number"
+									id="numeroModifier"
+									class="form-control form-control-sm validate"
+									name="numeroPorte" min="0" readonly>
+							</div>
+							<div class=" col-3 md-form form-sm mb-2">
+								<i class="fa fa-lock prefix"></i> <input type="text"
+									id="complementAdresseModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Complément d'adresse" name="complementAdresse"
+									readonly>
+							</div>
+							<div class="col-6 md-form form-sm mb-2 mt-4">
+								<input type="text" id="rueModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Nom de la rue" name="nomRue" readonly>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col md-form form-sm mb-2">
+								<i class="fa fa-location-arrow prefix"></i> <input type="text"
+									id="villeModifier" name="ville"
+									class="form-control form-control-sm validate"
+									placeholder="Ville" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="number" id="codePostalModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Code Postal" name="codePostal" readonly>
+							</div>
+							<div class="col md-form form-sm mb-2 mt-4">
+								<input type="text" id="paysModifier"
+									class="form-control form-control-sm validate"
+									placeholder="Pays" name="pays" readonly>
+							</div>
+						</div>
+
+
+					</div>
+					<!--Footer-->
+					<div class="modal-footer">
+						<button type="button"
+							class="btn btn-outline-info waves-effect ml-auto"
+							data-dismiss="modal">Close</button>
+					</div>
+				</div>
 
 			</div>
 		</div>

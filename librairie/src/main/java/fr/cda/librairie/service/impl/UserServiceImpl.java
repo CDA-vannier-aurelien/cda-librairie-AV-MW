@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import fr.cda.librairie.dao.ICommandeDao;
 import fr.cda.librairie.dao.ILivreDao;
 import fr.cda.librairie.dao.IPaysDao;
 import fr.cda.librairie.dao.IRoleDao;
@@ -41,7 +42,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	IVilleDao iVilleDao;
-
+	@Autowired
+	ICommandeDao iCommandeDao;
 	@Autowired
 	ILivreDao iLivreDao;
 
@@ -122,7 +124,7 @@ public class UserServiceImpl implements IUserService {
 
 				pUser = UtilisateurDto.builder().mail(optionalUser.get().getMail()).nom(optionalUser.get().getNom())
 						.prenom(optionalUser.get().getPrenom()).labelRole(optionalUser.get().getRole().getRole())
-						.dateConnection(optionalUser.get().getDateConnection()).build();
+						.dateConnection(optionalUser.get().getDateConnection()).id(optionalUser.get().getId()).build();
 				log.info("ajout avec succ�s");
 				return pUser;
 
@@ -152,6 +154,8 @@ public class UserServiceImpl implements IUserService {
 		for (User user : u) {
 			UtilisateurDto uDto = this.modelMapper.map(user, UtilisateurDto.class);
 			uDto.setLabelRole(user.getRole().getRole());
+			uDto.setVille(user.getVille().getNom());
+			uDto.setCodePostal(user.getVille().getCodePostal());
 			liste.add(uDto);
 
 		}
@@ -161,6 +165,11 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public long count() {
 		return this.iUserDao.count();
+	}
+
+	@Override
+	public long countCommandeByMail(String mail) {
+		return iUserDao.getUserByMail(mail).get().getCommandes().size();
 	}
 
 	@Override
@@ -252,15 +261,29 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<CommandeDto> getCommandeByMail(String mail) {
-		Optional<User> opsRes = iUserDao.getUserByMail(mail);
+	public List<CommandeDto> getCommandeById(int id, int pPageEnCours) {
+		PageRequest page = PageRequest.of(pPageEnCours - 1, Constantes.ELEMENTS_PAR_PAGE);
+		Page<Commande> pageCommande = iCommandeDao.getCommandeByIdUser(page, id);
 		List<CommandeDto> list = new ArrayList<>();
-		for (Commande iterable_element : opsRes.get().getCommandes()) {
+		for (Commande iterable_element : pageCommande) {
 			CommandeDto commande = this.modelMapper.map(iterable_element, CommandeDto.class);
 			list.add(commande);
 		}
-
 		return list;
+	}
+
+	@Override
+	public void deleteCommandeByIdCommande(int idCommande, String mail) {
+		Optional<User> optionalUser = iUserDao.getUserByMail(mail);
+		for (Commande commande : optionalUser.get().getCommandes()) {
+			if (commande.getNumeroCommande() == idCommande) {
+				optionalUser.get().getCommandes().remove(commande);
+				break;
+			}
+		}
+		iUserDao.save(optionalUser.get());
+		iCommandeDao.removeByNumeroCommande(idCommande);
+
 	}
 
 }

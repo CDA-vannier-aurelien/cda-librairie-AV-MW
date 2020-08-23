@@ -27,13 +27,6 @@
 
 <body onload="calculPrixTotal()"
       style="background-color: white; background: white;">
-<h1 class="text-center text-white d-none d-lg-block site-heading">
-		<span class="site-heading-lower"
-              style="font-family: Lora, serif; color: rgb(33, 37, 41);">La
-			Librairie</span>
-</h1>
-
-<body style="background-color: white; background: white;">
 <%@include file="navbar.jsp" %>
 <div class="shopping-cart">
     <div class="px-4 px-lg-0">
