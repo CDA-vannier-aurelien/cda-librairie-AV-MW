@@ -93,7 +93,7 @@
 								onclick="transfertUser('${u.mail }','${u.nom}','${u.prenom}','${u.numeroPorte}','${u.nomRue}','${u.ville}','${u.pays}','${u.codePostal}','${u.complementAdresse}')">${u.mail}</td>
 
 							<td><a href="#" class="text-success"> <i
-									class="fa fa-checkcircle" onclick="validerMail('${u.mail}')"></i>
+									class="fa fa-check-circle" onclick="validerMail('${u.mail}')"></i>
 							</a>
 								<form class="d-none" id="validateUser${u.mail}"
 									action="validerMail" method="POST">
@@ -410,7 +410,8 @@
 										placeholder="description" name="description" required>
 								</div>
 							</div>
-							<div class="md-form form-sm mb-2" id="divEditeur">
+							<div class="row">
+							<div class="md-form form-sm mb-2 col-6" id="divEditeur">
 								<i class="fa fa-lock prefix"></i> <input type="text"
 									list="listEditeur" id="editeur"
 									class="form-control form-control-sm validate"
@@ -418,12 +419,9 @@
 									onkeydown="addOptionEditeur()" onchange="addOptionEditeur()"
 									minlength="3" required>
 								<datalist id="listEditeur">
-
-
-
 								</datalist>
 							</div>
-							<div class="md-form form-sm mb-2" id="divAuteur">
+							<div class="md-form form-sm mb-2 col-6" id="divAuteur">
 								<i class="fa fa-envelope prefix"></i> <input type="text"
 									list="listAuteur" id="auteur"
 									class="form-control form-control-sm validate" name="auteur"
@@ -438,6 +436,7 @@
 							<datalist id="listAuteur">
 
 							</datalist>
+							</div>
 
 							<div class="text-center form-sm mt-2 mb-4">
 								<button class="btn btn-info" id="valider">
