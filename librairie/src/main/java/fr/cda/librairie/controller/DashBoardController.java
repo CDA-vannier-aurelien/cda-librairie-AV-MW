@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.cda.librairie.dto.CommandeDto;
 import fr.cda.librairie.dto.LivreDto;
 import fr.cda.librairie.dto.UtilisateurDto;
 import fr.cda.librairie.service.IAuteurService;
+import fr.cda.librairie.service.ICommandeService;
 import fr.cda.librairie.service.IEditeurService;
 import fr.cda.librairie.service.ILivreService;
 import fr.cda.librairie.service.IUserService;
@@ -32,30 +34,41 @@ public class DashBoardController {
 	IEditeurService serviceEditeur;
 
 	@Autowired
+	ICommandeService serviceCommande;
+
+	@Autowired
 	IUserService userService;
 
-	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
+	@Autowired
+	ModelAndView modelAndView;
+
+	@RequestMapping(value = { "/dashboard" }, method = { RequestMethod.GET, RequestMethod.POST })
 	protected ModelAndView listerLivresDash(@RequestParam(value = "pageLivre", defaultValue = "1") int pageEnCoursLivre,
-			@RequestParam(value = "page", defaultValue = "1") int pageEnCours) {
+			@RequestParam(value = "page", defaultValue = "1") int pageEnCours,
+			@RequestParam(value = "pageCommande", defaultValue = "1") int pageEnCoursCommande) {
 		log.debug("list livre dash");
 
-		ModelAndView model = new ModelAndView();
-
 		List<LivreDto> vList = this.serviceLivre.getAllLivre(pageEnCoursLivre);
-		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours);
+		List<UtilisateurDto> vListUser = this.userService.getAll(pageEnCours, Boolean.FALSE);
+		List<CommandeDto> vListCommande = this.serviceCommande.findAll(pageEnCoursCommande);
 
-		model.addObject("listeUser", vListUser);
-		model.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
-		model.addObject("count", this.userService.count());
-		model.addObject("pageEnCours", pageEnCours);
+		modelAndView.addObject("listeUser", vListUser);
+		modelAndView.addObject("nbElementsParPage", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("count", this.userService.count());
+		modelAndView.addObject("pageEnCours", pageEnCours);
 
-		model.addObject("listeLivre", vList);
-		model.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
-		model.addObject("countLivre", this.serviceLivre.count());
-		model.addObject("pageEnCoursLivre", pageEnCoursLivre);
+		modelAndView.addObject("listeLivre", vList);
+		modelAndView.addObject("nbElementsParPageLivre", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("countLivre", this.serviceLivre.count());
+		modelAndView.addObject("pageEnCoursLivre", pageEnCoursLivre);
 
-		model.setViewName("dashboard");
-		return model;
+		modelAndView.addObject("listeCommande", vListCommande);
+		modelAndView.addObject("nbElementsParPageCommande", Constantes.ELEMENTS_PAR_PAGE);
+		modelAndView.addObject("countCommande", this.serviceCommande.count());
+		modelAndView.addObject("pageEnCoursCommande", pageEnCoursCommande);
+
+		modelAndView.setViewName("dashboard");
+		return modelAndView;
 	}
 
 }

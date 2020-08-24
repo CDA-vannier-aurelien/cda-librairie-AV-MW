@@ -3,7 +3,7 @@ package fr.cda.librairie.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.Builder;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 public class Commande {
 
     @Id
@@ -28,7 +29,7 @@ public class Commande {
     private Date dateCommande = new Date();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-            @JoinColumn(name = "numero_commande")
+    @JoinColumn(name = "numero_commande")
     List<CommandeLine> commandeLine = new ArrayList<>();
 
 

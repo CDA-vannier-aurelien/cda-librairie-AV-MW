@@ -14,13 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import fr.cda.librairie.configuration.ApplicationConfig;
 import fr.cda.librairie.dto.AuteurDto;
 import fr.cda.librairie.service.IAuteurService;
 import fr.cda.librairie.utils.Constantes;
 
 @TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration("classpath:spring/beans-configuration.xml")
+@ContextConfiguration(classes = ApplicationConfig.class)
 public class TestAuteurService {
 
 	@Autowired

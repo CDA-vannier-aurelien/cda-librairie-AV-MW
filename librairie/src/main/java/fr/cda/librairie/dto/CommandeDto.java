@@ -13,11 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CommandeDto {
 
-	
 	private int numeroCommande;
 	private Date dateCommande;
-	private int nombreArticles;
-	private int prixTotal;
-	private int etatCommande;
+	private boolean estValidee;
+	private String userMail;
 
 }
