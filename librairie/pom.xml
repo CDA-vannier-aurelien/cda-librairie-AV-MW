@@ -13,7 +13,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<spring.cda>5.2.8.RELEASE</spring.cda>
+		<spring.cda>6.0.0</spring.cda>
 		<spring.security>5.3.3.RELEASE</spring.security>
 	</properties>
 
